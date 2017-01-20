@@ -1,5 +1,5 @@
 
-.PHONY: update build test push
+.PHONY: update build test push clean shell
 
 WD = $(shell pwd)
 USERNAME := $(shell docker info | grep Username | cut -d ' ' -f 2)
@@ -21,3 +21,7 @@ push:
 
 clean:
 	rm -r depends
+
+shell:
+	docker run -it -v $(ROOT):/Pillow $(USERNAME)/$(TARGET) /bin/bash
+
