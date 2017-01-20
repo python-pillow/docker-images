@@ -1,4 +1,4 @@
-#Docker images for the test infrastructure.
+# Docker Images for the Pillow Test Infrastructure.
 
 ## Getting Started
 
