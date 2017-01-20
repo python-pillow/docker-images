@@ -1,0 +1,23 @@
+
+.PHONY: update build test push
+
+WD = $(shell pwd)
+USERNAME := $(shell docker info | grep Username | cut -d ' ' -f 2)
+TARGET := $(notdir $(WD))
+ROOT := $(abspath $(WD)/../Pillow)
+
+build:
+	cp -r ../Pillow/depends .
+	docker build -t $(USERNAME)/$(TARGET) .
+
+update:
+	./update.sh
+
+test:
+	docker run -v $(ROOT):/Pillow $(USERNAME)/$(TARGET)
+
+push:
+	docker push $(USERNAME)/$(TARGET)
+
+clean:
+	rm -r depends

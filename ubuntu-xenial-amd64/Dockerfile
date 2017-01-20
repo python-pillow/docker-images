@@ -1,5 +1,4 @@
 FROM ubuntu:xenial
-USER root
 
 RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -y \
 	install sudo \
@@ -11,18 +10,24 @@ RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -y \
     libfreetype6-dev liblcms2-dev libwebp-dev tcl8.6-dev tk8.6-dev \
     python-tk python3-tk
 
+RUN useradd pillow && addgroup pillow sudo && \
+	mkdir /home/pillow && chown pillow:pillow /home/pillow
+
 RUN virtualenv -p /usr/bin/python2.7 --system-site-packages /vpy && \
 	/vpy/bin/pip install nose && \
-	/vpy/bin/pip install cffi
-				 
+	/vpy/bin/pip install cffi && \
+	chown -R pillow:pillow /vpy
+
+ADD depends /depends
+RUN	cd /depends && ./install_openjpeg.sh && ./install_imagequant.sh
 
 RUN echo "#!/bin/bash" >> /test && \
     echo "source /vpy/bin/activate && cd /Pillow " >> test && \
-	echo "pushd depends && ./install_openjpeg.sh && ./install_imagequant.sh && popd" >> test && \
-	echo "make install && python ./test-installed.py -v" >> test
+	echo "make clean && make install && python ./test-installed.py -v" >> test
 
 RUN chmod +x /test
 
+USER pillow
 CMD ["/test"]
 
-#docker run -v $TRAVIS_BUILD_DIR:/Pillow pillow-ubuntu-xenial-amd64
+#docker run -v $TRAVIS_BUILD_DIR:/Pillow pythonpillow/ubuntu-xenial-amd64

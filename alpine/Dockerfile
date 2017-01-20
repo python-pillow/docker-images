@@ -6,7 +6,6 @@
 # sudo and bash are required for the webp build script.
 
 FROM alpine
-USER root
 
 RUN apk --no-cache add python \
                        build-base \
@@ -28,15 +27,21 @@ RUN apk --no-cache add python \
                        tk-dev \
                        tcl-dev
 
-RUN pip install virtualenv && virtualenv /vpy && source /vpy/bin/activate && pip install nose
+ADD depends /depends
+RUN	cd /depends && ./install_webp.sh && ./install_imagequant.sh
+
+RUN /usr/sbin/adduser -D pillow && \
+	pip install virtualenv && virtualenv /vpy && \
+	/vpy/bin/pip install nose && \
+	chown -R pillow:pillow /vpy
 
 RUN echo "#!/bin/bash" >> /test && \
     echo "source /vpy/bin/activate && cd /Pillow " >> test && \
-	echo "pushd depends && ./install_webp.sh && ./install_imagequant.sh && popd" >> test && \
-	echo "LIBRARY_PATH=/lib:/usr/lib make install && python test-installed.py -v" >> test
+	echo "make clean && LIBRARY_PATH=/lib:/usr/lib make install && python test-installed.py -v" >> test
 
 RUN chmod +x /test
 
+USER pillow
 CMD ["/test"]
 
 #docker run -v $TRAVIS_BUILD_DIR:/Pillow pillow-alpine
