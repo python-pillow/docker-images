@@ -1,4 +1,4 @@
-# Originaly from https://github.com/M0E-lnx/ubuntu-32bit with thanks,
+# Originally from https://github.com/M0E-lnx/ubuntu-32bit with thanks,
 # and then https://github.com/matthew-brett/trusty/blob/32/Dockerfile
 
 FROM scratch
