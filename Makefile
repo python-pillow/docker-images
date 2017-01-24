@@ -5,12 +5,14 @@ BUILDDIRS = $(TARGETS:%=build-%)
 PUSHDIRS = $(TARGETS:%=push-%)
 UPDATEDIRS = $(TARGETS:%=update-%)
 CLEANDIRS = $(TARGETS:%=clean-%)
+TESTDIRS = $(TARGETS:%=test-%)
 
 .PHONY: build update push test $(TARGETS)
 .PHONY: subdirs $(BUILDDIRS)
 .PHONY: subdirs $(PUSHDIRS)
 .PHONY: subdirs $(UPDATEDIRS)
 .PHONY: subdirs $(CLEANDIRS)
+.PHONY: subdirs $(TESTDIRS)
 
 # these are parallelizable, but mind the load
 build: $(BUILDDIRS)
@@ -32,10 +34,9 @@ $(CLEANDIRS):
 
 # This has to be sequential due to the shared
 # pillow data/build directory
-test:
-	for target in $(TARGETS); do \
-	  $(MAKE) -C $$target test; \
-	done
+test: $(TESTDIRS)
+$(TESTDIRS):
+	$(MAKE) -C $(@:test-%=%) test
 
 # individual -- make alpine will do one.
 $(TARGETS):
