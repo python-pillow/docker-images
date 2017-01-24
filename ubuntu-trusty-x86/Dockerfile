@@ -32,7 +32,7 @@ RUN echo '#!/bin/sh' > /usr/sbin/policy-rc.d \
 #
 
 RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -y \
-    install \
+    install xvfb \
     git wget python-numpy python-scipy netpbm \
     python-qt4 ghostscript libffi-dev libjpeg-turbo-progs \
     python-setuptools python-virtualenv \
@@ -54,7 +54,8 @@ RUN cd /depends && ./install_openjpeg.sh && ./install_imagequant.sh
 
 RUN echo "#!/bin/bash" >> /test && \
     echo "source /vpy/bin/activate && cd /Pillow " >> test && \
-    echo "make clean && make install && python ./test-installed.py -v" >> test
+    echo "export DISPLAY=:99.0" >> test && \ 
+    echo "make clean && make install && /usr/bin/xvfb-run -a python ./test-installed.py -v" >> test
 
 RUN chmod +x /test
 
