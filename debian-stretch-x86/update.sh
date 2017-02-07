@@ -9,9 +9,11 @@ suite="stretch"
 chroot_dir="./guest-root"
 apt_mirror="http://http.debian.net/debian"
 
+mkdir $chroot_dir
+
 ### install a minbase system with debootstrap
 export DEBIAN_FRONTEND=noninteractive
-#sudo debootstrap --arch $arch $suite $chroot_dir $apt_mirror
+sudo debootstrap --arch $arch $suite $chroot_dir $apt_mirror
 
 ### update the list of package sources
 sudo sh -c "cat <<EOF > $chroot_dir/etc/apt/sources.list
