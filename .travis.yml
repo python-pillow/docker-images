@@ -9,7 +9,8 @@ services:
 
 install:
     - sudo apt-get install -qyy debootstrap
-    - make update
+    - sudo ln -s /usr/share/debootstrap/scripts/sid /usr/share/debootstrap/scripts/stretch
+    - make -j4 update
 
 script:
     - make build
