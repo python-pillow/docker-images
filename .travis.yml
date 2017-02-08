@@ -1,0 +1,17 @@
+language: python
+notifications:
+    irc: "chat.freenote.net#pil"
+
+dist: trusty
+sudo: required
+services:
+    - docker
+
+install:
+    - git submodule init
+    - git submodule update
+    - make update
+
+script:
+    - make build
+    - make test
