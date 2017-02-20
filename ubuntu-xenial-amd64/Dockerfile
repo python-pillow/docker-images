@@ -1,9 +1,9 @@
 FROM ubuntu:xenial
 
 RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -y \
-	install sudo \
+	install sudo xvfb \
 	git wget python-virtualenv python-numpy python-scipy netpbm \
-	python-qt4 ghostscript libffi-dev libjpeg-turbo-progs \
+	python-pyqt5 ghostscript libffi-dev libjpeg-turbo-progs \
 	python-dev python-setuptools \
     python3-dev cmake  \
 	libtiff5-dev libjpeg8-dev zlib1g-dev \
@@ -23,7 +23,7 @@ RUN	cd /depends && ./install_openjpeg.sh && ./install_imagequant.sh
 
 RUN echo "#!/bin/bash" >> /test && \
     echo "source /vpy/bin/activate && cd /Pillow " >> test && \
-	echo "make clean && make install && python ./test-installed.py -v" >> test
+	echo "make clean && make install && /usr/bin/xvfb-run -a python ./test-installed.py -v" >> test
 
 RUN chmod +x /test
 
