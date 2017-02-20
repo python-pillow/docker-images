@@ -23,4 +23,4 @@ install:
     - cd "$DOCKER" && make update
 
 script:
-    - cd "$DOCKER" && make build && make test
+    - make build && make test
