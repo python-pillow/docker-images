@@ -1,5 +1,7 @@
 # Docker Images for the Pillow Test Infrastructure
 
+[![Build Status](https://travis-ci.org/python-pillow/docker-images.svg?branch=master)](https://travis-ci.org/python-pillow/docker-images)
+
 ## Getting Started
 
 The makefiles rely on being logged into to [Docker Hub](https://hub.docker.com) to properly scope
