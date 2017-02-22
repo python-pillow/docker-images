@@ -7,7 +7,7 @@ RUN pacman -Sy --noconfirm \
 	        python2 python  \
  			python2-virtualenv \
  			python-virtualenv \	
-	   		gcc make git sudo \
+			gcc make git sudo wget \
 			python2-setuptools \
  			python-setuptools \
  			extra/libjpeg-turbo \
@@ -26,7 +26,7 @@ RUN pacman -Sy --noconfirm \
 
 
 ADD depends /depends
-RUN	cd /depends &&  ./install_imagequant.sh
+RUN	cd /depends && ./install_imagequant.sh
 
 RUN /sbin/useradd -m -U -u 1000 pillow && \
 	virtualenv2 --system-site-packages /vpy && \
