@@ -1,6 +1,6 @@
 
 
-TARGETS = alpine arch ubuntu-precise-amd64 ubuntu-trusty-x86 ubuntu-xenial-amd64 debian-stretch-x86
+TARGETS = alpine arch amazon-amd64 ubuntu-precise-amd64 ubuntu-trusty-x86 ubuntu-xenial-amd64 debian-stretch-x86
 BUILDDIRS = $(TARGETS:%=build-%)
 PUSHDIRS = $(TARGETS:%=push-%)
 UPDATEDIRS = $(TARGETS:%=update-%)
