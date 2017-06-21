@@ -25,10 +25,12 @@ RUN apk --no-cache add python \
                        openjpeg-dev \
                        tiff-dev \
                        tk-dev \
-                       tcl-dev
+                       tcl-dev \
+					   harfbuzz-dev \
+					   fribidi-dev 
 
 ADD depends /depends
-RUN	cd /depends && ./install_webp.sh && ./install_imagequant.sh
+RUN	cd /depends && ./install_webp.sh && ./install_imagequant.sh && ./install_raqm.sh
 
 RUN /usr/sbin/adduser -D pillow && \
 	pip install virtualenv && virtualenv /vpy && \
