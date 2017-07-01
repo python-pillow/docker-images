@@ -22,11 +22,14 @@ RUN pacman -Sy --noconfirm \
 			xorg-server-xvfb \
 	        ghostscript \
 			python2-pyqt5 \ 
-			python-pyqt5  
+			python-pyqt5  \
+			pkg-config \
+			extra/fribidi \
+			extra/harfbuzz 
 
 
 ADD depends /depends
-RUN	cd /depends && ./install_imagequant.sh
+RUN	cd /depends && ./install_imagequant.sh && ./install_raqm.sh
 
 RUN /sbin/useradd -m -U -u 1000 pillow && \
 	virtualenv2 --system-site-packages /vpy && \
