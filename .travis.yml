@@ -14,6 +14,8 @@ matrix:
     - env: DOCKER="arch"
     - env: DOCKER="amazon-amd64"
     - env: DOCKER="centos-6-amd64"
+    - env: DOCKER="fedora-24-amd64"
+    - env: DOCKER="fedora-26-amd64"
     - env: DOCKER="ubuntu-trusty-x86"
     - env: DOCKER="ubuntu-xenial-amd64"
     - env: DOCKER="ubuntu-precise-amd64"
