@@ -23,7 +23,6 @@ matrix:
 
 install:
     - sudo apt-get update && sudo apt-get install -qyy debootstrap
-    - sudo ln -s /usr/share/debootstrap/scripts/sid /usr/share/debootstrap/scripts/stretch
     - sudo chown -R 1000 $TRAVIS_BUILD_DIR
     - cd "$DOCKER" && make update
 
