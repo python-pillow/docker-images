@@ -12,8 +12,7 @@ RUN useradd --uid 1000 pillow
 
 RUN bash -c "source /opt/rh/python27/enable && \
 	/opt/rh/python27/root/usr/bin/virtualenv -p python2.7 --system-site-packages /vpy && \
-	/vpy/bin/pip install nose && \
-	/vpy/bin/pip install cffi && \
+	/vpy/bin/pip install nose cffi olefile && \
 	cat /opt/rh/python27/enable /vpy/bin/activate > /vpy/bin/activate2.7 && \
 	mv  /vpy/bin/activate2.7  /vpy/bin/activate && \
 	chown -R pillow:pillow /vpy "

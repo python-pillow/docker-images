@@ -34,7 +34,7 @@ RUN	cd /depends && ./install_webp.sh && ./install_imagequant.sh && ./install_raq
 
 RUN /usr/sbin/adduser -D pillow && \
 	pip install virtualenv && virtualenv /vpy && \
-	/vpy/bin/pip install nose && \
+	/vpy/bin/pip install nose olefile && \
 	chown -R pillow:pillow /vpy
 
 RUN echo "#!/bin/bash" >> /test && \
