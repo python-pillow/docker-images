@@ -9,8 +9,7 @@ run yum install -y  python27 python27-virtualenv \
 RUN useradd --uid 1000 pillow
 
 RUN bash -c "/usr/bin/virtualenv -p python2.7 --system-site-packages /vpy && \
-    /vpy/bin/pip install nose && \
-    /vpy/bin/pip install cffi && \
+    /vpy/bin/pip install nose cffi olefile && \
     chown -R pillow:pillow /vpy "
 
 ADD depends /depends

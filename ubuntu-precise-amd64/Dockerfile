@@ -13,8 +13,7 @@ RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -y \
 RUN useradd pillow && addgroup pillow sudo
 
 RUN virtualenv -p /usr/bin/python2.7 --system-site-packages /vpy && \
-	/vpy/bin/pip install nose && \
-	/vpy/bin/pip install cffi && \
+	/vpy/bin/pip install nose cffi olefile && \
 	chown -R pillow:pillow /vpy
 
 ADD depends /depends
