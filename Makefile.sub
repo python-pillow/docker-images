@@ -15,7 +15,7 @@ update:
 	./update.sh
 
 test:
-	docker run -v $(ROOT):/Pillow $(IMAGENAME)
+	docker run --rm -v $(ROOT):/Pillow $(IMAGENAME)
 
 push:
 	docker push $(IMAGENAME)
@@ -24,5 +24,5 @@ clean:
 	rm -r depends
 
 shell:
-	docker run -it -v $(ROOT):/Pillow $(IMAGENAME) /bin/bash
+	docker run --rm -it -v $(ROOT):/Pillow $(IMAGENAME) /bin/bash
 
