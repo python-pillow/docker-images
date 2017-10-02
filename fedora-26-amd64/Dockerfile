@@ -17,7 +17,7 @@ RUN virtualenv -p /usr/bin/python2.7 --system-site-packages /vpy && \
 
 RUN echo "#!/bin/bash" >> /test && \
     echo "source /vpy/bin/activate && cd /Pillow " >> test && \
-    echo "make clean && make install && /usr/bin/xvfb-run -a python ./test-installed.py -v --with-coverage" >> test
+    echo "make clean && make install-coverage && /usr/bin/xvfb-run -a python ./test-installed.py -v --with-coverage" >> test
 
 RUN chmod +x /test
 

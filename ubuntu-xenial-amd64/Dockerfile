@@ -23,7 +23,7 @@ RUN cd /depends && ./install_openjpeg.sh && ./install_imagequant.sh && ./install
 
 RUN echo "#!/bin/bash" >> /test && \
     echo "source /vpy/bin/activate && cd /Pillow " >> test && \
-    echo "make clean && make install && /usr/bin/xvfb-run -a python ./test-installed.py -v --with-coverage" >> test
+    echo "make clean && make install-coverage && /usr/bin/xvfb-run -a python ./test-installed.py -v --with-coverage" >> test
 
 RUN chmod +x /test
 
