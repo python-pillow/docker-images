@@ -39,7 +39,7 @@ RUN /usr/sbin/adduser -D pillow && \
 
 RUN echo "#!/bin/bash" >> /test && \
     echo "source /vpy/bin/activate && cd /Pillow " >> test && \
-    echo "make clean && LIBRARY_PATH=/lib:/usr/lib make install && python test-installed.py -v" >> test
+    echo "make clean && LIBRARY_PATH=/lib:/usr/lib make install && python test-installed.py -v --with-coverage" >> test
 
 RUN chmod +x /test
 

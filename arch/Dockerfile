@@ -42,7 +42,7 @@ RUN /sbin/useradd -m -U -u 1000 pillow && \
 RUN echo "#!/bin/bash" >> /test && \
     echo "source /vpy/bin/activate && cd /Pillow " >> test && \
     echo "make clean && make install " >> test && \
-    echo "QT_QPA_PLATFORM=offscreen /usr/bin/xvfb-run -a python test-installed.py -v" >> test
+    echo "QT_QPA_PLATFORM=offscreen /usr/bin/xvfb-run -a python test-installed.py -v --with-coverage" >> test
 
 RUN chmod +x /test
 
