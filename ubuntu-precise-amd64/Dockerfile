@@ -19,7 +19,7 @@ RUN virtualenv -p /usr/bin/python2.7 --system-site-packages /vpy && \
     chown -R pillow:pillow /vpy
 
 ADD depends /depends
-RUN	cd /depends && ./install_openjpeg.sh && ./install_imagequant.sh
+RUN cd /depends && ./install_openjpeg.sh && ./install_imagequant.sh
 
 RUN echo "#!/bin/bash" >> /test && \
     echo "source /vpy/bin/activate && cd /Pillow " >> test && \

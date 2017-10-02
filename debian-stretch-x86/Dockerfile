@@ -22,10 +22,10 @@ RUN echo '#!/bin/sh' > /usr/sbin/policy-rc.d \
     \
     && echo 'Acquire::Languages "none";' > /etc/apt/apt.conf.d/docker-no-languages \
     \
-    && echo 'Acquire::GzipIndexes "true"; Acquire::CompressionTypes::Order:: "gz";' > /etc/apt/apt.conf.d/docker-gzip-indexes 
+    && echo 'Acquire::GzipIndexes "true"; Acquire::CompressionTypes::Order:: "gz";' > /etc/apt/apt.conf.d/docker-gzip-indexes
 
 #    && echo 'deb http://archive.ubuntu.com/ubuntu/ trusty universe' >> /etc/apt/sources.list \
-#    && echo 'deb http://archive.ubuntu.com/ubuntu/ trusty-updates universe' >> /etc/apt/sources.list 
+#    && echo 'deb http://archive.ubuntu.com/ubuntu/ trusty-updates universe' >> /etc/apt/sources.list
 
 #
 # Pillow customization
@@ -40,7 +40,7 @@ RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -y \
     libtiff5-dev libjpeg62-turbo-dev zlib1g-dev \
     libfreetype6-dev liblcms2-dev libwebp-dev tcl8.6-dev tk8.6-dev \
     python-tk python3-tk \
-	libharfbuzz-dev libfribidi-dev && apt-get clean
+    libharfbuzz-dev libfribidi-dev && apt-get clean
 
 RUN useradd pillow && addgroup pillow sudo && \
     mkdir /home/pillow && chown pillow:pillow /home/pillow
@@ -54,7 +54,7 @@ RUN cd /depends && ./install_openjpeg.sh && ./install_imagequant.sh && ./install
 
 RUN echo "#!/bin/bash" >> /test && \
     echo "source /vpy/bin/activate && cd /Pillow " >> test && \
-    echo "export DISPLAY=:99.0" >> test && \ 
+    echo "export DISPLAY=:99.0" >> test && \
     echo "make clean && make install && /usr/bin/xvfb-run -a python ./test-installed.py -v" >> test
 
 RUN chmod +x /test
