@@ -17,7 +17,7 @@ RUN apk --no-cache add python \
 				   	   bash \
 					   sudo \
                        py2-pip \
-                       # Pillow depenencies
+                       # Pillow dependencies
                        jpeg-dev \
                        zlib-dev \
                        freetype-dev \
