@@ -1,6 +1,8 @@
 FROM amazonlinux
 
-run yum install -y  python27 python27-virtualenv \
+run yum install -y shadow-utils util-linux xorg-x11-xauth \
+	findutils which \
+	python27 python27-virtualenv \
 	gcc xorg-x11-server-Xvfb ghostscript sudo wget cmake \
 	libtiff-devel libjpeg-devel zlib-devel freetype-devel \
     lcms2-devel libwebp-devel  \
