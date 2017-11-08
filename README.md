@@ -5,7 +5,7 @@
 ## Getting Started
 
 The makefiles rely on being logged into to [Docker Hub](https://hub.docker.com) to properly scope
-the image tag. 
+the image tag.
 
 ```bash
 git clone https://github.com/python-pillow/docker-images.git
@@ -38,5 +38,5 @@ the container with bash.
 - Make a new directory for the platform
 - `ln -s ../Makefile.sub Makefile`
 - Write a simple update script to install the original image.
-- Write/customize a Docker file. The convention is that the Pillow directory will be mounted at `/Pillow`, and the test script will run as the `pillow` user. Sudo is not available at test time. 
+- Write/customize a Docker file. The convention is that the Pillow directory will be mounted at `/Pillow`, and the test script will run as the `pillow` user. Sudo is not available at test time.
 
