@@ -7,7 +7,7 @@ run yum install -y  python27 python-virtualenv \
     libtiff-devel libjpeg-devel zlib-devel freetype-devel \
     lcms2-devel libwebp-devel openjpeg2-devel tkinter \
     tcl-devel tk-devel libffi-devel libimagequant-devel \
-	libraqm-devel
+    libraqm-devel
 
 RUN useradd --uid 1000 pillow
 
