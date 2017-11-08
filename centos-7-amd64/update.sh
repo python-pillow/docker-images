@@ -1,3 +1,3 @@
 #!/bin/sh
-docker pull centos:6
+docker pull centos:7
 
