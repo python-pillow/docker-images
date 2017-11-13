@@ -21,7 +21,10 @@ RUN echo "#!/bin/bash" >> /test && \
     echo "source /vpy/bin/activate && cd /Pillow " >> test && \
     echo "export DISPLAY=:99.0" >> test && \
     echo "export LD_LIBRARY_PATH=/usr/lib" >> test && \
-    echo "make clean && make install-coverage && /usr/bin/xvfb-run -a python ./test-installed.py -v --with-coverage" >> test
+    echo "make clean" >> test && \
+    echo 'CFLAGS="-coverage" python setup.py build_ext --inplace' >> test && \
+    echo "/usr/bin/xvfb-run -a coverage run --include="PIL/*" -m nose -vx Tests/test_*.py" >> test && \
+    echo 'coverage report' >> test
 
 RUN chmod +x /test
 

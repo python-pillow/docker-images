@@ -38,8 +38,12 @@ RUN /usr/sbin/adduser -D pillow && \
     chown -R pillow:pillow /vpy
 
 RUN echo "#!/bin/bash" >> /test && \
+    echo "set -e" >> test && \
     echo "source /vpy/bin/activate && cd /Pillow " >> test && \
-    echo "make clean && LIBRARY_PATH=/lib:/usr/lib make install-coverage && python test-installed.py -v --with-coverage" >> test
+    echo "make clean" >> test && \
+    echo 'LIBRARY_PATH=/lib:/usr/lib CFLAGS="-coverage" python setup.py build_ext --inplace' >> test && \
+    echo 'coverage run --include="PIL/*" -m nose -vx Tests/test_*.py' >> test && \
+    echo 'coverage report' >> test
 
 RUN chmod +x /test
 

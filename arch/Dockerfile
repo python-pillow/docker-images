@@ -40,9 +40,12 @@ RUN /sbin/useradd -m -U -u 1000 pillow && \
     chown -R pillow:pillow /vpy3
 
 RUN echo "#!/bin/bash" >> /test && \
+    echo "set -e" >> test && \
     echo "source /vpy/bin/activate && cd /Pillow " >> test && \
-    echo "make clean && make install-coverage " >> test && \
-    echo "QT_QPA_PLATFORM=offscreen /usr/bin/xvfb-run -a python test-installed.py -v --with-coverage" >> test
+    echo "make clean" >> test && \
+    echo 'CFLAGS="-coverage" python setup.py build_ext --inplace' >> test && \
+    echo 'QT_QPA_PLATFORM=offscreen /usr/bin/xvfb-run -a coverage run --include="PIL/*" -m nose -vx Tests/test_*.py' >> test && \
+    echo 'coverage report' >> test
 
 RUN chmod +x /test
 
