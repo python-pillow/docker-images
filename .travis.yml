@@ -19,7 +19,6 @@ matrix:
     - env: DOCKER="fedora-26-amd64"
     - env: DOCKER="ubuntu-trusty-x86"
     - env: DOCKER="ubuntu-xenial-amd64"
-    - env: DOCKER="ubuntu-precise-amd64"
     - env: DOCKER="debian-stretch-x86"
 
 install:
