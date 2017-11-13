@@ -1,2 +1,5 @@
 *~
 depends
+
+# IDE
+.idea
