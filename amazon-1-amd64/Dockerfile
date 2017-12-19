@@ -1,4 +1,4 @@
-FROM amazonlinux
+FROM amazonlinux:1
 
 run yum install -y shadow-utils util-linux xorg-x11-xauth \
     findutils which \
