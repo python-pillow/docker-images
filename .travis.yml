@@ -12,7 +12,8 @@ matrix:
   include:
     - env: DOCKER="alpine"
     - env: DOCKER="arch"
-    - env: DOCKER="amazon-amd64"
+    - env: DOCKER="amazon-1-amd64"
+    - env: DOCKER="amazon-2-amd64"
     - env: DOCKER="centos-6-amd64"
     - env: DOCKER="centos-7-amd64"	
     - env: DOCKER="fedora-25-amd64"
