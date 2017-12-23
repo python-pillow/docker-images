@@ -46,7 +46,7 @@ RUN useradd pillow && addgroup pillow sudo && \
     mkdir /home/pillow && chown pillow:pillow /home/pillow
 
 RUN virtualenv -p /usr/bin/python2.7 --system-site-packages /vpy && \
-    /vpy/bin/pip install nose cffi olefile nose-cov coverage cov-core && \
+    /vpy/bin/pip install cffi olefile pytest pytest-cov && \
     chown -R pillow:pillow /vpy
 
 ADD depends /depends
@@ -55,7 +55,7 @@ RUN cd /depends && ./install_openjpeg.sh && ./install_imagequant.sh && ./install
 RUN echo "#!/bin/bash" >> /test && \
     echo "source /vpy/bin/activate && cd /Pillow " >> test && \
     echo "export DISPLAY=:99.0" >> test && \
-    echo "make clean && make install-coverage && /usr/bin/xvfb-run -a python ./test-installed.py -v --with-coverage" >> test
+    echo "make clean && make install-coverage && /usr/bin/xvfb-run -a pytest -vx --cov PIL --cov-report term Tests" >> test
 
 RUN chmod +x /test
 

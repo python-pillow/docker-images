@@ -15,7 +15,7 @@ RUN useradd --uid 1000 pillow
 
 RUN bash -c "/usr/bin/pip3 install virtualenv && \
     /usr/bin/python3 -mvirtualenv -p /usr/bin/python3 --system-site-packages /vpy && \
-    /vpy/bin/pip install nose cffi olefile nose-cov coverage cov-core && \
+    /vpy/bin/pip install cffi olefile pytest pytest-cov && \
     chown -R pillow:pillow /vpy "
 
 ADD depends /depends
@@ -25,10 +25,7 @@ RUN echo "#!/bin/bash" >> /test && \
     echo "source /vpy/bin/activate && cd /Pillow " >> test && \
     echo "export DISPLAY=:99.0" >> test && \
     echo "export LD_LIBRARY_PATH=/usr/lib" >> test && \
-    echo "make clean" >> test && \
-    echo 'CFLAGS="-coverage" python setup.py build_ext --inplace' >> test && \
-    echo "/usr/bin/xvfb-run -a coverage run --include="PIL/*" -m nose -vx Tests/test_*.py" >> test && \
-    echo 'coverage report' >> test
+    echo "make clean && make install-coverage && pytest -vx --cov PIL --cov-report term Tests" >> test
 
 RUN chmod +x /test
 
