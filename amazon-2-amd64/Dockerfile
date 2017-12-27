@@ -25,7 +25,7 @@ RUN echo "#!/bin/bash" >> /test && \
     echo "source /vpy/bin/activate && cd /Pillow " >> test && \
     echo "export DISPLAY=:99.0" >> test && \
     echo "export LD_LIBRARY_PATH=/usr/lib" >> test && \
-    echo "make clean && make install-coverage && pytest -vx --cov PIL --cov-report term Tests" >> test
+    echo "make clean && make install-coverage && /usr/bin/xvfb-run -a pytest -vx --cov PIL --cov-report term Tests" >> test
 
 RUN chmod +x /test
 
