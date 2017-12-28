@@ -6,10 +6,11 @@ USERNAME := $(shell docker info | grep Username | cut -d ' ' -f 2)
 TARGET := $(notdir $(WD))
 ROOT := $(abspath $(WD)/../Pillow)
 IMAGENAME := $(if $(USERNAME), $(USERNAME)/$(TARGET), $(TARGET))
+BRANCH := $(shell git rev-parse --abbrev-ref HEAD)
 
 build:
 	cp -r ../Pillow/depends .
-	docker build -t $(IMAGENAME) .
+	docker build -t $(IMAGENAME):$(BRANCH) .
 
 update:
 	./update.sh
@@ -18,7 +19,7 @@ test:
 	docker run --rm -v $(ROOT):/Pillow $(IMAGENAME)
 
 push:
-	docker push $(IMAGENAME)
+	docker push $(IMAGENAME):$(BRANCH)
 
 clean:
 	rm -r depends
