@@ -34,12 +34,12 @@ RUN cd /depends && ./install_webp.sh && ./install_imagequant.sh && ./install_raq
 
 RUN /usr/sbin/adduser -D pillow && \
     pip install virtualenv && virtualenv /vpy && \
-    /vpy/bin/pip install nose olefile nose-cov coverage cov-core && \
+    /vpy/bin/pip install olefile pytest pytest-cov && \
     chown -R pillow:pillow /vpy
 
 RUN echo "#!/bin/bash" >> /test && \
     echo "source /vpy/bin/activate && cd /Pillow " >> test && \
-    echo "make clean && LIBRARY_PATH=/lib:/usr/lib make install-coverage && python test-installed.py -v --with-coverage" >> test
+    echo "make clean && LIBRARY_PATH=/lib:/usr/lib make install-coverage && pytest -vx --cov PIL --cov-report term Tests" >> test
 
 RUN chmod +x /test
 

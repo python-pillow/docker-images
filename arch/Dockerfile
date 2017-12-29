@@ -33,16 +33,16 @@ RUN cd /depends && ./install_imagequant.sh && ./install_raqm.sh
 
 RUN /sbin/useradd -m -U -u 1000 pillow && \
     virtualenv2 --system-site-packages /vpy && \
-    /vpy/bin/pip install nose cffi olefile nose-cov coverage cov-core && \
+    /vpy/bin/pip install nose cffi olefile pytest pytest-cov && \
     chown -R pillow:pillow /vpy && \
     virtualenv --system-site-packages /vpy3 && \
-    /vpy3/bin/pip install nose cffi olefile nose-cov coverage cov-core && \
+    /vpy3/bin/pip install nose cffi olefile pytest pytest-cov && \
     chown -R pillow:pillow /vpy3
 
 RUN echo "#!/bin/bash" >> /test && \
     echo "source /vpy/bin/activate && cd /Pillow " >> test && \
     echo "make clean && make install-coverage " >> test && \
-    echo "QT_QPA_PLATFORM=offscreen /usr/bin/xvfb-run -a python test-installed.py -v --with-coverage" >> test
+    echo "QT_QPA_PLATFORM=offscreen /usr/bin/xvfb-run -a pytest -vx --cov PIL --cov-report term Tests" >> test
 
 RUN chmod +x /test
 
