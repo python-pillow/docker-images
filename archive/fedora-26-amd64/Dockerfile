@@ -12,7 +12,7 @@ RUN useradd pillow && \
     chown pillow:pillow /home/pillow
 
 RUN virtualenv -p /usr/bin/python2.7 --system-site-packages /vpy && \
-    /vpy/bin/pip install cffi olefile pytest pytest-cov && \
+    /vpy/bin/pip install cffi olefile numpy pytest pytest-cov && \
     chown -R pillow:pillow /vpy
 
 ADD depends /depends

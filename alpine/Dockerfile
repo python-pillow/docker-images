@@ -34,10 +34,10 @@ RUN cd /depends && ./install_webp.sh && ./install_imagequant.sh && ./install_raq
 
 RUN /usr/sbin/adduser -D pillow && \
     pip install virtualenv && virtualenv /vpy && \
-    /vpy/bin/pip install olefile pytest pytest-cov && \
+    /vpy/bin/pip install numpy olefile pytest pytest-cov && \
     chown -R pillow:pillow /vpy && \
     virtualenv -p python3.6 /vpy3 && \
-    /vpy3/bin/pip install olefile pytest pytest-cov && \
+    /vpy3/bin/pip install numpy olefile pytest pytest-cov && \
     chown -R pillow:pillow /vpy3
 
 USER pillow

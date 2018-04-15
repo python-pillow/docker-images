@@ -12,7 +12,7 @@ RUN useradd pillow && \
     chown pillow:pillow /home/pillow
 
 RUN virtualenv -p /usr/bin/python2.7 --system-site-packages /vpy && \
-    /vpy/bin/pip install nose cffi olefile nose-cov coverage cov-core && \
+    /vpy/bin/pip install nose cffi olefile numpy nose-cov coverage cov-core && \
     chown -R pillow:pillow /vpy
 
 ADD depends /depends

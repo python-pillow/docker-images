@@ -12,7 +12,7 @@ RUN useradd --uid 1000 pillow
 
 RUN bash -c "source /opt/rh/python27/enable && \
     /opt/rh/python27/root/usr/bin/virtualenv -p python2.7 --system-site-packages /vpy && \
-    /vpy/bin/pip install cffi olefile pytest pytest-cov && \
+    /vpy/bin/pip install cffi olefile numpy pytest pytest-cov && \
     cat /opt/rh/python27/enable /vpy/bin/activate > /vpy/bin/activate2.7 && \
     mv /vpy/bin/activate2.7 /vpy/bin/activate && \
     chown -R pillow:pillow /vpy && \
