@@ -11,7 +11,7 @@ run yum install -y shadow-utils util-linux xorg-x11-xauth \
 RUN useradd --uid 1000 pillow
 
 RUN bash -c "/usr/bin/virtualenv -p python2.7 --system-site-packages /vpy && \
-    /vpy/bin/pip install cffi olefile pytest pytest-cov && \
+    /vpy/bin/pip install cffi olefile numpy pytest pytest-cov && \
     chown -R pillow:pillow /vpy "
 
 ADD depends /depends
