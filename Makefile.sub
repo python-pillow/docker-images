@@ -16,7 +16,7 @@ update:
 	./update.sh
 
 test:
-	docker run --rm -v $(ROOT):/Pillow $(IMAGENAME)
+	docker run --rm -v $(ROOT):/Pillow $(IMAGENAME):$(BRANCH)
 
 push:
 	docker push $(IMAGENAME):$(BRANCH)
