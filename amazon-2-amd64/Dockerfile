@@ -9,7 +9,7 @@ run yum install -y shadow-utils util-linux xorg-x11-xauth \
     libtiff-devel libjpeg-devel zlib-devel freetype-devel \
     lcms2-devel libwebp-devel harfbuzz-devel fribidi-devel \
     libffi-devel \
-	pth-devel gcc-c++
+    pth-devel gcc-c++ tar
 
 RUN useradd --uid 1000 pillow
 
