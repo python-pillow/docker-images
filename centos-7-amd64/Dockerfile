@@ -18,13 +18,8 @@ RUN bash -c "source /opt/rh/python27/enable && \
     mv  /vpy/bin/activate2.7  /vpy/bin/activate && \
     chown -R pillow:pillow /vpy "
 
-RUN echo "#!/bin/bash" >> /test && \
-    echo "source /vpy/bin/activate && cd /Pillow " >> test && \
-    echo "export DISPLAY=:99.0" >> test && \
-    echo "make clean && make install-coverage && /usr/bin/xvfb-run -a pytest -vx --cov PIL --cov-report term Tests" >> test
-
-RUN chmod +x /test
+ADD depends /depends
 
 USER pillow
-CMD ["/test"]
+CMD ["depends/test.sh"]
 

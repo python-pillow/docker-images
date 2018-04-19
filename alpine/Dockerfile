@@ -37,13 +37,7 @@ RUN /usr/sbin/adduser -D pillow && \
     /vpy/bin/pip install olefile pytest pytest-cov && \
     chown -R pillow:pillow /vpy
 
-RUN echo "#!/bin/bash" >> /test && \
-    echo "source /vpy/bin/activate && cd /Pillow " >> test && \
-    echo "make clean && LIBRARY_PATH=/lib:/usr/lib make install-coverage && pytest -vx --cov PIL --cov-report term Tests" >> test
-
-RUN chmod +x /test
-
 USER pillow
-CMD ["/test"]
+CMD ["depends/test.sh"]
 
 #docker run -v $TRAVIS_BUILD_DIR:/Pillow pillow-alpine

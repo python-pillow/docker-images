@@ -52,15 +52,8 @@ RUN virtualenv -p /usr/bin/python2.7 --system-site-packages /vpy && \
 ADD depends /depends
 RUN cd /depends && ./install_openjpeg.sh && ./install_imagequant.sh && ./install_raqm.sh
 
-RUN echo "#!/bin/bash" >> /test && \
-    echo "source /vpy/bin/activate && cd /Pillow " >> test && \
-    echo "export DISPLAY=:99.0" >> test && \
-    echo "make clean && make install-coverage && /usr/bin/xvfb-run -a pytest -vx --cov PIL --cov-report term Tests" >> test
-
-RUN chmod +x /test
-
 USER pillow
 ENTRYPOINT ["linux32"]
-CMD ["/test"]
+CMD ["depends/test.sh"]
 
 #docker run -v $TRAVIS_BUILD_DIR:/Pillow pythonpillow/ubuntu-trusty-x86

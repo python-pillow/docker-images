@@ -15,13 +15,9 @@ RUN virtualenv -p /usr/bin/python2.7 --system-site-packages /vpy && \
     /vpy/bin/pip install nose cffi olefile nose-cov coverage cov-core && \
     chown -R pillow:pillow /vpy
 
-RUN echo "#!/bin/bash" >> /test && \
-    echo "source /vpy/bin/activate && cd /Pillow " >> test && \
-    echo "make clean && make install-coverage && /usr/bin/xvfb-run -a python ./test-installed.py -v --with-coverage" >> test
-
-RUN chmod +x /test
+ADD depends /depends
 
 USER pillow
-CMD ["/test"]
+CMD ["depends/test.sh"]
 
 #docker run -v $TRAVIS_BUILD_DIR:/Pillow pythonpillow/fedora-24-amd64

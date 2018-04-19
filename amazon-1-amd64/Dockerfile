@@ -17,14 +17,6 @@ RUN bash -c "/usr/bin/virtualenv -p python2.7 --system-site-packages /vpy && \
 ADD depends /depends
 RUN cd /depends && ./install_imagequant.sh && ./install_openjpeg.sh
 
-RUN echo "#!/bin/bash" >> /test && \
-    echo "source /vpy/bin/activate && cd /Pillow " >> test && \
-    echo "export DISPLAY=:99.0" >> test && \
-    echo "export LD_LIBRARY_PATH=/usr/lib" >> test && \
-    echo "make clean && make install-coverage && /usr/bin/xvfb-run -a pytest -vx --cov PIL --cov-report term Tests" >> test
-
-RUN chmod +x /test
-
 USER pillow
-CMD ["/test"]
+CMD ["depends/test.sh"]
 
