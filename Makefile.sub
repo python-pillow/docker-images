@@ -25,5 +25,5 @@ clean:
 	rm -r depends
 
 shell:
-	docker run --rm -it -v $(ROOT):/Pillow $(IMAGENAME) /bin/bash
+	docker run --rm -it -v $(ROOT):/Pillow $(IMAGENAME):$(BRANCH) /bin/bash
 
