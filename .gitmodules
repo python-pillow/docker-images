@@ -1,4 +1,3 @@
 [submodule "Pillow"]
 	path = Pillow
-	url = https://github.com/hugovk/Pillow.git
-	branch = pytest
+	url = https://github.com/python-pillow/Pillow.git
