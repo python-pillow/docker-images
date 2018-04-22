@@ -5,11 +5,11 @@ run amazon-linux-extras install python3
 run yum install -y shadow-utils util-linux xorg-x11-xauth \
     findutils which \
     python3-devel python3-test python3-tkinter python-virtualenv \
-    gcc xorg-x11-server-Xvfb ghostscript sudo wget cmake \
+    gcc xorg-x11-server-Xvfb ghostscript sudo wget cmake make \
     libtiff-devel libjpeg-devel zlib-devel freetype-devel \
     lcms2-devel libwebp-devel harfbuzz-devel fribidi-devel \
     libffi-devel \
-	pth-devel gcc-c++
+    pth-devel gcc-c++ tar
 
 RUN useradd --uid 1000 pillow
 
