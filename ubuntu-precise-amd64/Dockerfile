@@ -13,7 +13,7 @@ RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -y \
 RUN useradd pillow && addgroup pillow sudo
 
 RUN virtualenv -p /usr/bin/python2.7 --system-site-packages /vpy && \
-    /vpy/bin/pip install -U pip --index-url=https://pypi.python.org/simple/ && \
+    /vpy/bin/pip install -U pip --index-url=https://pypi.org/simple/ && \
     /vpy/bin/pip install -U setuptools wheel && \
     /vpy/bin/pip install nose cffi olefile nose-cov coverage cov-core && \
     chown -R pillow:pillow /vpy
