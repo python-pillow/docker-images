@@ -39,13 +39,6 @@ RUN /sbin/useradd -m -U -u 1000 pillow && \
     /vpy3/bin/pip install nose cffi olefile pytest pytest-cov && \
     chown -R pillow:pillow /vpy3
 
-RUN echo "#!/bin/bash" >> /test && \
-    echo "source /vpy/bin/activate && cd /Pillow " >> test && \
-    echo "make clean && make install-coverage " >> test && \
-    echo "QT_QPA_PLATFORM=offscreen /usr/bin/xvfb-run -a pytest -vx --cov PIL --cov-report term Tests" >> test
-
-RUN chmod +x /test
-
 USER pillow
-CMD ["/test"]
+CMD ["depends/test.sh"]
 
