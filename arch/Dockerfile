@@ -26,7 +26,8 @@ RUN pacman -Sy --noconfirm \
             pkg-config \
             extra/fribidi \
             extra/harfbuzz \
-            glibc
+            glibc \
+            libidn
 
 
 ADD depends /depends
