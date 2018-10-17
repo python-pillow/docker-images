@@ -25,7 +25,8 @@ RUN pacman -Sy --noconfirm \
             python-pyqt5  \
             pkg-config \
             extra/fribidi \
-            extra/harfbuzz
+            extra/harfbuzz \
+            glibc
 
 
 ADD depends /depends
