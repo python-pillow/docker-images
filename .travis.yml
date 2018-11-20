@@ -3,7 +3,6 @@ notifications:
     irc: "chat.freenote.net#pil"
 
 dist: trusty
-sudo: required
 services:
     - docker
 
