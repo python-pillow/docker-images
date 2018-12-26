@@ -27,4 +27,13 @@ install:
     - cd "$DOCKER" && make update
 
 script:
+	- if [[ -e "$DOCKER_USERNAME" ]]; then
+	  $docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD ;
+	  fi
     - make build && make test
+
+after_success:
+  - if [[ "$TRAVIS_BRANCH" == "docker-login" ]]; then
+  		 make push-image ;
+	fi
+
