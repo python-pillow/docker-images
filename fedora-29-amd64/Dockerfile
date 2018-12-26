@@ -1,4 +1,4 @@
-FROM fedora:27
+FROM fedora:29
 
 RUN dnf install -y redhat-rpm-config \
     python-devel python3-devel python-virtualenv make gcc \
@@ -11,7 +11,7 @@ RUN dnf install -y redhat-rpm-config \
 RUN useradd pillow && \
     chown pillow:pillow /home/pillow
 
-RUN virtualenv -p /usr/bin/python2.7 --system-site-packages /vpy && \
+RUN /usr/bin/python2.7 /usr/lib/python2.7/site-packages/virtualenv.py --system-site-packages /vpy && \
     /vpy/bin/pip install cffi olefile pytest pytest-cov && \
     chown -R pillow:pillow /vpy
 
@@ -20,4 +20,4 @@ ADD depends /depends
 USER pillow
 CMD ["depends/test.sh"]
 
-#docker run -v $TRAVIS_BUILD_DIR:/Pillow pythonpillow/fedora-27-amd64
+#docker run -v $TRAVIS_BUILD_DIR:/Pillow pythonpillow/fedora-29-amd64
