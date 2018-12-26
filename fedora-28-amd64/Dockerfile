@@ -1,4 +1,4 @@
-FROM fedora:27
+FROM fedora:28
 
 RUN dnf install -y redhat-rpm-config \
     python-devel python3-devel python-virtualenv make gcc \
@@ -20,4 +20,4 @@ ADD depends /depends
 USER pillow
 CMD ["depends/test.sh"]
 
-#docker run -v $TRAVIS_BUILD_DIR:/Pillow pythonpillow/fedora-27-amd64
+#docker run -v $TRAVIS_BUILD_DIR:/Pillow pythonpillow/fedora-28-amd64
