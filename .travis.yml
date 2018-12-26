@@ -1,11 +1,9 @@
 language: python
 notifications:
-    irc: "chat.freenote.net#pil"
-
+  irc: chat.freenote.net#pil
 dist: trusty
 services:
-    - docker
-
+- docker
 matrix:
   fast_finish: true
   include:
@@ -20,20 +18,17 @@ matrix:
     - env: DOCKER="ubuntu-trusty-x86"
     - env: DOCKER="ubuntu-xenial-amd64"
     - env: DOCKER="debian-stretch-x86"
-
 install:
-    - sudo apt-get update && sudo apt-get install -qyy debootstrap
-    - sudo chown -R 1000 $TRAVIS_BUILD_DIR
-    - cd "$DOCKER" && make update
-
+- sudo apt-get update && sudo apt-get install -qyy debootstrap
+- sudo chown -R 1000 $TRAVIS_BUILD_DIR
+- cd "$DOCKER" && make update
 script:
-	- if [[ -e "$DOCKER_USERNAME" ]]; then
-	  $docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD ;
-	  fi
-    - make build && make test
-
+- if [[ -n "$DOCKER_USERNAME" ]]; then $docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+  ; fi
+- make build && make test
 after_success:
-  - if [[ "$TRAVIS_BRANCH" == "docker-login" ]]; then
-  		 make push-image ;
-	fi
-
+- if [[ "$TRAVIS_BRANCH" == "docker-login" ]]; then make push-image ; fi
+env:
+  global:
+  - secure: W+ko5Y7TKxxEnJxji3NmnkoT/lRPCA/U6+ahBBQUXRhgbf7A6mXVaGgyBrerY5FZF//XAPYdbOIrVHnkhtUSB2yC//kzHsxWKMU2Rax7b228yfYaeGPtIFJ4MTSszqhadgSFk6zyByMNkz6XoufuY5RVpfp/VMxVR6YcOGmjOUhom92nZ9T2NfVP3HF2RLOn2O5N5+IhqJcGOced5FMIOPkrQcXBiikN2aCUg0KdUrcqRaFiPJINQn/FEWxQN717oAlRY9TE8DaziBIEB/z6nZ7CXLGVitc2jLjd/4fW0KGBB68XIHZ2S3rQ7kkr3y/LhptgZiJiSv+R/rxDC6NrfKwmG16xtDQVbnab9/iskdJax9fuQBlpLcyo+UuXbRs8pTNduJGV46ooOAOfF+2KvjTwLvYk9K6ahpt4W9vjs/ro1fF2gyG5haK/2MAZxT1xkT2WlRZwpDhMgE+ZBznGDMma6fbOvoWGhk7bfKUxVisb+CYuySfvhbdkYem+kMdUfcRb8Qo6750aK/fQdh8Xg9t+yCE4jzdzBH6RbTTmvNGOGFHhShCWmLVXU5LiYNLpxWCahuD4OYMSkq6WdobPKNZxl0xry2gxWLhIAFxoZMqdb2MWjdbf/0BSP0Fe2AliLfgZIXKq6t4l69pNJF2y2WieI6jVfeVotXCS2urVT+c=
+  - secure: M4xMLq9pWqh89A5S6JkIy9gInAE3PWdIX5Jsf73iM39gAncEDW6h/1iiYr0EPzc0qq3Cc+bWVJ+u+G6dwojATis3ApERqVVlB8Rwk88Xa7IDueKDbjCL7cbLW0tZ9j0Zxdqd5sUiOfpAWQp6Cy3hKYJh9+ScyilxHrG/qr8AH+RAmL+k/BadceftLalCA6GPg4kunukZrEe72c7ITsy75mNyEQtrm2YhDHd/M3sTb+Dl6dScvlZNPrl1fcpDIBvh4eL6XyEC0Of/M7TllYRUW2naBnQJ6ekeIAs6Kj7C7jqfxros+LpeVnXjqyp5SoyJBNB2945GjEQQMm0+mFRtJIRkwPUchhpkJZM+vPRE5Q8xSoHh7LQz2Bmv6KPqWdgwXRF0WQ0ke7Ta2D9ZQ2gAttaoh55etpfsBqC+B2Q1x/bWzDy4U84iDKhni6axbdbCjYJWjTsQgk0qdFt/MtrvB8nJsl3VhEJWZ5ibxxtZRA8NCpL5tdQq2b0s1/AQf9iOSgrfxq+xSpsD7o9BAfPolQyKccZ/cKGkMaUr+4z7xY+Gtr71arg/FtHjwSv7dWukMLbLyPnqcRt1C6mDATwMKkZNEMMYtL8xq0TX1iNYBmONoQCoI8eAKWlNNO8nj/1nLTALanAlz+XTWt1wjfe3g/htjA9LSVrkz0s53wdjmLw=
