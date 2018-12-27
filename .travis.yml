@@ -23,7 +23,7 @@ install:
 - sudo chown -R 1000 $TRAVIS_BUILD_DIR
 - cd "$DOCKER" && make update
 script:
-- if [[ -n "$DOCKER_USERNAME" ]]; then sudo $docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+- if [[ -n "$DOCKER_USERNAME" ]]; then sudo docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
   ; fi
 - make build && make test
 after_success:
