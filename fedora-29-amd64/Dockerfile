@@ -1,7 +1,7 @@
 FROM fedora:29
 
 RUN dnf install -y redhat-rpm-config \
-    python-devel python3-devel python-virtualenv make gcc \
+    python-devel python3-devel python-virtualenv python3-virtualenv make gcc \
     libtiff-devel libjpeg-devel zlib-devel freetype-devel \
     lcms2-devel libwebp-devel openjpeg2-devel tkinter python3-tkinter \
     tcl-devel tk-devel harfbuzz-devel fribidi-devel libraqm-devel \
@@ -13,7 +13,10 @@ RUN useradd pillow && \
 
 RUN /usr/bin/python2.7 /usr/lib/python2.7/site-packages/virtualenv.py --system-site-packages /vpy && \
     /vpy/bin/pip install cffi olefile pytest pytest-cov && \
-    chown -R pillow:pillow /vpy
+    chown -R pillow:pillow /vpy && \
+    /usr/bin/python3.7 /usr/lib/python3.7/site-packages/virtualenv.py --system-site-packages /vpy3 && \
+    /vpy3/bin/pip install cffi olefile pytest pytest-cov && \
+    chown -R pillow:pillow /vpy3
 
 ADD depends /depends
 
