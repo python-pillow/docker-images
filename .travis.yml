@@ -25,7 +25,7 @@ install:
 script:
 - if [[ -n "$DOCKER_USERNAME" ]]; then docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
   ; fi
-- make build && make test
+- make build BRANCH=master && make test BRANCH=master
 after_success:
 - if [[ "$TRAVIS_PULL_REQUEST" == "false" && "$TRAVIS_BRANCH" == "master" ]]; then make push BRANCH=master; fi
 env:
