@@ -40,3 +40,17 @@ the container with bash.
 - Write a simple update script to install the original image.
 - Write/customize a Docker file. The convention is that the Pillow directory will be mounted at `/Pillow`, and the test script will run as the `pillow` user. Sudo is not available at test time.
 
+## Update Pillow
+
+```bash
+git clone https://github.com/python-pillow/docker-images
+cd docker-images
+git submodule init
+git submodule update Pillow
+cd Pillow
+git fetch --all
+git checkout [[release tag]]
+cd ..
+git commit -m "Pillow -> 5.2.0" Pillow
+git push
+```
