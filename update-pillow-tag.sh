@@ -1,3 +1,5 @@
+set -e # exit on error
+
 if [ $# -eq 0 ]; then
     echo "Usage: update-pillow-tag.sh [[release tag]]"
     exit
