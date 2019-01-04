@@ -8,7 +8,7 @@ git submodule init
 git submodule update Pillow
 cd Pillow
 git fetch --all
-git checkout $1 || exit
+git checkout $1
 cd ..
 git commit -m "Pillow -> $1" Pillow
 git push
