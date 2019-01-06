@@ -40,3 +40,6 @@ the container with bash.
 - Write a simple update script to install the original image.
 - Write/customize a Docker file. The convention is that the Pillow directory will be mounted at `/Pillow`, and the test script will run as the `pillow` user. Sudo is not available at test time.
 
+## Update Pillow
+
+To push an update of Pillow to this repository, run `./update-pillow.sh [[release tag]]`
