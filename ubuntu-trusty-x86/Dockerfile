@@ -47,10 +47,7 @@ RUN useradd pillow && addgroup pillow sudo && \
 
 RUN virtualenv -p /usr/bin/python2.7 --system-site-packages /vpy && \
     /vpy/bin/pip install cffi olefile pytest pytest-cov && \
-    chown -R pillow:pillow /vpy && \
-    virtualenv -p /usr/bin/python3.4 --system-site-packages /vpy3 && \
-    /vpy3/bin/pip install cffi olefile pytest pytest-cov && \
-    chown -R pillow:pillow /vpy3
+    chown -R pillow:pillow /vpy
 
 ADD depends /depends
 RUN cd /depends && ./install_openjpeg.sh && ./install_imagequant.sh && ./install_raqm.sh
