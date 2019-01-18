@@ -3,11 +3,13 @@
 
 FROM greyltc/archlinux
 
+RUN pacman -Syu --noconfirm \
+            wget
 RUN pacman -Sy --noconfirm \
             python2 python  \
             python2-virtualenv \
             python-virtualenv \
-            gcc make git sudo wget \
+            gcc make git sudo \
             python2-setuptools \
             python-setuptools \
             extra/libjpeg-turbo \
