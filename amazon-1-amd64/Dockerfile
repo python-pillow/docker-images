@@ -11,10 +11,12 @@ run yum install -y shadow-utils util-linux xorg-x11-xauth \
 RUN useradd --uid 1000 pillow
 
 RUN bash -c "/usr/bin/virtualenv -p python2.7 --system-site-packages /vpy && \
+    /vpy/bin/pip install --upgrade pip && \
     /vpy/bin/pip install cffi olefile pytest pytest-cov && \
     /vpy/bin/pip install numpy --only-binary=:all: || true && \
     chown -R pillow:pillow /vpy && \
     /usr/bin/virtualenv -p python3.6 --system-site-packages /vpy3 && \
+    /vpy3/bin/pip install --upgrade pip && \
     /vpy3/bin/pip install cffi olefile pytest pytest-cov && \
     /vpy3/bin/pip install numpy --only-binary=:all: || true && \
     chown -R pillow:pillow /vpy3"
