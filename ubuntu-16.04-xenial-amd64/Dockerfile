@@ -29,4 +29,4 @@ RUN cd /depends && ./install_openjpeg.sh && ./install_imagequant.sh && ./install
 USER pillow
 CMD ["depends/test.sh"]
 
-#docker run -v $TRAVIS_BUILD_DIR:/Pillow pythonpillow/ubuntu-xenial-amd64
+#docker run -v $TRAVIS_BUILD_DIR:/Pillow pythonpillow/ubuntu-16.04-xenial-amd64

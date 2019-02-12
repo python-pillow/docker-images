@@ -57,4 +57,4 @@ USER pillow
 ENTRYPOINT ["linux32"]
 CMD ["depends/test.sh"]
 
-#docker run -v $TRAVIS_BUILD_DIR:/Pillow pythonpillow/ubuntu-trusty-x86
+#docker run -v $TRAVIS_BUILD_DIR:/Pillow pythonpillow/ubuntu-14.04-trusty-x86
