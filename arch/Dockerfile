@@ -35,10 +35,10 @@ RUN cd /depends && ./install_imagequant.sh && ./install_raqm.sh
 
 RUN /sbin/useradd -m -U -u 1000 pillow && \
     virtualenv2 --system-site-packages /vpy && \
-    /vpy/bin/pip install nose cffi olefile pytest pytest-cov && \
+    /vpy/bin/pip install nose cffi olefile pytest==4.1.1 pytest-cov && \
     chown -R pillow:pillow /vpy && \
     virtualenv --system-site-packages /vpy3 && \
-    /vpy3/bin/pip install nose cffi olefile pytest pytest-cov && \
+    /vpy3/bin/pip install nose cffi olefile pytest==4.1.1 pytest-cov && \
     chown -R pillow:pillow /vpy3
 
 USER pillow
