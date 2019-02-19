@@ -38,7 +38,7 @@ RUN /sbin/useradd -m -U -u 1000 pillow && \
     /vpy/bin/pip install nose cffi olefile pytest==4.1.1 pytest-cov && \
     chown -R pillow:pillow /vpy && \
     virtualenv --system-site-packages /vpy3 && \
-    /vpy3/bin/pip install nose cffi olefile pytest==4.1.1 pytest-cov && \
+    /vpy3/bin/pip install nose cffi olefile pytest pytest-cov && \
     chown -R pillow:pillow /vpy3
 
 USER pillow
