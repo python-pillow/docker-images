@@ -7,17 +7,7 @@ services:
 matrix:
   fast_finish: true
   include:
-    - env: DOCKER="alpine"
-    - env: DOCKER="amazon-1-amd64"
-    - env: DOCKER="amazon-2-amd64"
     - env: DOCKER="arch"
-    - env: DOCKER="centos-6-amd64"
-    - env: DOCKER="centos-7-amd64"
-    - env: DOCKER="fedora-28-amd64"
-    - env: DOCKER="fedora-29-amd64"
-    - env: DOCKER="ubuntu-trusty-x86"
-    - env: DOCKER="ubuntu-xenial-amd64"
-    - env: DOCKER="debian-stretch-x86"
 install:
 - sudo apt-get update && sudo apt-get install -qyy debootstrap
 - sudo chown -R 1000 $TRAVIS_BUILD_DIR
@@ -25,9 +15,9 @@ install:
 script:
 - if [[ -n "$DOCKER_USERNAME" ]]; then docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
   ; fi
-- make build BRANCH=master && make test BRANCH=master
+- make build BRANCH=pin-pytest && make test BRANCH=pin-pytest
 after_success:
-- if [[ "$TRAVIS_PULL_REQUEST" == "false" && "$TRAVIS_BRANCH" == "master" ]]; then make push BRANCH=master; fi
+- make push BRANCH=pin-pytest
 env:
   global:
   - secure: W+ko5Y7TKxxEnJxji3NmnkoT/lRPCA/U6+ahBBQUXRhgbf7A6mXVaGgyBrerY5FZF//XAPYdbOIrVHnkhtUSB2yC//kzHsxWKMU2Rax7b228yfYaeGPtIFJ4MTSszqhadgSFk6zyByMNkz6XoufuY5RVpfp/VMxVR6YcOGmjOUhom92nZ9T2NfVP3HF2RLOn2O5N5+IhqJcGOced5FMIOPkrQcXBiikN2aCUg0KdUrcqRaFiPJINQn/FEWxQN717oAlRY9TE8DaziBIEB/z6nZ7CXLGVitc2jLjd/4fW0KGBB68XIHZ2S3rQ7kkr3y/LhptgZiJiSv+R/rxDC6NrfKwmG16xtDQVbnab9/iskdJax9fuQBlpLcyo+UuXbRs8pTNduJGV46ooOAOfF+2KvjTwLvYk9K6ahpt4W9vjs/ro1fF2gyG5haK/2MAZxT1xkT2WlRZwpDhMgE+ZBznGDMma6fbOvoWGhk7bfKUxVisb+CYuySfvhbdkYem+kMdUfcRb8Qo6750aK/fQdh8Xg9t+yCE4jzdzBH6RbTTmvNGOGFHhShCWmLVXU5LiYNLpxWCahuD4OYMSkq6WdobPKNZxl0xry2gxWLhIAFxoZMqdb2MWjdbf/0BSP0Fe2AliLfgZIXKq6t4l69pNJF2y2WieI6jVfeVotXCS2urVT+c=
