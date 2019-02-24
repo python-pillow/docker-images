@@ -18,7 +18,7 @@ RUN bash -c "source /opt/rh/python27/enable && \
     chown -R pillow:pillow /vpy && \
     source /opt/rh/rh-python36/enable && \
     /opt/rh/rh-python36/root/usr/bin/virtualenv -p python3.6 --system-site-packages /vpy3 && \
-    /vpy3/bin/pip install cffi olefile pytest pytest-cov && \
+    /vpy3/bin/pip install cffi olefile numpy pytest pytest-cov && \
     cat /opt/rh/rh-python36/enable /vpy3/bin/activate > /vpy3/bin/activate3.6 && \
     mv /vpy3/bin/activate3.6 /vpy3/bin/activate && \
     chown -R pillow:pillow /vpy3"
