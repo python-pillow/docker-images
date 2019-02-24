@@ -15,10 +15,12 @@ RUN useradd pillow && addgroup pillow sudo && \
     mkdir /home/pillow && chown pillow:pillow /home/pillow
 
 RUN virtualenv -p /usr/bin/python2.7 --system-site-packages /vpy && \
-    /vpy/bin/pip install cffi numpy olefile pytest pytest-cov && \
+    /vpy/bin/pip install cffi olefile pytest pytest-cov && \
+    /vpy/bin/pip install numpy --only-binary=:all: && \
     chown -R pillow:pillow /vpy && \
     virtualenv -p /usr/bin/python3.5 --system-site-packages /vpy3 && \
-    /vpy3/bin/pip install cffi numpy olefile pytest pytest-cov && \
+    /vpy3/bin/pip install cffi olefile pytest pytest-cov && \
+    /vpy3/bin/pip install numpy --only-binary=:all: && \
     chown -R pillow:pillow /vpy3
 
 ADD depends /depends

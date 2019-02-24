@@ -15,7 +15,8 @@ RUN useradd --uid 1000 pillow
 
 RUN bash -c "/usr/bin/pip3 install virtualenv && \
     /usr/bin/python3 -mvirtualenv -p /usr/bin/python3 --system-site-packages /vpy && \
-    /vpy/bin/pip install cffi olefile numpy pytest pytest-cov && \
+    /vpy/bin/pip install cffi olefile pytest pytest-cov && \
+    /vpy/bin/pip install numpy --only-binary=:all: && \
     chown -R pillow:pillow /vpy "
 
 ADD depends /depends

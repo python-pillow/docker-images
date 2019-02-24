@@ -13,9 +13,11 @@ RUN useradd pillow && \
 
 RUN /usr/bin/python2.7 /usr/lib/python2.7/site-packages/virtualenv.py --system-site-packages /vpy && \
     /vpy/bin/pip install cffi olefile pytest pytest-cov && \
+    /vpy/bin/pip install numpy --only-binary=:all: && \
     chown -R pillow:pillow /vpy && \
     /usr/bin/python3.7 /usr/lib/python3.7/site-packages/virtualenv.py --system-site-packages /vpy3 && \
     /vpy3/bin/pip install cffi olefile pytest pytest-cov && \
+    /vpy3/bin/pip install numpy --only-binary=:all: && \
     chown -R pillow:pillow /vpy3
 
 ADD depends /depends
