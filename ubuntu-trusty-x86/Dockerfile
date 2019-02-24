@@ -47,7 +47,7 @@ RUN useradd pillow && addgroup pillow sudo && \
 
 RUN virtualenv -p /usr/bin/python2.7 --system-site-packages /vpy && \
     /vpy/bin/pip install cffi olefile pytest pytest-cov && \
-    /vpy/bin/pip install numpy --only-binary=:all: && \
+    /vpy/bin/pip install numpy --only-binary=:all: || true && \
     chown -R pillow:pillow /vpy
 
 ADD depends /depends
