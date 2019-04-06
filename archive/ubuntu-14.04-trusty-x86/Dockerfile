@@ -46,6 +46,7 @@ RUN useradd pillow && addgroup pillow sudo && \
     mkdir /home/pillow && chown pillow:pillow /home/pillow
 
 RUN virtualenv -p /usr/bin/python2.7 --system-site-packages /vpy && \
+    /vpy/bin/pip install --upgrade pip && \
     /vpy/bin/pip install cffi olefile pytest pytest-cov && \
     /vpy/bin/pip install numpy --only-binary=:all: || true && \
     chown -R pillow:pillow /vpy
@@ -57,4 +58,4 @@ USER pillow
 ENTRYPOINT ["linux32"]
 CMD ["depends/test.sh"]
 
-#docker run -v $TRAVIS_BUILD_DIR:/Pillow pythonpillow/ubuntu-trusty-x86
+#docker run -v $TRAVIS_BUILD_DIR:/Pillow pythonpillow/ubuntu-14.04-trusty-x86

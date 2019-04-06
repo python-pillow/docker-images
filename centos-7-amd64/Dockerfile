@@ -13,6 +13,7 @@ RUN useradd --uid 1000 pillow
 
 RUN bash -c "source /opt/rh/python27/enable && \
     /opt/rh/python27/root/usr/bin/virtualenv -p python2.7 --system-site-packages /vpy && \
+    /vpy/bin/pip install --upgrade pip && \
     /vpy/bin/pip install cffi olefile pytest pytest-cov && \
     /vpy/bin/pip install numpy --only-binary=:all: || true && \
     cat /opt/rh/python27/enable /vpy/bin/activate > /vpy/bin/activate2.7 && \
@@ -20,6 +21,7 @@ RUN bash -c "source /opt/rh/python27/enable && \
     chown -R pillow:pillow /vpy && \
     source /opt/rh/rh-python36/enable && \
     /opt/rh/rh-python36/root/usr/bin/virtualenv -p python3.6 --system-site-packages /vpy3 && \
+    /vpy3/bin/pip install --upgrade pip && \
     /vpy3/bin/pip install cffi olefile pytest pytest-cov && \
     /vpy3/bin/pip install numpy --only-binary=:all: || true && \
     cat /opt/rh/rh-python36/enable /vpy3/bin/activate > /vpy3/bin/activate3.6 && \
