@@ -41,7 +41,7 @@ RUN /sbin/useradd -m -U -u 1000 pillow && \
     chown -R pillow:pillow /vpy && \
     virtualenv --system-site-packages /vpy3 && \
     /vpy3/bin/pip install --upgrade pip && \
-    /vpy3/bin/pip install nose cffi olefile pytest==4.1.1 pytest-cov && \
+    /vpy3/bin/pip install nose cffi olefile pytest pytest-cov && \
     /vpy3/bin/pip install numpy --only-binary=:all: || true && \
     chown -R pillow:pillow /vpy3
 
