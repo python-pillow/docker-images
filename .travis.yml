@@ -15,6 +15,7 @@ matrix:
     - env: DOCKER="centos-7-amd64"
     - env: DOCKER="fedora-28-amd64"
     - env: DOCKER="fedora-29-amd64"
+    - env: DOCKER="fedora-30-amd64"
     - env: DOCKER="ubuntu-16.04-xenial-amd64"
     - env: DOCKER="ubuntu-18.04-bionic-amd64"
     - env: DOCKER="debian-stretch-x86"
