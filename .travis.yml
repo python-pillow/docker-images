@@ -17,8 +17,8 @@ matrix:
     - env: DOCKER="fedora-30-amd64"
     - env: DOCKER="ubuntu-16.04-xenial-amd64"
     - env: DOCKER="ubuntu-18.04-bionic-amd64"
-    - env: DOCKER="debian-stretch-x86"
-    - env: DOCKER="debian-buster-x86"
+    - env: DOCKER="debian-9-stretch-x86"
+    - env: DOCKER="debian-10-buster-x86"
 install:
 - sudo apt-get update && sudo apt-get install -qyy debootstrap
 - sudo chown -R 1000 $TRAVIS_BUILD_DIR
