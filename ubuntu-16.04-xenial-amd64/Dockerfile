@@ -6,7 +6,7 @@ RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -y \
     python-pyqt5 ghostscript libffi-dev libjpeg-turbo-progs \
     python-dev python-setuptools \
     python3-dev cmake  \
-    libtiff5-dev libjpeg8-dev zlib1g-dev \
+    libtiff5-dev libjpeg8-dev libopenjp2-7-dev zlib1g-dev \
     libfreetype6-dev liblcms2-dev libwebp-dev tcl8.6-dev tk8.6-dev \
     python-tk python3-tk \
     libharfbuzz-dev libfribidi-dev && apt-get clean
@@ -26,7 +26,7 @@ RUN virtualenv -p /usr/bin/python2.7 --system-site-packages /vpy && \
     chown -R pillow:pillow /vpy3
 
 ADD depends /depends
-RUN cd /depends && ./install_openjpeg.sh && ./install_imagequant.sh && ./install_raqm.sh
+RUN cd /depends && ./install_imagequant.sh && ./install_raqm.sh
 
 USER pillow
 CMD ["depends/test.sh"]
