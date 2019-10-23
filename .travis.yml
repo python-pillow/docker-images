@@ -58,7 +58,11 @@ matrix:
 install:
 - sudo apt-get update && sudo apt-get install -qyy debootstrap
 - sudo chown -R 1000 $TRAVIS_BUILD_DIR
-- if [[ -n "$LATEST" ]]; then git submodule update --remote --merge Pillow; fi
+- |
+  if [[ -n "$LATEST" ]]; then
+    git submodule update --remote Pillow
+    (cd Pillow && git checkout master)
+  fi
 - cd "$DOCKER" && make update
 script:
 - if [[ -n "$DOCKER_USERNAME" ]]; then echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
