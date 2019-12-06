@@ -4,7 +4,7 @@ run amazon-linux-extras install python3
 
 run yum install -y shadow-utils util-linux xorg-x11-xauth \
     findutils which \
-    python3-devel python3-test python3-tkinter python-virtualenv \
+    python3-devel python3-test python3-tkinter python3-virtualenv \
     gcc xorg-x11-server-Xvfb ghostscript sudo wget cmake make \
     libtiff-devel libjpeg-devel zlib-devel freetype-devel \
     lcms2-devel libwebp-devel harfbuzz-devel fribidi-devel \
@@ -18,7 +18,7 @@ RUN bash -c "/usr/bin/pip3 install virtualenv && \
     /vpy/bin/pip install --upgrade pip && \
     /vpy/bin/pip install cffi olefile pytest pytest-cov && \
     /vpy/bin/pip install numpy --only-binary=:all: || true && \
-    chown -R pillow:pillow /vpy "
+    chown -R pillow:pillow /vpy"
 
 ADD depends /depends
 RUN cd /depends && ./install_imagequant.sh && ./install_openjpeg.sh && ./install_raqm.sh
