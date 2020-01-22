@@ -1,5 +1,5 @@
 #!/bin/bash
-source /vpy/bin/activate
+source /vpy3/bin/activate
 cd /Pillow
 export DISPLAY=:99.0
 export LD_LIBRARY_PATH=/usr/lib
