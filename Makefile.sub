@@ -9,8 +9,8 @@ IMAGENAME := $(if $(USERNAME), $(USERNAME)/$(TARGET), $(TARGET))
 BRANCH := $(shell git rev-parse --abbrev-ref HEAD)
 
 build:
-	cp test.sh ../Pillow/depends
 	cp -r ../Pillow/depends .
+	cp test.sh depends
 	docker build -t $(IMAGENAME):$(BRANCH) .
 
 update:
