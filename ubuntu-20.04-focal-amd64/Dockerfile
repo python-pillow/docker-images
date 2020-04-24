@@ -25,4 +25,4 @@ RUN cd /depends && ./install_imagequant.sh && ./install_raqm.sh
 USER pillow
 CMD ["depends/test.sh"]
 
-#docker run -v $TRAVIS_BUILD_DIR:/Pillow pythonpillow/ubuntu-ubuntu-18.04-focal-amd64-amd64
+#docker run -v $TRAVIS_BUILD_DIR:/Pillow pythonpillow/ubuntu-ubuntu-20.04-focal-amd64-amd64
