@@ -24,3 +24,5 @@ ADD depends /depends
 
 USER pillow
 CMD ["depends/test.sh"]
+
+#docker run -v $TRAVIS_BUILD_DIR:/Pillow pythonpillow/centos-6-amd64

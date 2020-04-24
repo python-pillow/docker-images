@@ -22,3 +22,4 @@ RUN cd /depends && ./install_imagequant.sh && ./install_openjpeg.sh
 USER pillow
 CMD ["depends/test.sh"]
 
+#docker run -v $TRAVIS_BUILD_DIR:/Pillow pythonpillow/amazon-1-amd64
