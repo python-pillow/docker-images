@@ -21,6 +21,8 @@ matrix:
       env: DOCKER="centos-7-amd64"
     - name: "centos-8-amd64 stable"
       env: DOCKER="centos-8-amd64"
+    - name: "debian-10-buster-x86 stable"
+      env: DOCKER="debian-10-buster-x86"
     - name: "fedora-31-amd64 stable"
       env: DOCKER="fedora-31-amd64"
     - name: "fedora-32-amd64 stable"
@@ -29,8 +31,7 @@ matrix:
       env: DOCKER="ubuntu-18.04-bionic-amd64"
     - name: "ubuntu-20.04-focal-amd64 stable"
       env: DOCKER="ubuntu-20.04-focal-amd64"
-    - name: "debian-10-buster-x86 stable"
-      env: DOCKER="debian-10-buster-x86"
+
     - name: "alpine latest"
       env: DOCKER="alpine" LATEST="true"
     - name: "amazon-1-amd64 latest"
@@ -45,6 +46,8 @@ matrix:
       env: DOCKER="centos-7-amd64" LATEST="true"
     - name: "centos-8-amd64 latest"
       env: DOCKER="centos-8-amd64" LATEST="true"
+    - name: "debian-10-buster-x86 latest"
+      env: DOCKER="debian-10-buster-x86" LATEST="true"
     - name: "fedora-31-amd64 latest"
       env: DOCKER="fedora-31-amd64" LATEST="true"
     - name: "fedora-32-amd64 latest"
@@ -53,8 +56,7 @@ matrix:
       env: DOCKER="ubuntu-18.04-bionic-amd64" LATEST="true"
     - name: "ubuntu-20.04-focal-amd64 latest"
       env: DOCKER="ubuntu-20.04-focal-amd64" LATEST="true"
-    - name: "debian-10-buster-x86 latest"
-      env: DOCKER="debian-10-buster-x86" LATEST="true"
+
 install:
 - sudo apt-get update && sudo apt-get install -qyy debootstrap
 - sudo chown -R 1000 $TRAVIS_BUILD_DIR
