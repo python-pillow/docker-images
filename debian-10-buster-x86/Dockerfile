@@ -31,16 +31,35 @@ RUN echo '#!/bin/sh' > /usr/sbin/policy-rc.d \
 # Pillow customization
 #
 
-RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -y \
-    install xvfb sudo \
-    git wget python3-numpy python3-scipy netpbm \
-    python3-pyqt5 ghostscript libffi-dev libjpeg-turbo-progs \
-    python3-setuptools virtualenv \
-    python3-dev cmake \
-    libtiff5-dev libjpeg62-turbo-dev libopenjp2-7-dev zlib1g-dev \
-    libfreetype6-dev liblcms2-dev libwebp-dev tcl8.6-dev tk8.6-dev \
+RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -y install \
+    cmake \
+    ghostscript \
+    git \
+    libffi-dev \
+    libfreetype6-dev \
+    libfribidi-dev \
+    libharfbuzz-dev \
+    libjpeg-turbo-progs \
+    libjpeg62-turbo-dev \
+    liblcms2-dev \
+    libopenjp2-7-dev \
+    libtiff5-dev \
+    libwebp-dev \
+    netpbm \
+    python3-dev \
+    python3-numpy \
+    python3-pyqt5 \
+    python3-scipy \
+    python3-setuptools \
     python3-tk \
-    libharfbuzz-dev libfribidi-dev && apt-get clean
+    sudo \
+    tcl8.6-dev \
+    tk8.6-dev \
+    virtualenv \
+    wget \
+    xvfb \
+    zlib1g-dev \
+    && apt-get clean
 
 RUN useradd pillow && addgroup pillow sudo && \
     mkdir /home/pillow && chown pillow:pillow /home/pillow

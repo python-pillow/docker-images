@@ -1,12 +1,27 @@
 FROM amazonlinux:1
 
-run yum install -y shadow-utils util-linux xorg-x11-xauth \
-    findutils which \
-    python36 python36-virtualenv python36-devel \
-    gcc xorg-x11-server-Xvfb ghostscript sudo wget cmake \
-    libtiff-devel libjpeg-devel zlib-devel freetype-devel \
-    lcms2-devel libwebp-devel  \
-    libffi-devel
+run yum install -y \
+    cmake \
+    findutils \
+    freetype-devel \
+    gcc \
+    ghostscript \
+    lcms2-devel \
+    libffi-devel \
+    libjpeg-devel \
+    libtiff-devel \
+    libwebp-devel \
+    python36 \
+    python36-devel \
+    python36-virtualenv \
+    shadow-utils \
+    sudo \
+    util-linux \
+    wget \
+    which \
+    xorg-x11-server-Xvfb \
+    xorg-x11-xauth \
+    zlib-devel
 
 RUN useradd --uid 1000 pillow
 
@@ -17,7 +32,9 @@ RUN bash -c "/usr/bin/virtualenv-3.6 -p python3.6 --system-site-packages /vpy3 &
     chown -R pillow:pillow /vpy3"
 
 ADD depends /depends
-RUN cd /depends && ./install_imagequant.sh && ./install_openjpeg.sh
+RUN cd /depends && \
+    ./install_imagequant.sh && \
+    ./install_openjpeg.sh
 
 USER pillow
 CMD ["depends/test.sh"]
