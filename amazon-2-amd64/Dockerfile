@@ -16,6 +16,7 @@ RUN useradd --uid 1000 pillow
 RUN bash -c "/usr/bin/pip3 install virtualenv && \
     /usr/bin/python3 -mvirtualenv -p /usr/bin/python3 --system-site-packages /vpy3 && \
     /vpy3/bin/pip install --upgrade pip && \
+    /vpy3/bin/pip install --upgrade setuptools>=49.3.2 && \
     /vpy3/bin/pip install cffi olefile pytest pytest-cov && \
     /vpy3/bin/pip install numpy --only-binary=:all: || true && \
     chown -R pillow:pillow /vpy3"
