@@ -33,7 +33,7 @@ ADD depends /depends
 RUN cd /depends && ./install_webp.sh && ./install_imagequant.sh && ./install_raqm.sh
 
 RUN /usr/sbin/adduser -D pillow && \
-    pip3 install virtualenv && virtualenv /vpy3 && \
+    pip3 install -I virtualenv && virtualenv /vpy3 && \
     /vpy3/bin/pip install --upgrade pip && \
     /vpy3/bin/pip install olefile pytest pytest-cov && \
     /vpy3/bin/pip install numpy --only-binary=:all: || true && \
