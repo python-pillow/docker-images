@@ -1,12 +1,27 @@
 FROM centos:6
 
-run yum install -y epel-release centos-release-scl
+run yum install -y \
+    centos-release-scl \
+    epel-release
 
-run yum install -y rh-python36 rh-python36-python-virtualenv \
-    gcc xorg-x11-server-Xvfb ghostscript sudo \
-    libtiff-devel libjpeg-devel zlib-devel freetype-devel \
-    lcms2-devel libwebp-devel openjpeg2-devel tkinter \
-    tcl-devel tk-devel libffi-devel
+run yum install -y \
+    freetype-devel \
+    gcc \
+    ghostscript \
+    lcms2-devel \
+    libffi-devel \
+    libjpeg-devel \
+    libtiff-devel \
+    libwebp-devel \
+    openjpeg2-devel \
+    rh-python36 \
+    rh-python36-python-virtualenv \
+    sudo \
+    tcl-devel \
+    tk-devel \
+    tkinter \
+    xorg-x11-server-Xvfb \
+    zlib-devel
 
 RUN useradd --uid 1000 pillow
 

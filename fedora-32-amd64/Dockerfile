@@ -1,12 +1,26 @@
 FROM fedora:32
 
 RUN dnf install -y redhat-rpm-config \
-    python3-devel python3-virtualenv make gcc \
-    libtiff-devel libjpeg-devel zlib-devel freetype-devel \
-    lcms2-devel libwebp-devel openjpeg2-devel python3-tkinter \
-    tcl-devel tk-devel harfbuzz-devel fribidi-devel libraqm-devel \
+    freetype-devel \
+    fribidi-devel \
+    gcc \
+    harfbuzz-devel \
+    lcms2-devel \
     libimagequant-devel \
-    xorg-x11-server-Xvfb which
+    libjpeg-devel \
+    libraqm-devel \
+    libtiff-devel \
+    libwebp-devel \
+    make \
+    openjpeg2-devel \
+    python3-devel \
+    python3-tkinter \
+    python3-virtualenv \
+    tcl-devel \
+    tk-devel \
+    which \
+    xorg-x11-server-Xvfb \
+    zlib-devel
 
 RUN useradd pillow && \
     chown pillow:pillow /home/pillow

@@ -2,14 +2,35 @@ FROM amazonlinux:2
 
 run amazon-linux-extras install python3
 
-run yum install -y shadow-utils util-linux xorg-x11-xauth \
-    findutils which \
-    python3-devel python3-test python3-tkinter python3-virtualenv \
-    gcc xorg-x11-server-Xvfb ghostscript sudo wget cmake make \
-    libtiff-devel libjpeg-devel zlib-devel freetype-devel \
-    lcms2-devel libwebp-devel harfbuzz-devel fribidi-devel \
+run yum install -y \
+    cmake \
+    findutils \
+    freetype-devel \
+    fribidi-devel \
+    gcc \
+    gcc-c++ \
+    ghostscript \
+    harfbuzz-devel \
+    lcms2-devel \
     libffi-devel \
-    pth-devel gcc-c++ tar
+    libjpeg-devel \
+    libtiff-devel \
+    libwebp-devel \
+    make \
+    pth-devel \
+    python3-devel \
+    python3-test \
+    python3-tkinter \
+    python3-virtualenv \
+    shadow-utils \
+    sudo \
+    tar \
+    util-linux \
+    wget \
+    which \
+    xorg-x11-server-Xvfb \
+    xorg-x11-xauth \
+    zlib-devel
 
 RUN useradd --uid 1000 pillow
 
@@ -21,7 +42,10 @@ RUN bash -c "/usr/bin/pip3 install virtualenv && \
     chown -R pillow:pillow /vpy3"
 
 ADD depends /depends
-RUN cd /depends && ./install_imagequant.sh && ./install_openjpeg.sh && ./install_raqm.sh
+RUN cd /depends && \
+    ./install_imagequant.sh && \
+    ./install_openjpeg.sh && \
+    ./install_raqm.sh
 
 USER pillow
 CMD ["depends/test.sh"]

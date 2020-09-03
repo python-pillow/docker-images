@@ -6,29 +6,34 @@ FROM greyltc/archlinux
 RUN pacman -Syu --noconfirm \
             wget
 RUN pacman -Sy --noconfirm \
-            python \
-            python-virtualenv \
-            gcc make git sudo \
-            python-setuptools \
-            extra/libjpeg-turbo \
-            extra/openjpeg2 \
-            extra/libtiff \
-            extra/lcms2 \
-            extra/libwebp \
             extra/freetype2 \
-            extra/tk \
-            libffi \
-            mesa-libgl \
-            xorg-server-xvfb \
-            ghostscript \
-            python-pyqt5 \
-            pkg-config \
             extra/fribidi \
-            extra/harfbuzz
+            extra/harfbuzz \
+            extra/lcms2 \
+            extra/libjpeg-turbo \
+            extra/libtiff \
+            extra/libwebp \
+            extra/openjpeg2 \
+            extra/tk \
+            gcc \
+            ghostscript \
+            git \
+            libffi \
+            make \
+            mesa-libgl \
+            pkg-config \
+            python \
+            python-pyqt5 \
+            python-setuptools \
+            python-virtualenv \
+            sudo \
+            xorg-server-xvfb
 
 
 ADD depends /depends
-RUN cd /depends && ./install_imagequant.sh && ./install_raqm.sh
+RUN cd /depends && \
+     ./install_imagequant.sh && \
+     ./install_raqm.sh
 
 RUN /sbin/useradd -m -U -u 1000 pillow && \
     virtualenv --system-site-packages /vpy3 && \
