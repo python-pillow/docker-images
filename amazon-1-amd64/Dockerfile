@@ -1,6 +1,6 @@
 FROM amazonlinux:1
 
-run yum install -y \
+RUN yum install -y \
     cmake \
     findutils \
     freetype-devel \
