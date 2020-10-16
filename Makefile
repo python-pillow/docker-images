@@ -1,4 +1,4 @@
-TARGETS = alpine arch amazon-1-amd64 amazon-2-amd64 ubuntu-18.04-bionic-amd64 ubuntu-20.04-focal-amd64 debian-10-buster-x86 fedora-31-amd64 fedora-32-amd64 centos-6-amd64 centos-7-amd64 centos-8-amd64
+TARGETS = alpine arch amazon-1-amd64 amazon-2-amd64 ubuntu-18.04-bionic-amd64 ubuntu-20.04-focal-amd64 debian-10-buster-x86 fedora-32-amd64 centos-6-amd64 centos-7-amd64 centos-8-amd64
 
 
 BUILDDIRS = $(TARGETS:%=build-%)
