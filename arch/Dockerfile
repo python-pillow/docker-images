@@ -4,7 +4,9 @@
 FROM greyltc/archlinux
 
 RUN pacman -Syu --noconfirm \
-            wget
+            wget \
+    && find /var/cache/pacman/ -type f -delete
+
 RUN pacman -Sy --noconfirm \
             extra/freetype2 \
             extra/fribidi \
@@ -27,8 +29,8 @@ RUN pacman -Sy --noconfirm \
             python-setuptools \
             python-virtualenv \
             sudo \
-            xorg-server-xvfb
-
+            xorg-server-xvfb \
+    && find /var/cache/pacman/ -type f -delete
 
 ADD depends /depends
 RUN cd /depends && \

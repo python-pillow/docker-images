@@ -1,8 +1,10 @@
 FROM centos:8
 
-RUN yum install -y epel-release http://rpms.remirepo.net/enterprise/remi-release-8.rpm
+RUN yum install -y epel-release https://rpms.remirepo.net/enterprise/remi-release-8.rpm \
+    && yum clean all
 
-RUN yum install -y 'dnf-command(config-manager)'
+RUN yum install -y 'dnf-command(config-manager)' \
+    && yum clean all
 
 RUN yum config-manager --set-enabled PowerTools
 
@@ -27,7 +29,8 @@ RUN yum install -y \
     tk-devel \
     which \
     xorg-x11-server-Xvfb \
-    zlib-devel
+    zlib-devel \
+    && yum clean all
 
 RUN useradd --uid 1000 pillow
 

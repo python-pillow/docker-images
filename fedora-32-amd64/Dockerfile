@@ -1,6 +1,6 @@
 FROM fedora:32
 
-RUN dnf install -y redhat-rpm-config \
+RUN dnf install -y \
     freetype-devel \
     fribidi-devel \
     gcc \
@@ -16,11 +16,13 @@ RUN dnf install -y redhat-rpm-config \
     python3-devel \
     python3-tkinter \
     python3-virtualenv \
+    redhat-rpm-config \
     tcl-devel \
     tk-devel \
     which \
     xorg-x11-server-Xvfb \
-    zlib-devel
+    zlib-devel \
+    && dnf clean all
 
 RUN useradd pillow && \
     chown pillow:pillow /home/pillow
