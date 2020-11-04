@@ -57,3 +57,11 @@ jobs:
       - name: Post build
         if: always()
         run: sudo chown -R $(id -u) $(pwd)
+
+  success:
+    needs: build
+    runs-on: ubuntu-latest
+    name: Build Successful
+    steps:
+      - name: Success
+        run: echo Build Successful
