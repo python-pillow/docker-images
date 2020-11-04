@@ -3,7 +3,7 @@ pull_request_rules:
     conditions:
       - "#approved-reviews-by>=1"
       - label=automerge
-      - status-success=Build Successful
+      - status-success=Build successful
     actions:
       merge:
         method: merge
