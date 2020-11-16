@@ -1,0 +1,67 @@
+
+name: Docker images
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    name: ${{ matrix.target }} + ${{ matrix.image }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        target: [ "stable", "latest" ]
+        image:
+          - "alpine"
+          - "amazon-1-amd64"
+          - "amazon-2-amd64"
+          - "arch"
+          - "centos-6-amd64"
+          - "centos-7-amd64"
+          - "centos-8-amd64"
+          - "debian-10-buster-x86"
+          - "fedora-32-amd64"
+          - "fedora-33-amd64"
+          - "ubuntu-18.04-bionic-amd64"
+          - "ubuntu-20.04-focal-amd64"
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+
+      - name: Prepare build
+        run: |
+          sudo apt-get update && sudo apt-get install -qyy debootstrap
+          if [ "${{ matrix.target }}" = "latest" ]; then
+            git submodule update --remote Pillow
+            (cd Pillow && git checkout master)
+          fi
+          sudo chown -R 1000 $(pwd)
+
+      - name: Build image
+        run: |
+          cd "${{ matrix.image }}" && sudo chmod a+w . && make update
+          if [[ -n "$DOCKER_USERNAME" ]]; then
+            echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
+          fi
+          make build BRANCH=master && make test BRANCH=master
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Push image
+        if: "github.event_name == 'push' && github.ref == 'refs/heads/master' && matrix.target == 'stable'"
+        run: make push-${{ matrix.image }} BRANCH=master
+
+      - name: Post build
+        if: always()
+        run: sudo chown -R $(id -u) $(pwd)
+
+  success:
+    needs: build
+    runs-on: ubuntu-latest
+    name: Build successful
+    steps:
+      - name: Success
+        run: echo Build Successful

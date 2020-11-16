@@ -6,7 +6,7 @@ TARGETS = \
 	centos-6-amd64 \
 	centos-7-amd64 \
 	centos-8-amd64 \
-	debian-10-buster-\86 \
+	debian-10-buster-x86 \
 	fedora-32-amd64 \
 	fedora-33-amd64 \
 	ubuntu-18.04-bionic-amd64 \

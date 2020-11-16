@@ -2,7 +2,7 @@
 .PHONY: update build test push clean shell
 
 WD = $(shell pwd)
-USERNAME := $(shell docker info | grep Username | cut -d ' ' -f 2)
+USERNAME := $(shell docker info | grep Username | xargs | cut -d ' ' -f 2)
 TARGET := $(notdir $(WD))
 ROOT := $(abspath $(WD)/../Pillow)
 IMAGENAME := $(if $(USERNAME), $(USERNAME)/$(TARGET), $(TARGET))
