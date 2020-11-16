@@ -1,6 +1,6 @@
 # Docker Images for the Pillow Test Infrastructure
 
-[![Build Status](https://github.com/python-pillow/docker-images/workflows/Docker%20Images/badge.svg)](https://github.com/python-pillow/docker-images/actions?query=workflow%3A"Docker+Images")
+[![Docker images](https://github.com/python-pillow/docker-images/workflows/Docker%20images/badge.svg)](https://github.com/python-pillow/docker-images/actions?query=workflow%3A"Docker+Images")
 
 ## Getting Started
 
