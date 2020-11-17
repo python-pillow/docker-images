@@ -1,8 +1,9 @@
 FROM centos:7
 
-run yum install -y epel-release centos-release-scl
+RUN yum install -y epel-release centos-release-scl \
+    && yum clean all
 
-run yum install -y \
+RUN yum install -y \
     freetype-devel \
     gcc \
     ghostscript \
@@ -23,7 +24,8 @@ run yum install -y \
     tkinter \
     which \
     xorg-x11-server-Xvfb \
-    zlib-devel
+    zlib-devel \
+    && yum clean all
 
 RUN useradd --uid 1000 pillow
 

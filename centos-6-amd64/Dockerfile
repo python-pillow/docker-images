@@ -1,10 +1,11 @@
 FROM centos:6
 
-run yum install -y \
+RUN yum install -y \
     centos-release-scl \
-    epel-release
+    epel-release \
+    && yum clean all
 
-run yum install -y \
+RUN yum install -y \
     freetype-devel \
     gcc \
     ghostscript \
@@ -21,7 +22,8 @@ run yum install -y \
     tk-devel \
     tkinter \
     xorg-x11-server-Xvfb \
-    zlib-devel
+    zlib-devel \
+    && yum clean all
 
 RUN useradd --uid 1000 pillow
 

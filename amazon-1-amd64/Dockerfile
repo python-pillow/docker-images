@@ -1,6 +1,6 @@
 FROM amazonlinux:1
 
-run yum install -y \
+RUN yum install -y \
     cmake \
     findutils \
     freetype-devel \
@@ -21,7 +21,8 @@ run yum install -y \
     which \
     xorg-x11-server-Xvfb \
     xorg-x11-xauth \
-    zlib-devel
+    zlib-devel \
+    && yum clean all
 
 RUN useradd --uid 1000 pillow
 
