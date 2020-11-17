@@ -50,6 +50,10 @@ jobs:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
+      - name: Log image size
+        run: |
+          docker images
+
       - name: Push image
         if: "github.event_name == 'push' && github.ref == 'refs/heads/master' && matrix.target == 'stable'"
         run: make push-${{ matrix.image }} BRANCH=master
