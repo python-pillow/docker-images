@@ -28,9 +28,9 @@ RUN useradd pillow \
     && chown pillow:pillow /home/pillow
 
 RUN /usr/bin/python3.8 /usr/lib/python3.8/site-packages/virtualenv.py --system-site-packages /vpy3 \
-    && /vpy3/bin/pip install --upgrade pip \
-    && /vpy3/bin/pip install cffi olefile pytest pytest-cov \
-    && /vpy3/bin/pip install numpy --only-binary=:all: || true \
+    && /vpy3/bin/pip install --no-cache-dir --upgrade pip \
+    && /vpy3/bin/pip install --no-cache-dir cffi olefile pytest pytest-cov \
+    && /vpy3/bin/pip install --no-cache-dir numpy --only-binary=:all: || true \
     && chown -R pillow:pillow /vpy3
 
 ADD depends /depends

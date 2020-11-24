@@ -37,11 +37,11 @@ RUN cd /depends \
     && ./install_raqm.sh
 
 RUN /usr/sbin/adduser -D pillow \
-    && pip3 install -I virtualenv \
+    && pip3 install --no-cache-dir -I virtualenv \
     && virtualenv /vpy3 \
-    && /vpy3/bin/pip install --upgrade pip \
-    && /vpy3/bin/pip install olefile pytest pytest-cov \
-    && /vpy3/bin/pip install numpy --only-binary=:all: || true \
+    && /vpy3/bin/pip install --no-cache-dir --upgrade pip \
+    && /vpy3/bin/pip install --no-cache-dir olefile pytest pytest-cov \
+    && /vpy3/bin/pip install --no-cache-dir numpy --only-binary=:all: || true \
     && chown -R pillow:pillow /vpy3
 
 USER pillow

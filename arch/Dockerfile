@@ -39,10 +39,10 @@ RUN cd /depends \
 
 RUN /sbin/useradd -m -U -u 1000 pillow \
     && virtualenv --system-site-packages /vpy3 \
-    && /vpy3/bin/pip install --upgrade pip \
-    && /vpy3/bin/pip install --upgrade setuptools>=49.3.2 \
-    && /vpy3/bin/pip install nose cffi olefile pytest pytest-cov \
-    && /vpy3/bin/pip install numpy --only-binary=:all: || true \
+    && /vpy3/bin/pip install --no-cache-dir --upgrade pip \
+    && /vpy3/bin/pip install --no-cache-dir --upgrade setuptools>=49.3.2 \
+    && /vpy3/bin/pip install --no-cache-dir nose cffi olefile pytest pytest-cov \
+    && /vpy3/bin/pip install --no-cache-dir numpy --only-binary=:all: || true \
     && chown -R pillow:pillow /vpy3
 
 USER pillow
