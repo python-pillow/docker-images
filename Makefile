@@ -1,9 +1,7 @@
 TARGETS = \
 	alpine \
-	amazon-1-amd64 \
 	amazon-2-amd64 \
 	arch \
-	centos-6-amd64 \
 	centos-7-amd64 \
 	centos-8-amd64 \
 	debian-10-buster-x86 \
