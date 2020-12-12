@@ -38,10 +38,11 @@ jobs:
           sudo chown -R 1000 $(pwd)
 
       - name: Build image
+        id: build
         run: |
           cd "${{ matrix.image }}" && sudo chmod a+w . && make update
           if [[ -n "$DOCKER_USERNAME" ]]; then
-            echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
+            echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin && echo "::set-output name=logged_in::true"
           fi
           make build BRANCH=master && make test BRANCH=master
         env:
@@ -53,7 +54,10 @@ jobs:
           docker images
 
       - name: Push image
-        if: "github.event_name == 'push' && github.ref == 'refs/heads/master' && matrix.target == 'stable'"
+        if: "steps.build.outputs.logged_in == 'true'
+                           && github.event_name == 'push'
+                           && github.ref == 'refs/heads/master'
+                           && matrix.target == 'stable'"
         run: make push-${{ matrix.image }} BRANCH=master
 
       - name: Post build
