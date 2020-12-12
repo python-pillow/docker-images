@@ -12,6 +12,11 @@ jobs:
       matrix:
         target: [ "stable", "latest" ]
         image:
+          # Run slower jobs first to give them a headstart and reduce waiting time
+          - "ubuntu-20.04-focal-arm64v8"
+          - "ubuntu-20.04-focal-ppc64le"
+          - "ubuntu-20.04-focal-s390x"
+          # Then run the remainder
           - "alpine"
           - "amazon-2-amd64"
           - "arch"
@@ -22,9 +27,6 @@ jobs:
           - "fedora-33-amd64"
           - "ubuntu-18.04-bionic-amd64"
           - "ubuntu-20.04-focal-amd64"
-          - "ubuntu-20.04-focal-arm64v8"
-          - "ubuntu-20.04-focal-ppc64le"
-          - "ubuntu-20.04-focal-s390x"
         include:
           - image: "ubuntu-20.04-focal-arm64v8"
             qemu-arch: "aarch64"
