@@ -27,14 +27,14 @@ RUN yum install -y \
 
 RUN useradd --uid 1000 pillow
 
-RUN bash -c "source /opt/rh/rh-python36/enable && \
-    /opt/rh/rh-python36/root/usr/bin/virtualenv -p python3.6 --system-site-packages /vpy3 && \
-    /vpy3/bin/pip install --upgrade pip && \
-    /vpy3/bin/pip install cffi olefile pytest pytest-cov && \
-    /vpy3/bin/pip install numpy --only-binary=:all: || true && \
-    cat /opt/rh/rh-python36/enable /vpy3/bin/activate > /vpy3/bin/activate3.6 && \
-    mv /vpy3/bin/activate3.6 /vpy3/bin/activate && \
-    chown -R pillow:pillow /vpy3"
+RUN bash -c "source /opt/rh/rh-python36/enable \
+    && /opt/rh/rh-python36/root/usr/bin/virtualenv -p python3.6 --system-site-packages /vpy3 \
+    && /vpy3/bin/pip install --no-cache-dir --upgrade pip \
+    && /vpy3/bin/pip install --no-cache-dir cffi olefile pytest pytest-cov \
+    && /vpy3/bin/pip install --no-cache-dir numpy --only-binary=:all: || true \
+    && cat /opt/rh/rh-python36/enable /vpy3/bin/activate > /vpy3/bin/activate3.6 \
+    && mv /vpy3/bin/activate3.6 /vpy3/bin/activate \
+    && chown -R pillow:pillow /vpy3"
 
 ADD depends /depends
 #RUN cd /depends && ./install_imagequant.sh

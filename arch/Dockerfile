@@ -33,17 +33,17 @@ RUN pacman -Sy --noconfirm \
     && find /var/cache/pacman/ -type f -delete
 
 ADD depends /depends
-RUN cd /depends && \
-     ./install_imagequant.sh && \
-     ./install_raqm.sh
+RUN cd /depends \
+     && ./install_imagequant.sh \
+     && ./install_raqm.sh
 
-RUN /sbin/useradd -m -U -u 1000 pillow && \
-    virtualenv --system-site-packages /vpy3 && \
-    /vpy3/bin/pip install --upgrade pip && \
-    /vpy3/bin/pip install --upgrade setuptools>=49.3.2 && \
-    /vpy3/bin/pip install nose cffi olefile pytest pytest-cov && \
-    /vpy3/bin/pip install numpy --only-binary=:all: || true && \
-    chown -R pillow:pillow /vpy3
+RUN /sbin/useradd -m -U -u 1000 pillow \
+    && virtualenv --system-site-packages /vpy3 \
+    && /vpy3/bin/pip install --no-cache-dir --upgrade pip \
+    && /vpy3/bin/pip install --no-cache-dir --upgrade setuptools>=49.3.2 \
+    && /vpy3/bin/pip install --no-cache-dir nose cffi olefile pytest pytest-cov \
+    && /vpy3/bin/pip install --no-cache-dir numpy --only-binary=:all: || true \
+    && chown -R pillow:pillow /vpy3
 
 USER pillow
 CMD ["depends/test.sh"]
