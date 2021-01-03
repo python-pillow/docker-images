@@ -6,7 +6,7 @@ RUN yum install -y epel-release https://rpms.remirepo.net/enterprise/remi-releas
 RUN yum install -y 'dnf-command(config-manager)' \
     && yum clean all
 
-RUN yum config-manager --set-enabled PowerTools
+RUN yum config-manager --set-enabled powertools
 
 RUN yum install -y \
     freetype-devel \
