@@ -8,7 +8,6 @@ RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -y install \
     libffi-dev \
     libfreetype6-dev \
     libfribidi-dev \
-    libgl-dev \
     libharfbuzz-dev \
     libjpeg-turbo-progs \
     libjpeg8-dev \
@@ -21,7 +20,6 @@ RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -y install \
     libxcb-image0 \
     libxcb-keysyms1 \
     libxcb-render-util0 \
-    libxkbcommon-dev \
     libxkbcommon-x11-0 \
     netpbm \
     python3-dev \
