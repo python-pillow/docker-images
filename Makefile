@@ -8,7 +8,8 @@ TARGETS = \
 	fedora-32-amd64 \
 	fedora-33-amd64 \
 	ubuntu-18.04-bionic-amd64 \
-	ubuntu-20.04-focal-amd64
+	ubuntu-20.04-focal-amd64 \
+	ubuntu-20.04-focal-amd64-valgrind
 
 BUILDDIRS = $(TARGETS:%=build-%)
 PUSHDIRS = $(TARGETS:%=push-%)
