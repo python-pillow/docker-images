@@ -47,4 +47,4 @@ RUN cd /depends \
 USER pillow
 CMD ["depends/test.sh"]
 
-#docker run -v $TRAVIS_BUILD_DIR:/Pillow pythonpillow/ubuntu-18.04-bionic-amd64
+#docker run -v $GITHUB_WORKSPACE:/Pillow pythonpillow/ubuntu-18.04-bionic-amd64

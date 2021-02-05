@@ -39,4 +39,4 @@ ADD depends /depends
 USER pillow
 CMD ["depends/test.sh"]
 
-#docker run -v $TRAVIS_BUILD_DIR:/Pillow pythonpillow/fedora-33-amd64
+#docker run -v $GITHUB_WORKSPACE:/Pillow pythonpillow/fedora-33-amd64

@@ -47,4 +47,4 @@ RUN /sbin/useradd -m -U -u 1000 pillow \
 USER pillow
 CMD ["depends/test.sh"]
 
-#docker run -v $TRAVIS_BUILD_DIR:/Pillow pythonpillow/arch
+#docker run -v $GITHUB_WORKSPACE:/Pillow pythonpillow/arch
