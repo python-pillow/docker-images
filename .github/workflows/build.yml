@@ -10,7 +10,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: [ "stable", "latest" ]
+        target:
+          - "latest"
         image:
           - "alpine"
           - "amazon-2-amd64"
@@ -57,7 +58,7 @@ jobs:
         if: "steps.build.outputs.logged_in == 'true'
                            && github.event_name == 'push'
                            && github.ref == 'refs/heads/master'
-                           && matrix.target == 'stable'"
+                           && matrix.target == 'latest'"
         run: make push-${{ matrix.image }} BRANCH=master
 
       - name: Post build
