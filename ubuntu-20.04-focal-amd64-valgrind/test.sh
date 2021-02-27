@@ -6,7 +6,7 @@ make install-coverage
 
 PYTHONMALLOC=malloc valgrind --suppressions=/depends/python.supp --leak-check=no \
             --log-file=/tmp/valgrind-output \
-            python -m pytest --no-memcheck -vv --valgrind --valgrind-log=/tmp/valgrind-output
+            python3 -m pytest --no-memcheck -vv --valgrind --valgrind-log=/tmp/valgrind-output
 
 # To run one test in the image:
 # make bash
