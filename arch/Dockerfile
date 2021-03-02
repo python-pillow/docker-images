@@ -7,6 +7,11 @@ RUN pacman -Syu --noconfirm \
             wget \
     && find /var/cache/pacman/ -type f -delete
 
+# Temporary fix for Arch breaking
+RUN patched_glibc=glibc-linux4-2.33-4-x86_64.pkg.tar.zst && \
+    curl -LO "https://repo.archlinuxcn.org/x86_64/$patched_glibc" && \
+    bsdtar -C / -xvf "$patched_glibc"
+
 RUN pacman -Sy --noconfirm \
             extra/freetype2 \
             extra/fribidi \
@@ -47,4 +52,4 @@ RUN /sbin/useradd -m -U -u 1000 pillow \
 USER pillow
 CMD ["depends/test.sh"]
 
-#docker run -v $TRAVIS_BUILD_DIR:/Pillow pythonpillow/arch
+#docker run -v $GITHUB_WORKSPACE:/Pillow pythonpillow/arch

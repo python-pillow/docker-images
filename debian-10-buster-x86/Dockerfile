@@ -79,4 +79,4 @@ USER pillow
 ENTRYPOINT ["linux32"]
 CMD ["depends/test.sh"]
 
-#docker run -v $TRAVIS_BUILD_DIR:/Pillow pythonpillow/debian-10-buster-x86
+#docker run -v $GITHUB_WORKSPACE:/Pillow pythonpillow/debian-10-buster-x86

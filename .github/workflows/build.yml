@@ -10,7 +10,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: [ "stable", "latest" ]
+        target:
+          - "latest"
         image:
           # Run slower jobs first to give them a headstart and reduce waiting time
           - "ubuntu-20.04-focal-arm64v8"
@@ -27,6 +28,7 @@ jobs:
           - "fedora-33-amd64"
           - "ubuntu-18.04-bionic-amd64"
           - "ubuntu-20.04-focal-amd64"
+          - "ubuntu-20.04-focal-amd64-valgrind"
         include:
           - image: "ubuntu-20.04-focal-arm64v8"
             qemu-arch: "aarch64"
@@ -74,7 +76,7 @@ jobs:
         if: "steps.build.outputs.logged_in == 'true'
                            && github.event_name == 'push'
                            && github.ref == 'refs/heads/master'
-                           && matrix.target == 'stable'"
+                           && matrix.target == 'latest'"
         run: make push-${{ matrix.image }} BRANCH=master
 
       - name: Post build

@@ -1,4 +1,4 @@
-FROM ubuntu:bionic
+FROM ubuntu:focal
 
 RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -y install \
     cmake \
@@ -15,6 +15,7 @@ RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -y install \
     libtiff5-dev \
     libwebp-dev \
     netpbm \
+    python3.8-dbg \
     python3-dev \
     python3-numpy \
     python3-scipy \
@@ -27,16 +28,17 @@ RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -y install \
     wget \
     xvfb \
     zlib1g-dev \
-    && rm -rf /var/lib/apt/lists/*
+    valgrind \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN useradd pillow \
     && addgroup pillow sudo \
     && mkdir /home/pillow \
     && chown pillow:pillow /home/pillow
 
-RUN virtualenv -p /usr/bin/python3.6 --system-site-packages /vpy3 \
+RUN virtualenv -p /usr/bin/python3.8-dbg --system-site-packages /vpy3 \
     && /vpy3/bin/pip install --no-cache-dir --upgrade pip \
-    && /vpy3/bin/pip install --no-cache-dir cffi olefile pytest pytest-cov \
+    && /vpy3/bin/pip install --no-cache-dir cffi olefile pytest pytest-cov pytest-valgrind \
     && chown -R pillow:pillow /vpy3
 
 ADD depends /depends
@@ -44,7 +46,9 @@ RUN cd /depends \
     && ./install_imagequant.sh \
     && ./install_raqm.sh
 
+COPY python.supp /depends
+
 USER pillow
 CMD ["depends/test.sh"]
 
-#docker run -v $GITHUB_WORKSPACE:/Pillow pythonpillow/ubuntu-18.04-bionic-amd64
+#docker run -v $TRAVIS_BUILD_DIR:/Pillow pythonpillow/ubuntu-20.04-focal-amd64

@@ -8,10 +8,8 @@ The makefiles rely on being logged into to [Docker Hub](https://hub.docker.com) 
 the image tag.
 
 ```bash
-git clone https://github.com/python-pillow/docker-images.git
+git clone --recurse-submodules https://github.com/python-pillow/docker-images.git
 cd docker-images
-git submodule init
-git submodule update
 # update all the base images
 make update
 # build all of the test images
