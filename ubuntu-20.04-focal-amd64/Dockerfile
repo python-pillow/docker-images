@@ -43,7 +43,7 @@ RUN useradd pillow \
 
 RUN virtualenv -p /usr/bin/python3.8 --system-site-packages /vpy3 \
     && /vpy3/bin/pip install --no-cache-dir --upgrade pip \
-    && /vpy3/bin/pip install --no-cache-dir cffi olefile pyside6 pytest pytest-cov \
+    && /vpy3/bin/pip install --no-cache-dir cffi olefile pyside6 pytest pytest-cov pytest-timeout \
     && chown -R pillow:pillow /vpy3
 
 ADD depends /depends

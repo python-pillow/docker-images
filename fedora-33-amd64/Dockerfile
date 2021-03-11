@@ -30,7 +30,7 @@ RUN useradd pillow \
 RUN virtualenv -p /usr/bin/python3.9 --system-site-packages /vpy3 \
     && /vpy3/bin/pip install --no-cache-dir --upgrade pip \
     && /vpy3/bin/pip install --no-cache-dir --upgrade setuptools>=49.3.2 \
-    && /vpy3/bin/pip install --no-cache-dir cffi olefile pytest pytest-cov \
+    && /vpy3/bin/pip install --no-cache-dir cffi olefile pytest pytest-cov pytest-timeout \
     && /vpy3/bin/pip install --no-cache-dir numpy --only-binary=:all: || true \
     && chown -R pillow:pillow /vpy3
 

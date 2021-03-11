@@ -38,7 +38,7 @@ RUN useradd pillow \
 
 RUN virtualenv -p /usr/bin/python3.8-dbg --system-site-packages /vpy3 \
     && /vpy3/bin/pip install --no-cache-dir --upgrade pip \
-    && /vpy3/bin/pip install --no-cache-dir cffi olefile pytest pytest-cov pytest-valgrind \
+    && /vpy3/bin/pip install --no-cache-dir cffi olefile pytest pytest-cov pytest-timeout pytest-valgrind \
     && chown -R pillow:pillow /vpy3
 
 ADD depends /depends

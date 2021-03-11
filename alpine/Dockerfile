@@ -40,7 +40,7 @@ RUN /usr/sbin/adduser -D pillow \
     && pip3 install --no-cache-dir -I virtualenv \
     && virtualenv /vpy3 \
     && /vpy3/bin/pip install --no-cache-dir --upgrade pip \
-    && /vpy3/bin/pip install --no-cache-dir olefile pytest pytest-cov \
+    && /vpy3/bin/pip install --no-cache-dir olefile pytest pytest-cov pytest-timeout \
     && /vpy3/bin/pip install --no-cache-dir numpy --only-binary=:all: || true \
     && chown -R pillow:pillow /vpy3
 
