@@ -19,5 +19,5 @@ cd /Pillow
 PATH=$PYBIN:$PATH make clean
 
 # Build and repair
-$PYBIN/pip wheel ${OPTS} -w /tmp /Pillow
+$PYBIN/pip --verbose wheel ${OPTS} -w /tmp /Pillow
 auditwheel repair /tmp/Pillow*whl -w /output
