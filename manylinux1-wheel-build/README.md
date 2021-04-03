@@ -11,9 +11,12 @@ source directory mounted at /Pillow. Unlike the others, it puts the
 output files in /output. This should be mounted as a volume to the host
 to retrieve the finished wheel.
 
+Setting the environment variable `DEBUG=1` will create a build with
+symbols for debugging with valgrind/gdb.
+
 The Makefile has several new commands:
 
-* make wheel: Makes a python 3.8 many linux wheel, and puts it in the
+* make wheel: Makes a python 3.8 manylinux1 wheel, and puts it in the
 ./out directory.
 * make 36|37|38|39: These are specific commands to make
 the corresponding 3.x version in the ./out directory.

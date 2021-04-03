@@ -2,8 +2,16 @@
 
 # options required to trigger the vendored raqm install
 OPTS="--global-option build_ext --global-option --vendor-raqm --global-option --vendor-fribidi"
+
 CFLAGS=${CFLAGS:-}
 export CFLAGS="$CFLAGS --std=c99"
+
+# Check for debug build
+DEBUG=${DEBUG:-0}
+if [ $DEBUG ]; then
+    OPTS="--global-option build --global-option --debug $OPTS"
+    CFLAGS="$CFLAGS -Og -DDEBUG"
+fi
 
 # not strictly necessary, unless running multiple versions from the shell
 rm -f /tmp/*.whl || true
