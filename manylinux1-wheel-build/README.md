@@ -4,7 +4,7 @@ This image is a little different than the other images in this repo --
 it's intended to be a quick way to build manylinux wheels with the
 production version of the libraries for debugging and testing
 purposes. This is designed to work as a single docker image that
-doesn't require privlege or multiple images to run.
+doesn't require privilege or multiple images to run.
 
 Like the other images in this repo, it expects that there is a Pillow
 source directory mounted at /Pillow. Unlike the others, it puts the
@@ -19,7 +19,8 @@ The Makefile has several new commands:
 the corresponding 3.x version in the ./out directory.
 
 The test target here is mainly to validate the image build, it is
-assumed that the builds.
+assumed that the builds will be used for other purposes or tested in
+other images. .
 
 
 # Sources
