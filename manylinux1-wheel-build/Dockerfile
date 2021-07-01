@@ -17,7 +17,6 @@ RUN cd $SRC/pillow-wheels \
 FROM quay.io/pypa/manylinux1_x86_64:latest
 COPY --from=0 /usr/local/lib /usr/local/lib
 COPY --from=0 /usr/local/include /usr/local/include
-RUN yum install -y zlib-devel
 COPY build.sh /build.sh
 
 CMD ["/bin/sh /build.sh"]
