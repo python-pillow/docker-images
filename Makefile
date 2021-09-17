@@ -4,6 +4,7 @@ TARGETS = \
 	arch \
 	centos-7-amd64 \
 	centos-8-amd64 \
+	centos-stream-8-amd64 \
 	debian-10-buster-x86 \
 	fedora-33-amd64 \
 	fedora-34-amd64 \
