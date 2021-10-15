@@ -6,7 +6,6 @@ TARGETS = \
 	centos-8-amd64 \
 	centos-stream-8-amd64 \
 	debian-10-buster-x86 \
-	fedora-33-amd64 \
 	fedora-34-amd64 \
 	manylinux1-wheel-build \
 	ubuntu-18.04-bionic-amd64 \
