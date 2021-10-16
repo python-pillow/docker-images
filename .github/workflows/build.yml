@@ -53,7 +53,7 @@ jobs:
           sudo apt-get update && sudo apt-get install -qyy debootstrap
           if [ "${{ matrix.target }}" = "latest" ]; then
             git submodule update --remote Pillow
-            (cd Pillow && git checkout master)
+            (cd Pillow && git checkout main)
           fi
           sudo chown -R 1000 $(pwd)
 
@@ -64,7 +64,7 @@ jobs:
           if [[ -n "$DOCKER_USERNAME" ]]; then
             echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin && echo "::set-output name=logged_in::true"
           fi
-          make build BRANCH=master && make test BRANCH=master
+          make build BRANCH=main && make test BRANCH=main
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
@@ -76,9 +76,9 @@ jobs:
       - name: Push image
         if: "steps.build.outputs.logged_in == 'true'
                            && github.event_name == 'push'
-                           && github.ref == 'refs/heads/master'
+                           && github.ref == 'refs/heads/main'
                            && matrix.target == 'latest'"
-        run: make push-${{ matrix.image }} BRANCH=master
+        run: make push-${{ matrix.image }} BRANCH=main
 
       - name: Post build
         if: always()
