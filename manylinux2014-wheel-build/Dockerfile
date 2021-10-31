@@ -2,7 +2,7 @@ FROM quay.io/pypa/manylinux2014_x86_64:latest
 
 run mkdir /src && mkdir /Pillow
 ENV SRC=/src
-ENV PATH=/opt/python/cp27-cp27m/bin:/opt/rh/devtoolset-2/root/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+ENV PATH=/opt/rh/devtoolset-2/root/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 RUN git clone --depth 1 https://github.com/python-pillow/pillow-wheels /src/pillow-wheels
 
