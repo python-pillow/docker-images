@@ -7,7 +7,7 @@ TARGETS = \
 	centos-stream-8-amd64 \
 	debian-10-buster-x86 \
 	fedora-34-amd64 \
-	manylinux1-wheel-build \
+	manylinux2014-wheel-build \
 	ubuntu-18.04-bionic-amd64 \
 	ubuntu-20.04-focal-amd64 \
 	ubuntu-20.04-focal-amd64-valgrind \
