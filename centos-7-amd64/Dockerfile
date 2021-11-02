@@ -1,6 +1,6 @@
 FROM centos:7
 
-RUN yum install -y epel-release centos-release-scl \
+RUN yum install -y epel-release \
     && yum clean all
 
 RUN yum install -y \
@@ -16,12 +16,13 @@ RUN yum install -y \
     libwebp-devel \
     make \
     openjpeg2-devel \
-    rh-python36 \
-    rh-python36-python-virtualenv \
+    openssl-devel \
+    sqlite-devel \
     sudo \
     tcl-devel \
     tk-devel \
     tkinter \
+    wget \
     which \
     xorg-x11-server-Xvfb \
     zlib-devel \
@@ -29,13 +30,19 @@ RUN yum install -y \
 
 RUN useradd --uid 1000 pillow
 
-RUN bash -c "source /opt/rh/rh-python36/enable \
-    && /opt/rh/rh-python36/root/usr/bin/virtualenv -p python3.6 --system-site-packages /vpy3 \
+RUN wget https://www.python.org/ftp/python/3.9.7/Python-3.9.7.tgz \
+    && tar xzf Python-3.9.7.tgz \
+    && cd Python-3.9.7 \
+    && ./configure \
+    && make altinstall \
+    && cd .. \
+    && rm -r Python-3.9.7 Python-3.9.7.tgz
+
+RUN bash -c "python3.9 -m pip install virtualenv \
+    && python3.9 -m virtualenv --system-site-packages /vpy3 \
     && /vpy3/bin/pip install --no-cache-dir --upgrade pip \
     && /vpy3/bin/pip install --no-cache-dir cffi olefile pytest pytest-cov pytest-timeout \
     && /vpy3/bin/pip install --no-cache-dir numpy --only-binary=:all: || true \
-    && cat /opt/rh/rh-python36/enable /vpy3/bin/activate > /vpy3/bin/activate3.6 \
-    && mv /vpy3/bin/activate3.6 /vpy3/bin/activate \
     && chown -R pillow:pillow /vpy3"
 
 ADD depends /depends
