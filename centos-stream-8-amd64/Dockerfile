@@ -21,11 +21,11 @@ RUN yum install -y \
     libwebp-devel \
     make \
     openjpeg2-devel \
-    python3 \
-    python3-tkinter \
-    python3-virtualenv \
+    openssl-devel \
+    sqlite-devel \
     tcl-devel \
     tk-devel \
+    wget \
     which \
     xorg-x11-server-Xvfb \
     zlib-devel \
@@ -33,7 +33,14 @@ RUN yum install -y \
 
 RUN useradd --uid 1000 pillow
 
-RUN bash -c "/usr/bin/virtualenv -p python3.6 --system-site-packages /vpy3 \
+RUN wget https://www.python.org/ftp/python/3.9.7/Python-3.9.7.tgz \
+    && tar xzf Python-3.9.7.tgz \
+    && cd Python-3.9.7 \
+    && ./configure \
+    && make altinstall
+
+RUN bash -c "python3.9 -m pip install virtualenv \
+    && python3.9 -m virtualenv --system-site-packages /vpy3 \
     && /vpy3/bin/pip install --no-cache-dir --upgrade pip \
     && /vpy3/bin/pip install --no-cache-dir cffi olefile pytest pytest-cov pytest-timeout \
     && /vpy3/bin/pip install --no-cache-dir numpy --only-binary=:all: || true \

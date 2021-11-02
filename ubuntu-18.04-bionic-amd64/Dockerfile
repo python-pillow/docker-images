@@ -12,18 +12,14 @@ RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -y install \
     libjpeg8-dev \
     liblcms2-dev \
     libopenjp2-7-dev \
+    libssl-dev \
+    libsqlite3-dev \
     libtiff5-dev \
     libwebp-dev \
     netpbm \
-    python3-dev \
-    python3-numpy \
-    python3-scipy \
-    python3-setuptools \
-    python3-tk \
     sudo \
     tcl8.6-dev \
     tk8.6-dev \
-    virtualenv \
     wget \
     xvfb \
     zlib1g-dev \
@@ -34,9 +30,16 @@ RUN useradd pillow \
     && mkdir /home/pillow \
     && chown pillow:pillow /home/pillow
 
-RUN virtualenv -p /usr/bin/python3.6 --system-site-packages /vpy3 \
+RUN wget https://www.python.org/ftp/python/3.9.7/Python-3.9.7.tgz \
+    && tar xzf Python-3.9.7.tgz \
+    && cd Python-3.9.7 \
+    && ./configure \
+    && make altinstall
+
+RUN python3.9 -m pip install virtualenv \
+    && python3.9 -m virtualenv --system-site-packages /vpy3 \
     && /vpy3/bin/pip install --no-cache-dir --upgrade pip \
-    && /vpy3/bin/pip install --no-cache-dir cffi olefile pytest pytest-cov pytest-timeout \
+    && /vpy3/bin/pip install --no-cache-dir cffi numpy olefile pytest pytest-cov pytest-timeout \
     && chown -R pillow:pillow /vpy3
 
 ADD depends /depends
