@@ -26,5 +26,5 @@ export PKG_CONFIG_PATH="$BUILD_PREFIX/lib/pkgconfig/:$PKG_CONFIG_PATH"
 . multibuild/library_builders.sh
 . config.sh
 
-yum install -y gcc gcc-c++
+yum install -y devtoolset-9-gcc devtoolset-9-gcc-c++
 pre_build
