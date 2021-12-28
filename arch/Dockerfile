@@ -7,6 +7,8 @@ RUN pacman -Syu --noconfirm \
             wget \
     && find /var/cache/pacman/ -type f -delete
 
+RUN pacman -Sy --noconfirm --overwrite "*libedit*,*readline.h,*histedit.h" libedit
+
 RUN pacman -Sy --noconfirm \
             extra/freetype2 \
             extra/fribidi \
