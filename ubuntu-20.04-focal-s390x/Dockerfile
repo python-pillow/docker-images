@@ -14,7 +14,6 @@ RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -y install \
     liblcms2-dev \
     libopenjp2-7-dev \
     libtiff5-dev \
-    libwebp-dev \
     netpbm \
     python3-dev \
     python3-numpy \
@@ -43,7 +42,8 @@ RUN virtualenv -p /usr/bin/python3.8 --system-site-packages /vpy3 \
 ADD depends /depends
 RUN cd /depends \
     && ./install_imagequant.sh \
-    && ./install_raqm.sh
+    && ./install_raqm.sh \
+    && ./install_webp.sh
 
 USER pillow
 CMD ["depends/test.sh"]
