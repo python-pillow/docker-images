@@ -17,7 +17,6 @@ RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -y install \
     netpbm \
     python3-dev \
     python3-numpy \
-    python3-scipy \
     python3-setuptools \
     python3-tk \
     sudo \

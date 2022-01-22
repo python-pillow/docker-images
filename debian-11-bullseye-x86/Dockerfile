@@ -49,7 +49,6 @@ RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -y install \
     python3-dev \
     python3-numpy \
     python3-pyqt5 \
-    python3-scipy \
     python3-setuptools \
     python3-tk \
     sudo \
