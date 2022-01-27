@@ -17,6 +17,7 @@ RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -y install \
     libtiff5-dev \
     libwebp-dev \
     netpbm \
+    ninja-build \
     sudo \
     tcl8.6-dev \
     tk8.6-dev \
@@ -45,6 +46,7 @@ RUN python3.9 -m pip install virtualenv \
     && chown -R pillow:pillow /vpy3
 
 ADD depends /depends
+RUN python3.9 -m pip install meson
 RUN cd /depends \
     && ./install_imagequant.sh \
     && ./install_raqm.sh

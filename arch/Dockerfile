@@ -25,6 +25,7 @@ RUN pacman -Sy --noconfirm \
             libffi \
             make \
             mesa-libgl \
+            meson \
             pkg-config \
             python \
             python-pyqt5 \
