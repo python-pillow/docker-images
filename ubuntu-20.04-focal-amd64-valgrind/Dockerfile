@@ -4,7 +4,6 @@ RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -y install \
     cmake \
     ghostscript \
     git \
-    meson \
     libffi-dev \
     libfreetype6-dev \
     libfribidi-dev \
@@ -15,6 +14,7 @@ RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -y install \
     libopenjp2-7-dev \
     libtiff5-dev \
     libwebp-dev \
+    meson \
     netpbm \
     python3.8-dbg \
     python3-dev \
