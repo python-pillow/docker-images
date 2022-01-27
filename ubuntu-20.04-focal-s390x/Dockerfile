@@ -14,6 +14,7 @@ RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -y install \
     liblcms2-dev \
     libopenjp2-7-dev \
     libtiff5-dev \
+    meson \
     netpbm \
     python3-dev \
     python3-numpy \

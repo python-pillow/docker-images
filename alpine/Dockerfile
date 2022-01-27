@@ -18,6 +18,7 @@ RUN apk --no-cache add \
     git \
     py3-pip \
     sudo \
+    meson \
     # Pillow dependencies
     freetype-dev \
     fribidi-dev \

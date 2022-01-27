@@ -19,12 +19,14 @@ RUN yum install -y \
     make \
     pth-devel \
     python3-devel \
+    python3-pip \
     python3-test \
     python3-tkinter \
     python3-virtualenv \
     shadow-utils \
     sudo \
     tar \
+    unzip \
     util-linux \
     wget \
     which \
@@ -43,6 +45,10 @@ RUN bash -c "/usr/bin/pip3 install virtualenv \
     && chown -R pillow:pillow /vpy3"
 
 ADD depends /depends
+RUN wget https://github.com/ninja-build/ninja/releases/download/v1.10.2/ninja-linux.zip \
+    && unzip ninja-linux.zip \
+    && mv ninja /usr/bin
+RUN /usr/bin/python3 -m pip install meson
 RUN cd /depends \
     && ./install_imagequant.sh \
     && ./install_openjpeg.sh \
