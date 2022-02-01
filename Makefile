@@ -3,7 +3,6 @@ TARGETS = \
 	amazon-2-amd64 \
 	arch \
 	centos-7-amd64 \
-	centos-8-amd64 \
 	centos-stream-8-amd64 \
 	debian-10-buster-x86 \
 	debian-11-bullseye-x86 \
