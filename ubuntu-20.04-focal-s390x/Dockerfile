@@ -14,10 +14,11 @@ RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -y install \
     liblcms2-dev \
     libopenjp2-7-dev \
     libtiff5-dev \
-    meson \
     netpbm \
+    ninja-build \
     python3-dev \
     python3-numpy \
+    python3-pip \
     python3-setuptools \
     python3-tk \
     sudo \
@@ -40,6 +41,7 @@ RUN virtualenv -p /usr/bin/python3.8 --system-site-packages /vpy3 \
     && chown -R pillow:pillow /vpy3
 
 ADD depends /depends
+RUN python3.8 -m pip install meson
 RUN cd /depends \
     && ./install_imagequant.sh \
     && ./install_raqm.sh \
