@@ -43,7 +43,7 @@ RUN virtualenv -p /usr/bin/python3.8-dbg --system-site-packages /vpy3 \
     && chown -R pillow:pillow /vpy3
 
 ADD depends /depends
-RUN /usr/bin/python3.8-dbg -m pip install meson
+RUN /usr/bin/python3.8-dbg -m pip install --no-cache-dir meson
 RUN cd /depends \
     && ./install_imagequant.sh \
     && ./install_raqm.sh
