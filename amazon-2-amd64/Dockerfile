@@ -10,6 +10,7 @@ RUN yum install -y \
     gcc \
     gcc-c++ \
     ghostscript \
+    git \
     harfbuzz-devel \
     lcms2-devel \
     libffi-devel \
