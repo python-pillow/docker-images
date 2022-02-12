@@ -9,7 +9,6 @@ RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -y install \
     libfreetype6-dev \
     libfribidi-dev \
     libharfbuzz-dev \
-    libimagequant-dev \
     libjpeg-turbo-progs \
     libjpeg8-dev \
     liblcms2-dev \
