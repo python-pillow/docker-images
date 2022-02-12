@@ -4,6 +4,7 @@ RUN amazon-linux-extras install python3
 
 RUN yum install -y \
     cmake \
+    curl \
     findutils \
     freetype-devel \
     fribidi-devel \
@@ -18,6 +19,7 @@ RUN yum install -y \
     libtiff-devel \
     libwebp-devel \
     make \
+    openssl-devel \
     pth-devel \
     python3-devel \
     python3-pip \
@@ -35,6 +37,9 @@ RUN yum install -y \
     xorg-x11-xauth \
     zlib-devel \
     && yum clean all
+
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+ENV PATH="/root/.cargo/bin:${PATH}"
 
 RUN useradd --uid 1000 pillow
 

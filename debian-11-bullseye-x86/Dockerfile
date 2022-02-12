@@ -33,6 +33,7 @@ RUN echo '#!/bin/sh' > /usr/sbin/policy-rc.d \
 
 RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -y install \
     cmake \
+    curl \
     ghostscript \
     git \
     libffi-dev \
@@ -45,6 +46,7 @@ RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -y install \
     libopenjp2-7-dev \
     libtiff5-dev \
     libwebp-dev \
+    libssl-dev \
     meson \
     netpbm \
     python3-dev \
@@ -60,6 +62,9 @@ RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -y install \
     xvfb \
     zlib1g-dev \
     && rm -rf /var/lib/apt/lists/*
+
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-host=i686-unknown-linux-gnu
+ENV PATH="/root/.cargo/bin:${PATH}"
 
 RUN useradd pillow \
     && addgroup pillow sudo \
