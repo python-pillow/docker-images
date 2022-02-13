@@ -4,6 +4,7 @@ RUN amazon-linux-extras install python3
 
 RUN yum install -y \
     cmake \
+    curl \
     findutils \
     freetype-devel \
     fribidi-devel \
@@ -16,8 +17,8 @@ RUN yum install -y \
     libffi-devel \
     libjpeg-devel \
     libtiff-devel \
-    libwebp-devel \
     make \
+    openssl-devel \
     pth-devel \
     python3-devel \
     python3-pip \
@@ -36,6 +37,9 @@ RUN yum install -y \
     zlib-devel \
     && yum clean all
 
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+ENV PATH="/root/.cargo/bin:${PATH}"
+
 RUN useradd --uid 1000 pillow
 
 RUN bash -c "/usr/bin/pip3 install virtualenv \
@@ -53,7 +57,8 @@ RUN /usr/bin/python3 -m pip install meson
 RUN cd /depends \
     && ./install_imagequant.sh \
     && ./install_openjpeg.sh \
-    && ./install_raqm.sh
+    && ./install_raqm.sh \
+    && ./install_webp.sh
 
 USER pillow
 CMD ["depends/test.sh"]

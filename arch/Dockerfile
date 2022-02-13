@@ -10,6 +10,7 @@ RUN pacman -Syu --noconfirm \
 RUN pacman -Sy --noconfirm --overwrite "*libedit*,*readline.h,*histedit.h" libedit
 
 RUN pacman -Sy --noconfirm \
+            cargo \
             extra/freetype2 \
             extra/fribidi \
             extra/harfbuzz \
