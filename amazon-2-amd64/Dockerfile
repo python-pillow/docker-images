@@ -17,7 +17,6 @@ RUN yum install -y \
     libffi-devel \
     libjpeg-devel \
     libtiff-devel \
-    libwebp-devel \
     make \
     openssl-devel \
     pth-devel \
@@ -58,7 +57,8 @@ RUN /usr/bin/python3 -m pip install meson
 RUN cd /depends \
     && ./install_imagequant.sh \
     && ./install_openjpeg.sh \
-    && ./install_raqm.sh
+    && ./install_raqm.sh \
+    && ./install_webp.sh
 
 USER pillow
 CMD ["depends/test.sh"]
