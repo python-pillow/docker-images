@@ -22,6 +22,10 @@ RUN emerge --quiet -uDU @world
 # Install some useful bits.
 RUN emerge --quiet --oneshot --jobs=$(nproc) media-libs/libjpeg-turbo sys-libs/zlib app-text/ghostscript-gpl 
 
+# We're not running on real hardware, so set basic values instead.
+# We deliberately set this quite late on to avoid rebuilding e.g. mesa.
+RUN echo 'VIDEO_CARDS="fbdev dummy"' | cat >> /etc/portage/make.conf
+
 # Try install as many of our (test) dependencies as possible with fewer flags on
 RUN emerge --quiet --oneshot --onlydeps --jobs=$(nproc) --with-test-deps dev-python/pillow || true
 
@@ -31,4 +35,17 @@ RUN USE="jpeg jpeg2k tiff truetype xvfb X elogind" emerge --quiet --oneshot --on
 
 # Actually build & run the tests.
 # TODO: change this to use the mounted version of Pillow (so the commit to be tested)
-RUN FEATURES="test" USE="jpeg jpeg2k tiff truetype xvfb X elogind" emerge --verbose --oneshot --getbinpkg=n dev-python/pillow
+#RUN FEATURES="test" USE="jpeg jpeg2k tiff truetype xvfb X elogind" emerge --verbose --oneshot --getbinpkg=n dev-python/pillow
+
+RUN emerge --quiet --jobs=$(nproc) dev-python/virtualenv x11-misc/xvfb-run
+
+ADD depends /depends
+RUN cd /depends
+
+RUN useradd pillow \
+    && virtualenv --system-site-packages /vpy3 \
+    && /vpy3/bin/pip install --no-cache-dir --upgrade pip \
+    && chown -R pillow:pillow /vpy3
+
+USER pillow
+CMD ["depends/test.sh"]
