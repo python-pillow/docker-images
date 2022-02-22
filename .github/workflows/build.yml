@@ -67,10 +67,15 @@ jobs:
           if [[ -n "$DOCKER_USERNAME" ]]; then
             echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin && echo "::set-output name=logged_in::true"
           fi
-          make build BRANCH=main && make test BRANCH=main
+          make build BRANCH=main
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Test image
+        run: |
+          cd "${{ matrix.image }}"
+          make test BRANCH=main
 
       - name: Log image size
         run: |
