@@ -11,41 +11,37 @@ RUN echo -e "[binhost]\npriority = 9999\nsync-uri = https://gentoo.osuosl.org/ex
 
 RUN echo 'EMERGE_DEFAULT_OPTS="--binpkg-respect-use=n --getbinpkg=y --autounmask-write --autounmask-continue --autounmask-keep-keywords=y --autounmask-use=y"' | cat >> /etc/portage/make.conf
 RUN echo 'USE="elogind -polkit"' | cat >> /etc/portage/make.conf
-RUN cat /etc/portage/make.conf                                                  
+RUN cat /etc/portage/make.conf
 
-RUN emerge-webrsync --quiet || true 
+RUN emerge-webrsync --quiet || true
 RUN eselect news read --quiet all || true
 
 # Make sure everything is consistent first.
 RUN emerge --quiet -uDU @world
 
-# Install some useful bits.
-RUN emerge --quiet --oneshot --jobs=$(nproc) media-libs/libjpeg-turbo sys-libs/zlib app-text/ghostscript-gpl 
-
 # We're not running on real hardware, so set basic values instead.
 # We deliberately set this quite late on to avoid rebuilding e.g. mesa.
 RUN echo 'VIDEO_CARDS="fbdev dummy"' | cat >> /etc/portage/make.conf
 
-# Try install as many of our (test) dependencies as possible with fewer flags on
-RUN emerge --quiet --oneshot --onlydeps --jobs=$(nproc) --with-test-deps dev-python/pillow || true
+RUN USE="tk" emerge --quiet --getbinpkg=n dev-lang/python:3.9
+RUN emerge --quiet dev-python/virtualenv dev-util/cargo-c dev-util/meson sudo x11-misc/xvfb-run
 
-# Then install the remaining (test) dependencies with more flags (because they clearly didn't get picked up before)
-# ... and these more flags are needed to run tests anyway.
-RUN USE="jpeg jpeg2k tiff truetype xvfb X elogind" emerge --quiet --oneshot --onlydeps --with-test-deps --getbinpkg=n dev-python/pillow
-
-# Actually build & run the tests.
-# TODO: change this to use the mounted version of Pillow (so the commit to be tested)
-#RUN FEATURES="test" USE="jpeg jpeg2k tiff truetype xvfb X elogind" emerge --verbose --oneshot --getbinpkg=n dev-python/pillow
-
-RUN emerge --quiet --jobs=$(nproc) dev-python/virtualenv x11-misc/xvfb-run
-
-ADD depends /depends
-RUN cd /depends
+# Install dependencies
+RUN USE="jpeg jpeg2k lcms tiff truetype webp xcb zlib" emerge --quiet --onlydeps dev-python/pillow
+RUN emerge --quiet app-text/ghostscript-gpl dev-python/numpy
 
 RUN useradd pillow \
-    && virtualenv --system-site-packages /vpy3 \
+    && chown pillow:pillow /home/pillow
+
+RUN virtualenv --system-site-packages /vpy3 \
     && /vpy3/bin/pip install --no-cache-dir --upgrade pip \
+    && /vpy3/bin/pip install --no-cache-dir cffi pytest-cov pytest-timeout \
     && chown -R pillow:pillow /vpy3
+
+ADD depends /depends
+RUN cd /depends && ./install_imagequant.sh && ./install_raqm.sh
 
 USER pillow
 CMD ["depends/test.sh"]
+
+#docker run -v $GITHUB_WORKSPACE:/Pillow pythonpillow/gentoo
