@@ -9,6 +9,7 @@ TARGETS = \
 	debian-11-bullseye-x86 \
 	fedora-34-amd64 \
 	fedora-35-amd64 \
+	gentoo \
 	manylinux2014-wheel-build \
 	ubuntu-18.04-bionic-amd64 \
 	ubuntu-20.04-focal-amd64 \
