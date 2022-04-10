@@ -11,6 +11,7 @@ RUN apk --no-cache add \
     build-base \
     python3 \
     python3-dev \
+    python3-tkinter \
     # wget dependency
     openssl \
     # dev dependencies
@@ -25,6 +26,7 @@ RUN apk --no-cache add \
     harfbuzz-dev \
     jpeg-dev \
     lcms2-dev \
+    libimagequant-dev \
     openjpeg-dev \
     tcl-dev \
     tiff-dev \
