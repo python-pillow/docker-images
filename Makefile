@@ -12,6 +12,7 @@ TARGETS = \
 	manylinux2014-wheel-build \
 	ubuntu-18.04-bionic-amd64 \
 	ubuntu-20.04-focal-amd64 \
+	ubuntu-22.04-jammy-amd64 \
 	ubuntu-20.04-focal-amd64-valgrind \
 	ubuntu-20.04-focal-arm64v8 \
 	ubuntu-20.04-focal-ppc64le \
