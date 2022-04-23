@@ -29,7 +29,7 @@ RUN pacman -Sy --noconfirm \
             meson \
             pkg-config \
             python \
-            python-pyqt5 \
+            python-pyqt6 \
             python-setuptools \
             python-virtualenv \
             sudo \
