@@ -1,8 +1,8 @@
 FROM ubuntu:jammy
 
 RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -y install \
+    cargo \
     cmake \
-    curl \
     ghostscript \
     git \
     libegl-dev \
@@ -37,9 +37,6 @@ RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -y install \
     xvfb \
     zlib1g-dev \
     && rm -rf /var/lib/apt/lists/*
-
-RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-ENV PATH="/root/.cargo/bin:${PATH}"
 
 RUN useradd pillow \
     && addgroup pillow sudo \
