@@ -4,12 +4,12 @@ RUN yum install -y epel-release \
     && yum clean all
 
 RUN yum install -y \
+    cargo \
     freetype-devel \
     gcc \
     ghostscript \
     lcms2-devel \
     libffi-devel \
-    libimagequant-devel \
     libjpeg-devel \
     libraqm-devel \
     libtiff-devel \
@@ -46,6 +46,9 @@ RUN bash -c "python3.9 -m pip install virtualenv \
     && chown -R pillow:pillow /vpy3"
 
 ADD depends /depends
+RUN cd /depends \
+    && ./install_imagequant.sh \
+    && ldconfig
 
 USER pillow
 CMD ["depends/test.sh"]
