@@ -6,6 +6,7 @@ RUN yum install -y 'dnf-command(config-manager)' \
 RUN yum config-manager --set-enabled crb
 
 RUN yum install -y \
+    cargo \
     cmake \
     freetype-devel \
     gcc \
@@ -42,7 +43,9 @@ RUN bash -c "python3.9 -m pip install virtualenv \
 
 COPY depends /depends
 RUN cd /depends \
-    && ./install_raqm.sh
+    && ./install_imagequant.sh \
+    && ./install_raqm.sh \
+    && ldconfig
 
 USER pillow
 CMD ["depends/test.sh"]
