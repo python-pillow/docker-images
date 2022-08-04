@@ -9,12 +9,12 @@ RUN yum install -y 'dnf-command(config-manager)' \
 RUN yum config-manager --set-enabled powertools
 
 RUN yum install -y \
+    cargo \
     freetype-devel \
     gcc \
     ghostscript \
     lcms2-devel \
     libffi-devel \
-    libimagequant-devel \
     libjpeg-devel \
     libraqm-devel \
     libtiff-devel \
@@ -23,6 +23,7 @@ RUN yum install -y \
     openjpeg2-devel \
     openssl-devel \
     sqlite-devel \
+    sudo \
     tcl-devel \
     tk-devel \
     wget \
@@ -49,6 +50,9 @@ RUN bash -c "python3.9 -m pip install virtualenv \
     && chown -R pillow:pillow /vpy3"
 
 COPY depends /depends
+RUN cd /depends \
+    && ./install_imagequant.sh \
+    && ldconfig
 
 USER pillow
 CMD ["depends/test.sh"]

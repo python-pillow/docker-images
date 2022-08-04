@@ -39,7 +39,7 @@ RUN virtualenv --system-site-packages /vpy3 \
     && chown -R pillow:pillow /vpy3
 
 ADD depends /depends
-RUN cd /depends && ./install_imagequant.sh && ./install_raqm.sh
+RUN cd /depends && ./install_imagequant.sh && ./install_raqm.sh && ldconfig
 
 USER pillow
 CMD ["depends/test.sh"]
