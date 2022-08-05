@@ -20,6 +20,7 @@ RUN yum install -y \
     make \
     meson \
     openjpeg2-devel \
+    openssl-devel \
     python3-devel \
     python3-pip \
     python3-tkinter \
