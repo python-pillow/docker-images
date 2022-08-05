@@ -50,7 +50,7 @@ RUN bash -c "/usr/bin/pip3 install virtualenv \
     && chown -R pillow:pillow /vpy3"
 
 ADD depends /depends
-RUN wget https://github.com/ninja-build/ninja/releases/download/v1.10.2/ninja-linux.zip \
+RUN wget https://github.com/ninja-build/ninja/releases/download/v1.11.0/ninja-linux.zip \
     && unzip ninja-linux.zip \
     && mv ninja /usr/bin
 RUN /usr/bin/python3 -m pip install meson
