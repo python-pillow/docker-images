@@ -3,6 +3,9 @@
     "extends": [
         "config:base"
     ],
+    "labels": [
+        "Dependency"
+    ],
     "packageRules": [
         {
             "matchManagers": ["dockerfile"],
