@@ -3,8 +3,11 @@
     "extends": [
         "config:base"
     ],
-    "ignorePaths": ["archive/**"],
     "packageRules": [
+        {
+            "matchManagers": ["dockerfile"],
+            "enabled": false
+        },
         {
             "groupName": "github-actions",
             "matchManagers": ["github-actions"],
