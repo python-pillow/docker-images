@@ -1,0 +1,21 @@
+{
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": [
+        "config:base"
+    ],
+    "labels": [
+        "Dependency"
+    ],
+    "packageRules": [
+        {
+            "matchManagers": ["dockerfile"],
+            "enabled": false
+        },
+        {
+            "groupName": "github-actions",
+            "matchManagers": ["github-actions"],
+            "separateMajorMinor": "false"
+        }
+    ],
+    "schedule": ["on the 5th day of the month"]
+}
