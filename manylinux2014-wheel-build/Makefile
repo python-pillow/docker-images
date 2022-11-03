@@ -29,7 +29,7 @@ wheel:
 310:
 	_PYVER=310 $(MAKE) wheel
 311:
-	_PYVER=310 $(MAKE) wheel
+	_PYVER=311 $(MAKE) wheel
 
 .PHONY: test
 test: 310
