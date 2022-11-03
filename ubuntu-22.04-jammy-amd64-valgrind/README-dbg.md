@@ -6,7 +6,7 @@ valgrind docker image. [citation needed]
 The `build-dbg` and `dbg` shell provide some symbols and debugging
 tools to fix that. Emacs is provided, as are some of the source packages.
 
-You may need to se source directories with the `set substitute-path`
+You may need to set source directories with the `set substitute-path`
 command.
 
 e.g.:
