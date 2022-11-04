@@ -23,6 +23,10 @@ test:
 push:
 	docker push $(IMAGENAME):$(BRANCH)
 
+.PHONY: pull
+pull:
+	docker pull $(IMAGENAME):$(BRANCH)
+
 .PHONY: clean
 clean:
 	rm -r depends

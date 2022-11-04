@@ -17,6 +17,8 @@ jobs:
           - "ubuntu-22.04-jammy-arm64v8"
           - "ubuntu-22.04-jammy-ppc64le"
           - "ubuntu-22.04-jammy-s390x"
+          # test image for manylinux-wheel build
+          - "ubuntu-22.04-jammy-amd64"
           # Then run the remainder
           - "alpine"
           - "amazon-2-amd64"
@@ -28,12 +30,14 @@ jobs:
           - "debian-11-bullseye-x86"
           - "fedora-36-amd64"
           - "gentoo"
-          - "manylinux2014-wheel-build"
           - "ubuntu-18.04-bionic-amd64"
           - "ubuntu-20.04-focal-amd64"
-          - "ubuntu-22.04-jammy-amd64"
           - "ubuntu-22.04-jammy-amd64-valgrind"
+          # has a dependency on the test image
+          - "manylinux2014-wheel-build"
         include:
+          - image: "manylinux2014-wheel-build"
+            test-image: "ubuntu-22.04-jammy-amd64"
           - image: "ubuntu-22.04-jammy-arm64v8"
             qemu-arch: "aarch64"
           - image: "ubuntu-22.04-jammy-ppc64le"
@@ -59,6 +63,12 @@ jobs:
             (cd Pillow && git checkout main)
           fi
           sudo chown -R 1000 $(pwd)
+
+      - name: Test Image Build
+        if: "matrix.test-image"
+        run: |
+          cd "${{ matrix.test-image }}"
+          make pull || (sudo chmod a+w . && make update && make build BRANCH=main)
 
       - name: Build image
         id: build
