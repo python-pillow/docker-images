@@ -34,13 +34,13 @@ RUN yum install -y \
 
 RUN useradd --uid 1000 pillow
 
-RUN wget https://www.python.org/ftp/python/3.9.7/Python-3.9.7.tgz \
-    && tar xzf Python-3.9.7.tgz \
-    && cd Python-3.9.7 \
+RUN wget https://www.python.org/ftp/python/3.9.15/Python-3.9.15.tgz \
+    && tar xzf Python-3.9.15.tgz \
+    && cd Python-3.9.15 \
     && ./configure \
     && make altinstall \
     && cd .. \
-    && rm -r Python-3.9.7 Python-3.9.7.tgz
+    && rm -r Python-3.9.15 Python-3.9.15.tgz
 
 RUN bash -c "python3.9 -m pip install virtualenv \
     && python3.9 -m virtualenv --system-site-packages /vpy3 \
