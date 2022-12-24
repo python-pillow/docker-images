@@ -1,11 +1,10 @@
 WD = $(shell pwd)
-USERNAME := $(shell docker info | grep Username | xargs | cut -d ' ' -f 2)
 TARGET := $(notdir $(WD))
 ROOT := $(abspath $(WD)/../Pillow)
-IMAGENAME := $(if $(USERNAME), $(USERNAME)/$(TARGET), $(TARGET))
+IMAGENAME := $(if $(DOCKER_USERNAME), $(DOCKER_USERNAME)/$(TARGET), $(TARGET))
 BRANCH := $(shell git rev-parse --abbrev-ref HEAD)
 TEST_TARGET = ubuntu-22.04-jammy-amd64
-TEST_IMAGE := $(if $(USERNAME), $(USERNAME)/$(TEST_TARGET), $(TEST_TARGET))
+TEST_IMAGE := $(if $(DOCKER_USERNAME), $(DOCKER_USERNAME)/$(TEST_TARGET), $(TEST_TARGET))
 
 .PHONY: build
 build:
