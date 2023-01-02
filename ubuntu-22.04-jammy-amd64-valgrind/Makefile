@@ -17,7 +17,7 @@ update:
 
 .PHONY: test
 test:
-	docker run --rm -v $(ROOT):/Pillow $(IMAGENAME):$(BRANCH)
+	docker run --rm -e "PILLOW_VALGRIND_TEST=true" -v $(ROOT):/Pillow $(IMAGENAME):$(BRANCH)
 
 .PHONY: push
 push:
