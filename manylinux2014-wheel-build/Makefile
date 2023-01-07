@@ -1,11 +1,10 @@
 WD = $(shell pwd)
-USERNAME := $(shell docker info | grep Username | xargs | cut -d ' ' -f 2)
 TARGET := $(notdir $(WD))
 ROOT := $(abspath $(WD)/../Pillow)
-IMAGENAME := $(if $(USERNAME), $(USERNAME)/$(TARGET), $(TARGET))
+IMAGENAME := $(if $(DOCKER_USERNAME), $(DOCKER_USERNAME)/$(TARGET), $(TARGET))
 BRANCH := $(shell git rev-parse --abbrev-ref HEAD)
 TEST_TARGET = ubuntu-22.04-jammy-amd64
-TEST_IMAGE := $(if $(USERNAME), $(USERNAME)/$(TEST_TARGET), $(TEST_TARGET))
+TEST_IMAGE := $(if $(DOCKER_USERNAME), $(DOCKER_USERNAME)/$(TEST_TARGET):$(BRANCH), pythonpillow/$(TEST_TARGET):main)
 
 .PHONY: build
 build:
@@ -33,7 +32,7 @@ wheel:
 
 .PHONY: test
 test: 310
-	docker run --rm -v $(ROOT):/Pillow -v `pwd`/out:/output $(TEST_IMAGE):$(BRANCH) sh -c "/vpy3/bin/pip install /output/*cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl && cd /Pillow && /vpy3/bin/python selftest.py && /usr/bin/xvfb-run -a /vpy3/bin/pytest -vx"
+	docker run --rm -v $(ROOT):/Pillow -v `pwd`/out:/output $(TEST_IMAGE) sh -c "/vpy3/bin/pip install /output/*cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl && cd /Pillow && /vpy3/bin/python selftest.py && /usr/bin/xvfb-run -a /vpy3/bin/pytest -vx"
 
 .PHONY: push
 push:

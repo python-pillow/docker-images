@@ -69,6 +69,8 @@ jobs:
         run: |
           cd "${{ matrix.test-image }}"
           make pull || (sudo chmod a+w . && make update && make build BRANCH=main)
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
 
       - name: Build image
         id: build
@@ -86,6 +88,8 @@ jobs:
         run: |
           cd "${{ matrix.image }}"
           make test BRANCH=main
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
 
       - name: Log image size
         run: |
@@ -97,6 +101,8 @@ jobs:
                            && github.ref == 'refs/heads/main'
                            && matrix.target == 'latest'"
         run: make push-${{ matrix.image }} BRANCH=main
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
 
       - name: Post build
         if: always()
