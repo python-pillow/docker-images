@@ -3,6 +3,10 @@ name: Docker images
 
 on: [push, pull_request, workflow_dispatch]
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
     name: ${{ matrix.target }} + ${{ matrix.image }}
@@ -29,6 +33,7 @@ jobs:
           - "debian-10-buster-x86"
           - "debian-11-bullseye-x86"
           - "fedora-36-amd64"
+          - "fedora-37-amd64"
           - "gentoo"
           - "ubuntu-18.04-bionic-amd64"
           - "ubuntu-20.04-focal-amd64"
