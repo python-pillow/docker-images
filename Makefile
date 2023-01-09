@@ -21,6 +21,7 @@ TARGETS = \
 
 BUILDDIRS = $(TARGETS:%=build-%)
 PUSHDIRS = $(TARGETS:%=push-%)
+PULLDIRS = $(TARGETS:%=pull-%)
 UPDATEDIRS = $(TARGETS:%=update-%)
 CLEANDIRS = $(TARGETS:%=clean-%)
 TESTDIRS = $(TARGETS:%=test-%)
@@ -28,6 +29,7 @@ TESTDIRS = $(TARGETS:%=test-%)
 .PHONY: build update push test $(TARGETS)
 .PHONY: subdirs $(BUILDDIRS)
 .PHONY: subdirs $(PUSHDIRS)
+.PHONY: subdirs $(PULLDIRS)
 .PHONY: subdirs $(UPDATEDIRS)
 .PHONY: subdirs $(CLEANDIRS)
 .PHONY: subdirs $(TESTDIRS)
@@ -40,6 +42,10 @@ $(BUILDDIRS):
 push: $(PUSHDIRS)
 $(PUSHDIRS):
 	$(MAKE) -C $(@:push-%=%) push
+
+pull: $(PULLDIRS)
+$(PULLDIRS):
+	$(MAKE) -C $(@:pull-%=%) pull
 
 update: $(UPDATEDIRS)
 $(UPDATEDIRS):

@@ -1,9 +1,9 @@
 WD = $(shell pwd)
-USERNAME := $(shell docker info | grep Username | xargs | cut -d ' ' -f 2)
 TARGET := $(notdir $(WD))
 ROOT := $(abspath $(WD)/../Pillow)
-IMAGENAME := $(if $(USERNAME), $(USERNAME)/$(TARGET), $(TARGET))
+IMAGENAME := $(if $(DOCKER_USERNAME), $(DOCKER_USERNAME)/$(TARGET), $(TARGET))
 BRANCH := $(shell git rev-parse --abbrev-ref HEAD)
+TEST_IMAGE := $(if $(DOCKER_USERNAME), $(DOCKER_USERNAME)/$(TARGET):$(BRANCH), pythonpillow/$(TARGET):main)
 
 .PHONY: build
 build:
@@ -22,6 +22,10 @@ test:
 .PHONY: push
 push:
 	docker push $(IMAGENAME):$(BRANCH)
+
+.PHONY: pull
+pull:
+	docker pull $(TEST_IMAGE)
 
 .PHONY: clean
 clean:

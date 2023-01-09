@@ -1,11 +1,11 @@
 WD = $(shell pwd)
-USERNAME := $(shell docker info | grep Username | xargs | cut -d ' ' -f 2)
 TARGET := $(notdir $(WD))
 ROOT := $(abspath $(WD)/../Pillow)
-IMAGENAME := $(if $(USERNAME), $(USERNAME)/$(TARGET), $(TARGET))
+IMAGENAME := $(if $(DOCKER_USERNAME), $(DOCKER_USERNAME)/$(TARGET), $(TARGET))
 BRANCH := $(shell git rev-parse --abbrev-ref HEAD)
-TEST_TARGET = ubuntu-20.04-focal-amd64
-TEST_IMAGE=pythonpillow/$(TEST_TARGET)
+TEST_TARGET = ubuntu-22.04-jammy-amd64
+TEST_IMAGE := $(if $(DOCKER_USERNAME), $(DOCKER_USERNAME)/$(TEST_TARGET):$(BRANCH), pythonpillow/$(TEST_TARGET):main)
+
 .PHONY: build
 build:
 	docker build -t $(IMAGENAME):$(BRANCH) .
@@ -27,10 +27,12 @@ wheel:
 	_PYVER=39 $(MAKE) wheel
 310:
 	_PYVER=310 $(MAKE) wheel
+311:
+	_PYVER=311 $(MAKE) wheel
 
 .PHONY: test
-test: 38
-	docker run --rm -v $(ROOT):/Pillow -v `pwd`/out:/output $(TEST_IMAGE):$(BRANCH) sh -c "/vpy3/bin/pip install /output/*cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl && cd /Pillow && /vpy3/bin/python selftest.py && /usr/bin/xvfb-run -a /vpy3/bin/pytest -vx"
+test: 310
+	docker run --rm -v $(ROOT):/Pillow -v `pwd`/out:/output $(TEST_IMAGE) sh -c "/vpy3/bin/pip install /output/*cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl && cd /Pillow && /vpy3/bin/python selftest.py && /usr/bin/xvfb-run -a /vpy3/bin/pytest -vx"
 
 .PHONY: push
 push:
