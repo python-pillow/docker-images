@@ -21,6 +21,7 @@ RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -y install \
     libxcb-icccm4 \
     libxcb-image0 \
     libxcb-keysyms1 \
+    libxcb-randr0 \
     libxcb-render-util0 \
     libxkbcommon-x11-0 \
     meson \
