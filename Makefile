@@ -5,7 +5,6 @@ TARGETS = \
 	centos-7-amd64 \
 	centos-stream-8-amd64 \
 	centos-stream-9-amd64 \
-	debian-10-buster-x86 \
 	debian-11-bullseye-x86 \
 	fedora-36-amd64 \
 	fedora-37-amd64 \
