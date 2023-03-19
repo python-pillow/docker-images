@@ -1,6 +1,7 @@
 TARGETS = \
 	alpine \
 	amazon-2-amd64 \
+	amazon-2023-amd64 \
 	arch \
 	centos-7-amd64 \
 	centos-stream-8-amd64 \
