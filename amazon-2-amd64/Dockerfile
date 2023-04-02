@@ -1,7 +1,5 @@
 FROM amazonlinux:2
 
-RUN amazon-linux-extras install python3
-
 RUN yum install -y \
     cmake \
     curl \
@@ -19,15 +17,12 @@ RUN yum install -y \
     libtiff-devel \
     make \
     openssl-devel \
+    sqlite-devel \
     pth-devel \
-    python3-devel \
-    python3-pip \
-    python3-test \
-    python3-tkinter \
-    python3-virtualenv \
     shadow-utils \
     sudo \
     tar \
+    tk-devel \
     unzip \
     util-linux \
     wget \
@@ -42,8 +37,16 @@ ENV PATH="/root/.cargo/bin:${PATH}"
 
 RUN useradd --uid 1000 pillow
 
-RUN bash -c "/usr/bin/pip3 install virtualenv \
-    && /usr/bin/python3 -mvirtualenv -p /usr/bin/python3 --system-site-packages /vpy3 \
+RUN wget https://www.python.org/ftp/python/3.9.16/Python-3.9.16.tgz \
+    && tar xzf Python-3.9.16.tgz \
+    && cd Python-3.9.16 \
+    && ./configure \
+    && make altinstall \
+    && cd .. \
+    && rm -r Python-3.9.16 Python-3.9.16.tgz
+
+RUN bash -c "python3.9 -m pip install virtualenv \
+    && python3.9 -m virtualenv --system-site-packages /vpy3 \
     && /vpy3/bin/pip install --no-cache-dir --upgrade pip \
     && /vpy3/bin/pip install --no-cache-dir cffi olefile pytest pytest-cov pytest-timeout \
     && /vpy3/bin/pip install --no-cache-dir numpy --only-binary=:all: || true \
@@ -53,7 +56,8 @@ ADD depends /depends
 RUN wget https://github.com/ninja-build/ninja/releases/download/v1.11.1/ninja-linux.zip \
     && unzip ninja-linux.zip \
     && mv ninja /usr/bin
-RUN /usr/bin/python3 -m pip install meson
+RUN python3.9 -m pip install meson
+RUN ln -s /usr/local/bin/python3.9 /usr/bin/python3
 RUN cd /depends \
     && ./install_imagequant.sh \
     && ./install_openjpeg.sh \
