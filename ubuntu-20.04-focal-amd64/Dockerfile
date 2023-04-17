@@ -18,6 +18,7 @@ RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -y install \
     libssl-dev \
     libtiff5-dev \
     libwebp-dev \
+    libxcb-cursor0 \
     libxcb-icccm4 \
     libxcb-image0 \
     libxcb-keysyms1 \
