@@ -24,7 +24,7 @@ RUN emerge --quiet -uDU @world
 RUN echo 'VIDEO_CARDS="fbdev dummy"' | cat >> /etc/portage/make.conf
 
 RUN USE="tk" emerge --quiet --getbinpkg=n dev-lang/python:3.9
-RUN emerge --quiet dev-python/virtualenv dev-util/cargo-c dev-util/meson sudo x11-misc/xvfb-run =x11-base/xorg-server-21.1.8
+RUN emerge --quiet dev-python/virtualenv dev-util/cargo-c dev-util/meson sudo x11-misc/xvfb-run
 
 # Install dependencies
 RUN USE="jpeg jpeg2k lcms tiff truetype webp xcb zlib" emerge --quiet --onlydeps dev-python/pillow
