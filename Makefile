@@ -8,6 +8,7 @@ TARGETS = \
 	centos-stream-9-amd64 \
 	debian-11-bullseye-x86 \
 	fedora-37-amd64 \
+	fedora-38-amd64 \
 	gentoo \
 	manylinux2014-wheel-build \
 	ubuntu-18.04-bionic-amd64 \
