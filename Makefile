@@ -11,7 +11,6 @@ TARGETS = \
 	fedora-38-amd64 \
 	gentoo \
 	manylinux2014-wheel-build \
-	ubuntu-18.04-bionic-amd64 \
 	ubuntu-20.04-focal-amd64 \
 	ubuntu-22.04-jammy-amd64 \
 	ubuntu-22.04-jammy-amd64-valgrind \
