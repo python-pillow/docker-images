@@ -39,6 +39,7 @@ jobs:
           - "ubuntu-22.04-jammy-amd64-valgrind"
           # has a dependency on the test image
           - "manylinux2014-wheel-build"
+          - "manylinux_2_28-wheel-build"
         include:
           - image: "manylinux2014-wheel-build"
             test-image: "ubuntu-22.04-jammy-amd64"
