@@ -66,7 +66,6 @@ RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --de
 ENV PATH="/root/.cargo/bin:${PATH}"
 
 RUN useradd pillow \
-    && addgroup pillow sudo \
     && mkdir /home/pillow \
     && chown pillow:pillow /home/pillow
 
