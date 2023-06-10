@@ -2,7 +2,7 @@
 # and then https://github.com/matthew-brett/trusty/blob/32/Dockerfile
 
 FROM scratch
-ADD debian-bullseye-i386.tgz /
+ADD debian-bookworm-i386.tgz /
 
 # a few minor docker-specific tweaks
 # see https://github.com/docker/docker/blob/master/contrib/mkimage/debootstrap
@@ -82,4 +82,4 @@ USER pillow
 ENTRYPOINT ["linux32"]
 CMD ["depends/test.sh"]
 
-#docker run -v $GITHUB_WORKSPACE:/Pillow pythonpillow/debian-11-bullseye-x86
+#docker run -v $GITHUB_WORKSPACE:/Pillow pythonpillow/debian-12-bookworm-x86
