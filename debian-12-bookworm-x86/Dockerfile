@@ -2,7 +2,7 @@
 # and then https://github.com/matthew-brett/trusty/blob/32/Dockerfile
 
 FROM scratch
-ADD debian-bullseye-i386.tgz /
+ADD debian-bookworm-i386.tgz /
 
 # a few minor docker-specific tweaks
 # see https://github.com/docker/docker/blob/master/contrib/mkimage/debootstrap
@@ -66,11 +66,10 @@ RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --de
 ENV PATH="/root/.cargo/bin:${PATH}"
 
 RUN useradd pillow \
-    && addgroup pillow sudo \
     && mkdir /home/pillow \
     && chown pillow:pillow /home/pillow
 
-RUN virtualenv -p /usr/bin/python3.9 --system-site-packages /vpy3 \
+RUN virtualenv -p /usr/bin/python3.11 --system-site-packages /vpy3 \
     && /vpy3/bin/pip install --no-cache-dir --upgrade pip \
     && /vpy3/bin/pip install --no-cache-dir cffi olefile pytest pytest-cov pytest-timeout \
     && chown -R pillow:pillow /vpy3
@@ -82,4 +81,4 @@ USER pillow
 ENTRYPOINT ["linux32"]
 CMD ["depends/test.sh"]
 
-#docker run -v $GITHUB_WORKSPACE:/Pillow pythonpillow/debian-11-bullseye-x86
+#docker run -v $GITHUB_WORKSPACE:/Pillow pythonpillow/debian-12-bookworm-x86

@@ -5,7 +5,7 @@ set -e
 
 ### settings
 arch=i386
-suite="bullseye"
+suite="bookworm"
 chroot_dir="./guest-root"
 apt_mirror="http://http.debian.net/debian"
 
