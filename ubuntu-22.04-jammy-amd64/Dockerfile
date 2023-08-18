@@ -1,7 +1,6 @@
 FROM ubuntu:jammy
 
 RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -y install \
-    cargo \
     cmake \
     ghostscript \
     git \
@@ -10,6 +9,7 @@ RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -y install \
     libfreetype6-dev \
     libfribidi-dev \
     libharfbuzz-dev \
+    libimagequant-dev \
     libjpeg-turbo-progs \
     libjpeg8-dev \
     liblcms2-dev \
@@ -52,7 +52,6 @@ RUN virtualenv -p /usr/bin/python3.10 --system-site-packages /vpy3 \
 
 ADD depends /depends
 RUN cd /depends \
-    && ./install_imagequant.sh \
     && ./install_raqm.sh
 
 USER pillow
