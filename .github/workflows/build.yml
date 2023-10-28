@@ -68,7 +68,11 @@ jobs:
         run: |
           sudo apt-get update && sudo apt-get install -qyy debootstrap
           if [ "${{ matrix.target }}" = "latest" ]; then
-            git submodule update --remote Pillow
+            if [[ -n "$matrix.test-image" ]]; then
+              git submodule update --remote --init --recursive Pillow
+            else
+              git submodule update --remote Pillow
+            fi
             (cd Pillow && git checkout main)
           fi
           sudo chown -R 1000 $(pwd)

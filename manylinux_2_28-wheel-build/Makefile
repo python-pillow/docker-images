@@ -8,6 +8,7 @@ TEST_IMAGE := $(if $(DOCKER_USERNAME), $(DOCKER_USERNAME)/$(TEST_TARGET):$(BRANC
 
 .PHONY: build
 build:
+	cp -r ../Pillow .
 	docker build -t $(IMAGENAME):$(BRANCH) .
 
 .PHONY: update

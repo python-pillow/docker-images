@@ -29,4 +29,4 @@ PATH=$PYBIN:$PATH make clean
 # Build and repair
 $PYBIN/pip --verbose wheel ${OPTS} -w /tmp /Pillow
 $PYBIN/pip install auditwheel
-$PYBIN/python3 -m auditwheel repair /tmp/Pillow*whl -w /output
+$PYBIN/python3 -m auditwheel repair /tmp/pillow*whl -w /output
