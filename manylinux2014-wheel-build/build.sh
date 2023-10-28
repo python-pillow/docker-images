@@ -16,7 +16,7 @@ fi
 # not strictly necessary, unless running multiple versions from the shell
 rm -f /tmp/*.whl || true
 
-# Python version, as 38,39,310,311. Defaults to 310.
+# Python version, as 38,39,310,311,312. Defaults to 310.
 # Matches the naming in /opt/python/
 PYVER=${1:-310}
 PYBIN=$(echo /opt/python/cp${PYVER}*/bin)
@@ -29,4 +29,4 @@ PATH=$PYBIN:$PATH make clean
 # Build and repair
 $PYBIN/pip --verbose wheel ${OPTS} -w /tmp /Pillow
 $PYBIN/pip install auditwheel
-$PYBIN/python3 -m auditwheel repair /tmp/Pillow*whl -w /output
+$PYBIN/python3 -m auditwheel repair /tmp/pillow*whl -w /output

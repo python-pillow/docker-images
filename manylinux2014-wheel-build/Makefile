@@ -8,6 +8,7 @@ TEST_IMAGE := $(if $(DOCKER_USERNAME), $(DOCKER_USERNAME)/$(TEST_TARGET):$(BRANC
 
 .PHONY: build
 build:
+	cp -r ../Pillow .
 	docker build -t $(IMAGENAME):$(BRANCH) .
 
 .PHONY: update
@@ -27,6 +28,8 @@ wheel:
 	_PYVER=310 $(MAKE) wheel
 311:
 	_PYVER=311 $(MAKE) wheel
+312:
+	_PYVER=312 $(MAKE) wheel
 
 .PHONY: test
 test: 310
