@@ -9,7 +9,6 @@ TARGETS = \
 	debian-11-bullseye-amd64 \
 	debian-12-bookworm-x86 \
 	debian-12-bookworm-amd64 \
-	fedora-37-amd64 \
 	fedora-38-amd64 \
 	gentoo \
 	manylinux2014-wheel-build \
