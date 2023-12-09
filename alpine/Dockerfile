@@ -19,6 +19,7 @@ RUN apk --no-cache add \
     git \
     meson \
     py3-pip \
+    py3-virtualenv \
     sudo \
     # Pillow dependencies
     freetype-dev \
@@ -40,7 +41,6 @@ RUN cd /depends \
     && ./install_raqm.sh
 
 RUN /usr/sbin/adduser -D pillow \
-    && pip3 install --no-cache-dir -I virtualenv \
     && virtualenv /vpy3 \
     && /vpy3/bin/pip install --no-cache-dir --upgrade pip \
     && /vpy3/bin/pip install --no-cache-dir olefile pytest pytest-cov pytest-timeout \
