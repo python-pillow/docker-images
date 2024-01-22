@@ -8,7 +8,7 @@ RUN echo 'FEATURES="${FEATURES} parallel-install parallel-fetch -merge-sync"' | 
 RUN echo 'FEATURES="${FEATURES} getbinpkg binpkg-request-signature"' | cat >> /etc/portage/make.conf
 RUN getuto
 
-RUN echo 'EMERGE_DEFAULT_OPTS="--binpkg-respect-use=n --autounmask-write --autounmask-continue --autounmask-keep-keywords=y --autounmask-use=y"' | cat >> /etc/portage/make.conf
+RUN echo 'EMERGE_DEFAULT_OPTS="--autounmask-write --autounmask-continue --autounmask-keep-keywords=y --autounmask-use=y"' | cat >> /etc/portage/make.conf
 RUN echo 'USE="elogind -polkit"' | cat >> /etc/portage/make.conf
 RUN cat /etc/portage/make.conf
 
@@ -22,8 +22,9 @@ RUN emerge --quiet -uDU @world
 # We deliberately set this quite late on to avoid rebuilding e.g. mesa.
 RUN echo 'VIDEO_CARDS="fbdev dummy"' | cat >> /etc/portage/make.conf
 
-RUN USE="tk" emerge --quiet --getbinpkg=n dev-lang/python:3.9
-RUN emerge --quiet dev-python/virtualenv dev-util/cargo-c dev-util/meson sudo x11-misc/xvfb-run
+RUN echo 'dev-lang/python:3.9 tk' | cat >> /etc/portage/package.use/python
+RUN emerge --quiet dev-lang/python:3.9
+RUN emerge --quiet app-admin/sudo dev-python/virtualenv dev-util/cargo-c dev-build/meson x11-misc/xvfb-run
 
 # Install dependencies
 RUN USE="jpeg jpeg2k lcms tiff truetype webp xcb zlib" emerge --quiet --onlydeps dev-python/pillow
