@@ -6,7 +6,6 @@ RUN echo 'FEATURES="-ipc-sandbox -pid-sandbox -network-sandbox -usersandbox -mou
 RUN echo 'FEATURES="${FEATURES} parallel-install parallel-fetch -merge-sync"' | cat >> /etc/portage/make.conf
 # We use binpkgs.
 RUN echo 'FEATURES="${FEATURES} getbinpkg binpkg-request-signature"' | cat >> /etc/portage/make.conf
-RUN getuto
 
 RUN echo 'EMERGE_DEFAULT_OPTS="--autounmask-write --autounmask-continue --autounmask-keep-keywords=y --autounmask-use=y"' | cat >> /etc/portage/make.conf
 RUN echo 'USE="elogind -polkit"' | cat >> /etc/portage/make.conf
