@@ -9,13 +9,11 @@ concurrency:
 
 jobs:
   build:
-    name: ${{ matrix.target }} + ${{ matrix.image }}
+    name: ${{ matrix.image }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        target:
-          - "latest"
         image:
           # Run slower jobs first to give them a headstart and reduce waiting time
           - "ubuntu-22.04-jammy-arm64v8"
@@ -67,14 +65,12 @@ jobs:
       - name: Prepare build
         run: |
           sudo apt-get update && sudo apt-get install -qyy debootstrap
-          if [ "${{ matrix.target }}" = "latest" ]; then
-            if [[ -n "$matrix.test-image" ]]; then
-              git submodule update --remote --init --recursive Pillow
-            else
-              git submodule update --remote Pillow
-            fi
-            (cd Pillow && git checkout main)
+          if [[ -n "$matrix.test-image" ]]; then
+            git submodule update --remote --init --recursive Pillow
+          else
+            git submodule update --remote Pillow
           fi
+          (cd Pillow && git checkout main)
           sudo chown -R 1000 $(pwd)
 
       - name: Test Image Build
@@ -111,8 +107,7 @@ jobs:
       - name: Push image
         if: "steps.build.outputs.logged_in == 'true'
                            && github.event_name == 'push'
-                           && github.ref == 'refs/heads/main'
-                           && matrix.target == 'latest'"
+                           && github.ref == 'refs/heads/main'"
         run: make push-${{ matrix.image }} BRANCH=main
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
