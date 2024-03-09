@@ -4,12 +4,10 @@ FROM gentoo/stage3:desktop
 RUN echo 'FEATURES="-ipc-sandbox -pid-sandbox -network-sandbox -usersandbox -mount-sandbox -sandbox"' | cat >> /etc/portage/make.conf
 # Speed things up a bit.
 RUN echo 'FEATURES="${FEATURES} parallel-install parallel-fetch -merge-sync"' | cat >> /etc/portage/make.conf
+# We use binpkgs.
+RUN echo 'FEATURES="${FEATURES} getbinpkg binpkg-request-signature"' | cat >> /etc/portage/make.conf
 
-# TODO: May be able to drop this once changed to desktop docker images?
-# https://dilfridge.blogspot.com/2021/09/experimental-binary-gentoo-package.html
-RUN echo -e "[gentoobinhost]\npriority = 9999\nsync-uri = https://gentoo.osuosl.org/experimental/amd64/binpkg/default/linux/17.1/x86-64/\n" | cat >> /etc/portage/binrepos.conf/gentoobinhost.conf
-
-RUN echo 'EMERGE_DEFAULT_OPTS="--binpkg-respect-use=n --getbinpkg=y --autounmask-write --autounmask-continue --autounmask-keep-keywords=y --autounmask-use=y"' | cat >> /etc/portage/make.conf
+RUN echo 'EMERGE_DEFAULT_OPTS="--autounmask-write --autounmask-continue --autounmask-keep-keywords=y --autounmask-use=y"' | cat >> /etc/portage/make.conf
 RUN echo 'USE="elogind -polkit"' | cat >> /etc/portage/make.conf
 RUN cat /etc/portage/make.conf
 
@@ -23,8 +21,9 @@ RUN emerge --quiet -uDU @world
 # We deliberately set this quite late on to avoid rebuilding e.g. mesa.
 RUN echo 'VIDEO_CARDS="fbdev dummy"' | cat >> /etc/portage/make.conf
 
-RUN USE="tk" emerge --quiet --getbinpkg=n dev-lang/python:3.9
-RUN emerge --quiet dev-python/virtualenv dev-util/cargo-c dev-util/meson sudo x11-misc/xvfb-run
+RUN echo 'dev-lang/python:3.9 tk' | cat >> /etc/portage/package.use/python
+RUN emerge --quiet dev-lang/python:3.9
+RUN emerge --quiet dev-python/virtualenv dev-util/cargo-c dev-build/meson x11-misc/xvfb-run
 
 # Install dependencies
 RUN USE="jpeg jpeg2k lcms tiff truetype webp xcb zlib" emerge --quiet --onlydeps dev-python/pillow
