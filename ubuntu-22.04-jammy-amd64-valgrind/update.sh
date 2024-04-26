@@ -1,2 +1,2 @@
 #!/bin/sh
-docker pull ubuntu:focal
+docker pull ubuntu:jammy
