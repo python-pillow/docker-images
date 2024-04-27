@@ -1,4 +1,4 @@
-FROM ubuntu:noble
+FROM ubuntu:jammy
 
 RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -y install \
     cmake \
@@ -18,7 +18,7 @@ RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -y install \
     libwebp-dev \
     meson \
     netpbm \
-    python3.12-dbg \
+    python3.10-dbg \
     python3-dev \
     python3-numpy \
     python3-setuptools \
@@ -33,11 +33,12 @@ RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -y install \
     valgrind \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-RUN useradd pillow \
+RUN useradd --uid 1001 pillow \
+    && addgroup pillow sudo \
     && mkdir /home/pillow \
     && chown pillow:pillow /home/pillow
 
-RUN virtualenv -p /usr/bin/python3.12-dbg --system-site-packages /vpy3 \
+RUN virtualenv -p /usr/bin/python3.10-dbg --system-site-packages /vpy3 \
     && /vpy3/bin/pip install --no-cache-dir --upgrade pip \
     && /vpy3/bin/pip install --no-cache-dir cffi olefile pytest pytest-cov pytest-timeout pytest-valgrind \
     && chown -R pillow:pillow /vpy3
@@ -51,4 +52,4 @@ COPY python.supp /depends
 USER pillow
 CMD ["depends/test.sh"]
 
-#docker run -v $TRAVIS_BUILD_DIR:/Pillow pythonpillow/ubuntu-24.04-noble-amd64
+#docker run -v $TRAVIS_BUILD_DIR:/Pillow pythonpillow/ubuntu-22.04-jammy-amd64
