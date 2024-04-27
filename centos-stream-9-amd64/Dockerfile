@@ -33,7 +33,7 @@ RUN yum install -y \
     zlib-devel \
     && yum clean all
 
-RUN useradd --uid 1000 pillow
+RUN useradd --uid 1001 pillow
 
 RUN bash -c "python3.9 -m pip install virtualenv \
     && python3.9 -m virtualenv --system-site-packages /vpy3 \

@@ -35,7 +35,7 @@ RUN yum install -y \
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 ENV PATH="/root/.cargo/bin:${PATH}"
 
-RUN useradd --uid 1000 pillow
+RUN useradd --uid 1001 pillow
 
 RUN wget https://www.python.org/ftp/python/3.9.16/Python-3.9.16.tgz \
     && tar xzf Python-3.9.16.tgz \

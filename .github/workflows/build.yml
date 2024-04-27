@@ -70,7 +70,7 @@ jobs:
             git submodule update --remote Pillow
           fi
           (cd Pillow && git checkout main)
-          sudo chown -R 1000 $(pwd)
+          sudo chown -R 1001 $(pwd)
 
       - name: Test Image Build
         if: "matrix.test-image"

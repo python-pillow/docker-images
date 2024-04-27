@@ -34,7 +34,6 @@ RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -y install \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN useradd pillow \
-    && addgroup pillow sudo \
     && mkdir /home/pillow \
     && chown pillow:pillow /home/pillow
 

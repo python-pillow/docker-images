@@ -25,7 +25,7 @@ RUN dnf install -y \
     zlib-devel \
     && dnf clean all
 
-RUN useradd pillow \
+RUN useradd --uid 1001 pillow \
     && chown pillow:pillow /home/pillow
 
 RUN virtualenv -p /usr/bin/python3.12 --system-site-packages /vpy3 \
