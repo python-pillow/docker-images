@@ -16,7 +16,7 @@ jobs:
       matrix:
         image:
           # Run slower jobs first to give them a headstart and reduce waiting time
-          - "ubuntu-24.04-noble-arm64v8"
+          - "ubuntu-22.04-jammy-arm64v8"
           - "ubuntu-24.04-noble-ppc64le"
           - "ubuntu-24.04-noble-s390x"
           # test image for manylinux-wheel build
@@ -44,7 +44,7 @@ jobs:
             test-image: "ubuntu-24.04-noble-amd64"
           - image: "manylinux_2_28-wheel-build"
             test-image: "ubuntu-24.04-noble-amd64"
-          - image: "ubuntu-24.04-noble-arm64v8"
+          - image: "ubuntu-22.04-jammy-arm64v8"
             qemu-arch: "aarch64"
           - image: "ubuntu-24.04-noble-ppc64le"
             qemu-arch: "ppc64le"
