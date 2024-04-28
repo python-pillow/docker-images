@@ -36,7 +36,7 @@ RUN yum install -y \
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 ENV PATH="/root/.cargo/bin:${PATH}"
 
-RUN useradd --uid 1000 pillow
+RUN useradd --uid 1001 pillow
 
 RUN bash -c "/usr/bin/pip3 install virtualenv \
     && /usr/bin/python3 -mvirtualenv -p /usr/bin/python3 --system-site-packages /vpy3 \

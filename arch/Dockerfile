@@ -41,7 +41,7 @@ RUN cd /depends \
      && ./install_imagequant.sh \
      && ./install_raqm.sh
 
-RUN /sbin/useradd -m -U -u 1000 pillow \
+RUN /sbin/useradd -m -U --uid 1001 pillow \
     && virtualenv --system-site-packages /vpy3 \
     && /vpy3/bin/pip install --no-cache-dir --upgrade pip \
     && /vpy3/bin/pip install --no-cache-dir cffi olefile pytest pytest-cov pytest-timeout \

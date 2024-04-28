@@ -17,10 +17,10 @@ jobs:
         image:
           # Run slower jobs first to give them a headstart and reduce waiting time
           - "ubuntu-22.04-jammy-arm64v8"
-          - "ubuntu-22.04-jammy-ppc64le"
-          - "ubuntu-22.04-jammy-s390x"
+          - "ubuntu-24.04-noble-ppc64le"
+          - "ubuntu-24.04-noble-s390x"
           # test image for manylinux-wheel build
-          - "ubuntu-22.04-jammy-amd64"
+          - "ubuntu-24.04-noble-amd64"
           # Then run the remainder
           - "alpine"
           - "amazon-2-amd64"
@@ -34,6 +34,7 @@ jobs:
           - "fedora-40-amd64"
           - "gentoo"
           - "ubuntu-20.04-focal-amd64"
+          - "ubuntu-22.04-jammy-amd64"
           - "ubuntu-22.04-jammy-amd64-valgrind"
           # has a dependency on the test image
           - "manylinux2014-wheel-build"
@@ -45,9 +46,9 @@ jobs:
             test-image: "ubuntu-22.04-jammy-amd64"
           - image: "ubuntu-22.04-jammy-arm64v8"
             qemu-arch: "aarch64"
-          - image: "ubuntu-22.04-jammy-ppc64le"
+          - image: "ubuntu-24.04-noble-ppc64le"
             qemu-arch: "ppc64le"
-          - image: "ubuntu-22.04-jammy-s390x"
+          - image: "ubuntu-24.04-noble-s390x"
             qemu-arch: "s390x"
 
     steps:
@@ -69,7 +70,7 @@ jobs:
             git submodule update --remote Pillow
           fi
           (cd Pillow && git checkout main)
-          sudo chown -R 1000 $(pwd)
+          sudo chown -R 1001 $(pwd)
 
       - name: Test Image Build
         if: "matrix.test-image"

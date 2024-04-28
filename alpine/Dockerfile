@@ -40,7 +40,7 @@ RUN cd /depends \
     && ./install_imagequant.sh \
     && ./install_raqm.sh
 
-RUN /usr/sbin/adduser -D pillow \
+RUN /usr/sbin/adduser -D --uid 1001 pillow \
     && virtualenv /vpy3 \
     && /vpy3/bin/pip install --no-cache-dir --upgrade pip \
     && /vpy3/bin/pip install --no-cache-dir olefile pytest pytest-cov pytest-timeout \

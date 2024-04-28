@@ -27,7 +27,7 @@ RUN emerge --quiet dev-python/virtualenv dev-util/cargo-c dev-build/meson x11-mi
 RUN USE="jpeg jpeg2k lcms tiff truetype webp xcb zlib" emerge --quiet --onlydeps dev-python/pillow
 RUN emerge --quiet app-text/ghostscript-gpl dev-python/numpy
 
-RUN useradd pillow \
+RUN useradd --uid 1001 pillow \
     && chown pillow:pillow /home/pillow
 
 RUN virtualenv --system-site-packages /vpy3 \

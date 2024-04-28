@@ -65,7 +65,7 @@ RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -y install \
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-host=i686-unknown-linux-gnu
 ENV PATH="/root/.cargo/bin:${PATH}"
 
-RUN useradd pillow \
+RUN useradd -u 1001 pillow \
     && mkdir /home/pillow \
     && chown pillow:pillow /home/pillow
 

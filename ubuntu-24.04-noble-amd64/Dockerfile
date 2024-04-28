@@ -1,9 +1,10 @@
-FROM ubuntu:jammy
+FROM ubuntu:noble
 
 RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -y install \
     cmake \
     ghostscript \
     git \
+    libegl-dev \
     libffi-dev \
     libfreetype6-dev \
     libfribidi-dev \
@@ -12,13 +13,21 @@ RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -y install \
     libjpeg-turbo-progs \
     libjpeg8-dev \
     liblcms2-dev \
+    libopengl-dev \
     libopenjp2-7-dev \
     libssl-dev \
     libtiff5-dev \
     libwebp-dev \
+    libxcb-cursor0 \
+    libxcb-icccm4 \
+    libxcb-image0 \
+    libxcb-keysyms1 \
+    libxcb-randr0 \
+    libxcb-render-util0 \
+    libxcb-shape0 \
+    libxkbcommon-x11-0 \
     meson \
     netpbm \
-    python3.10-dbg \
     python3-dev \
     python3-numpy \
     python3-setuptools \
@@ -30,26 +39,22 @@ RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -y install \
     wget \
     xvfb \
     zlib1g-dev \
-    valgrind \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/*
 
-RUN useradd --uid 1001 pillow \
-    && addgroup pillow sudo \
+RUN useradd pillow \
     && mkdir /home/pillow \
     && chown pillow:pillow /home/pillow
 
-RUN virtualenv -p /usr/bin/python3.10-dbg --system-site-packages /vpy3 \
+RUN virtualenv -p /usr/bin/python3.12 --system-site-packages /vpy3 \
     && /vpy3/bin/pip install --no-cache-dir --upgrade pip \
-    && /vpy3/bin/pip install --no-cache-dir cffi olefile pytest pytest-cov pytest-timeout pytest-valgrind \
+    && /vpy3/bin/pip install --no-cache-dir cffi olefile pyside6 pytest pytest-cov pytest-timeout \
     && chown -R pillow:pillow /vpy3
 
 ADD depends /depends
 RUN cd /depends \
     && ./install_raqm.sh
 
-COPY python.supp /depends
-
 USER pillow
 CMD ["depends/test.sh"]
 
-#docker run -v $TRAVIS_BUILD_DIR:/Pillow pythonpillow/ubuntu-22.04-jammy-amd64
+#docker run -v $GITHUB_WORKSPACE:/Pillow pythonpillow/ubuntu-24.04-noble-amd64
