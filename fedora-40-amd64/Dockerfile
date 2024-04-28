@@ -14,6 +14,7 @@ RUN dnf install -y \
     make \
     openjpeg2-devel \
     python3-devel \
+    python3-setuptools \
     python3-tkinter \
     python3-virtualenv \
     redhat-rpm-config \
