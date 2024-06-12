@@ -20,8 +20,6 @@ wheel:
 	-[ ! -d out ] && mkdir out
 	docker run --rm -v $(ROOT):/Pillow -v `pwd`/out:/output $(IMAGENAME):$(BRANCH) /build.sh $(_PYVER)
 
-38:
-	_PYVER=38 $(MAKE) wheel
 39:
 	_PYVER=39 $(MAKE) wheel
 310:
