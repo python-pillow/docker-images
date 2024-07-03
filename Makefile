@@ -11,7 +11,6 @@ TARGETS = \
 	gentoo \
 	manylinux2014-wheel-build \
 	manylinux_2_28-wheel-build \
-	ubuntu-20.04-focal-amd64 \
 	ubuntu-22.04-jammy-amd64 \
 	ubuntu-24.04-noble-amd64 \
 	ubuntu-22.04-jammy-amd64-valgrind \
