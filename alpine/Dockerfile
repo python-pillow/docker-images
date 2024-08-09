@@ -40,11 +40,14 @@ RUN cd /depends \
     && ./install_imagequant.sh \
     && ./install_raqm.sh
 
+ARG PIP_DISABLE_PIP_VERSION_CHECK=1
+ARG PIP_NO_CACHE_DIR=1
+
 RUN /usr/sbin/adduser -D --uid 1001 pillow \
     && virtualenv /vpy3 \
-    && /vpy3/bin/pip install --no-cache-dir --upgrade pip \
-    && /vpy3/bin/pip install --no-cache-dir olefile pytest pytest-cov pytest-timeout \
-    && /vpy3/bin/pip install --no-cache-dir numpy --only-binary=:all: || true \
+    && /vpy3/bin/pip install --upgrade pip \
+    && /vpy3/bin/pip install olefile pytest pytest-cov pytest-timeout \
+    && /vpy3/bin/pip install numpy --only-binary=:all: || true \
     && chown -R pillow:pillow /vpy3
 
 USER pillow
