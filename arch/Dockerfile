@@ -23,7 +23,6 @@ RUN pacman -Sy --noconfirm \
             gcc \
             ghostscript \
             git \
-            libffi \
             make \
             mesa-libgl \
             meson \
@@ -47,7 +46,7 @@ ARG PIP_NO_CACHE_DIR=1
 RUN /sbin/useradd -m -U --uid 1001 pillow \
     && virtualenv --system-site-packages /vpy3 \
     && /vpy3/bin/pip install --upgrade pip \
-    && /vpy3/bin/pip install cffi olefile pytest pytest-cov pytest-timeout \
+    && /vpy3/bin/pip install olefile pytest pytest-cov pytest-timeout \
     && /vpy3/bin/pip install numpy --only-binary=:all: || true \
     && chown -R pillow:pillow /vpy3
 

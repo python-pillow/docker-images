@@ -36,7 +36,6 @@ RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -y install \
     curl \
     ghostscript \
     git \
-    libffi-dev \
     libfreetype6-dev \
     libfribidi-dev \
     libharfbuzz-dev \
@@ -74,7 +73,7 @@ ARG PIP_NO_CACHE_DIR=1
 
 RUN virtualenv -p /usr/bin/python3.11 --system-site-packages /vpy3 \
     && /vpy3/bin/pip install --upgrade pip \
-    && /vpy3/bin/pip install cffi olefile pytest pytest-cov pytest-timeout \
+    && /vpy3/bin/pip install olefile pytest pytest-cov pytest-timeout \
     && chown -R pillow:pillow /vpy3
 
 ADD depends /depends
