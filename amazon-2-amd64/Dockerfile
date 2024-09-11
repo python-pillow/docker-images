@@ -12,7 +12,6 @@ RUN yum install -y \
     git \
     harfbuzz-devel \
     lcms2-devel \
-    libffi-devel \
     libjpeg-devel \
     libtiff-devel \
     make \
@@ -51,7 +50,7 @@ ARG PIP_NO_CACHE_DIR=1
 RUN bash -c "python3.9 -m pip install virtualenv \
     && python3.9 -m virtualenv --system-site-packages /vpy3 \
     && /vpy3/bin/pip install --upgrade pip \
-    && /vpy3/bin/pip install cffi olefile pytest pytest-cov pytest-timeout \
+    && /vpy3/bin/pip install olefile pytest pytest-cov pytest-timeout \
     && /vpy3/bin/pip install numpy --only-binary=:all: || true \
     && chown -R pillow:pillow /vpy3"
 
