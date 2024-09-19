@@ -3,5 +3,4 @@ source /vpy3/bin/activate
 cd /Pillow
 make clean
 make install-coverage
-python3 -c "from PIL import Image"
-QT_QPA_PLATFORM=offscreen /usr/bin/xvfb-run -a pytest -vx --cov PIL --cov-report term Tests
+QT_QPA_PLATFORM=offscreen /usr/bin/xvfb-run -a .ci/test.sh
