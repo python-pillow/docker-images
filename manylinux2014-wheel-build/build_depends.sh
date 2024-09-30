@@ -25,4 +25,7 @@ export PKG_CONFIG_PATH="$BUILD_PREFIX/lib/pkgconfig/:$PKG_CONFIG_PATH"
 
 yum install -y devtoolset-9-gcc devtoolset-9-gcc-c++
 
+PATH=/opt/_internal/tools/bin:$PATH
+python3 -m ensurepip
+
 . .github/workflows/wheels-dependencies.sh
