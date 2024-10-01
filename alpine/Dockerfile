@@ -37,7 +37,6 @@ RUN apk --no-cache add \
 ADD depends /depends
 RUN cd /depends \
     && ./install_webp.sh \
-    && ./install_imagequant.sh \
     && ./install_raqm.sh
 
 ARG PIP_DISABLE_PIP_VERSION_CHECK=1
