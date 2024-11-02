@@ -21,7 +21,7 @@ RUN emerge --quiet -uDU @world
 # We deliberately set this quite late on to avoid rebuilding e.g. mesa.
 RUN echo 'VIDEO_CARDS="fbdev dummy"' | cat >> /etc/portage/make.conf
 
-RUN emerge --quiet sudo dev-python/virtualenv dev-util/cargo-c dev-build/meson x11-misc/xvfb-run
+RUN emerge --quiet sudo dev-python/virtualenv dev-util/cargo-c dev-build/meson =x11-base/xorg-server-21.1.14 x11-misc/xvfb-run
 
 # Install dependencies
 RUN USE="jpeg jpeg2k lcms tiff truetype webp xcb zlib" emerge --quiet --onlydeps dev-python/pillow
