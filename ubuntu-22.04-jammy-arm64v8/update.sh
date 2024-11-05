@@ -1,2 +1,2 @@
 #!/bin/sh
-docker pull arm64v8/ubuntu:jammy
+docker pull $DOCKER_ARGS arm64v8/ubuntu:jammy

@@ -44,10 +44,13 @@ jobs:
             test-image: "ubuntu-24.04-noble-amd64"
           - image: "ubuntu-22.04-jammy-arm64v8"
             qemu-arch: "aarch64"
+            docker-args: "--platform linux/arm64"
           - image: "ubuntu-24.04-noble-ppc64le"
             qemu-arch: "ppc64le"
+            docker-args: "--platform linux/ppc64le"
           - image: "ubuntu-24.04-noble-s390x"
             qemu-arch: "s390x"
+            docker-args: "--platform linux/s390x"
 
     steps:
       - uses: actions/checkout@v4
@@ -78,6 +81,7 @@ jobs:
           make pull || (sudo chmod a+w . && make update && make build BRANCH=main)
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_ARGS: ${{ matrix.docker-args }}
 
       - name: Build image
         id: build
@@ -90,6 +94,7 @@ jobs:
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          DOCKER_ARGS: ${{ matrix.docker-args }}
 
       - name: Test image
         run: |

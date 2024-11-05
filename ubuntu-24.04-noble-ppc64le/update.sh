@@ -1,2 +1,2 @@
 #!/bin/sh
-docker pull ppc64le/ubuntu:noble
+docker pull $DOCKER_ARGS ppc64le/ubuntu:noble

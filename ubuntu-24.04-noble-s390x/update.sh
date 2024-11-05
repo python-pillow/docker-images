@@ -1,2 +1,2 @@
 #!/bin/sh
-docker pull s390x/ubuntu:noble
+docker pull $DOCKER_ARGS s390x/ubuntu:noble
