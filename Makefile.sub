@@ -9,7 +9,7 @@ TEST_IMAGE := $(if $(DOCKER_USERNAME), $(DOCKER_USERNAME)/$(TARGET):$(BRANCH), p
 build:
 	cp -r ../Pillow/depends .
 	cp test.sh depends
-	docker build -t $(IMAGENAME):$(BRANCH) .
+	docker build -t $(IMAGENAME):$(BRANCH) $(DOCKER_ARGS) .
 
 .PHONY: update
 update:
@@ -25,7 +25,7 @@ push:
 
 .PHONY: pull
 pull:
-	docker pull $(TEST_IMAGE)
+	docker pull $(DOCKER_ARGS) $(TEST_IMAGE)
 
 .PHONY: clean
 clean:
