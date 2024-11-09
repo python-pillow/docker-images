@@ -16,10 +16,10 @@ fi
 # not strictly necessary, unless running multiple versions from the shell
 rm -f /tmp/*.whl || true
 
-# Python version, as 39,310,311,312. Defaults to 312.
+# Python version, as 39,310,311,312,313. Defaults to 313.
 # Matches the naming in /opt/python/
-PYVER=${1:-312}
-PYBIN=$(echo /opt/python/cp${PYVER}*/bin)
+PYVER=${1:-313}
+PYBIN=$(echo /opt/python/cp${PYVER}-cp${PYVER}/bin)
 
 # We have to clean up the Pillow directories, otherwise we might get
 # cached builds that are not manylinux wheel compatible
