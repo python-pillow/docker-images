@@ -39,9 +39,9 @@ jobs:
           - "manylinux_2_28-wheel-build"
         include:
           - image: "manylinux2014-wheel-build"
-            test-image: "ubuntu-24.04-noble-amd64"
+            test-image: "fedora-41-amd64"
           - image: "manylinux_2_28-wheel-build"
-            test-image: "ubuntu-24.04-noble-amd64"
+            test-image: "fedora-41-amd64"
           - image: "ubuntu-22.04-jammy-arm64v8"
             qemu-arch: "aarch64"
             docker-args: "--platform linux/arm64"
