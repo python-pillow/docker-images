@@ -9,8 +9,7 @@ RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -y install \
     libfribidi-dev \
     libharfbuzz-dev \
     libimagequant-dev \
-    libjpeg-turbo-progs \
-    libjpeg8-dev \
+    libjpeg-turbo8-dev \
     liblcms2-dev \
     libopengl-dev \
     libopenjp2-7-dev \
