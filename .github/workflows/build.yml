@@ -20,7 +20,7 @@ jobs:
           - "ubuntu-24.04-noble-ppc64le"
           - "ubuntu-24.04-noble-s390x"
           # test image for manylinux-wheel build
-          - "ubuntu-24.04-noble-amd64"
+          - "fedora-41-amd64"
           # Then run the remainder
           - "alpine"
           - "amazon-2-amd64"
@@ -31,10 +31,10 @@ jobs:
           - "debian-12-bookworm-x86"
           - "debian-12-bookworm-amd64"
           - "fedora-40-amd64"
-          - "fedora-41-amd64"
           - "gentoo"
           - "ubuntu-22.04-jammy-amd64"
           - "ubuntu-22.04-jammy-amd64-valgrind"
+          - "ubuntu-24.04-noble-amd64"
           # has a dependency on the test image
           - "manylinux2014-wheel-build"
           - "manylinux_2_28-wheel-build"
