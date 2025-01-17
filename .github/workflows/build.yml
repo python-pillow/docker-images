@@ -10,13 +10,13 @@ concurrency:
 jobs:
   build:
     name: ${{ matrix.image }}
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
+        os: ["ubuntu-latest"]
         image:
           # Run slower jobs first to give them a headstart and reduce waiting time
-          - "ubuntu-22.04-jammy-arm64v8"
           - "ubuntu-24.04-noble-ppc64le"
           - "ubuntu-24.04-noble-s390x"
           # test image for manylinux-wheel build
@@ -44,8 +44,7 @@ jobs:
           - image: "manylinux_2_28-wheel-build"
             test-image: "fedora-41-amd64"
           - image: "ubuntu-22.04-jammy-arm64v8"
-            qemu-arch: "aarch64"
-            docker-args: "--platform linux/arm64"
+            os: "ubuntu-24.04-arm"
           - image: "ubuntu-24.04-noble-ppc64le"
             qemu-arch: "ppc64le"
             docker-args: "--platform linux/ppc64le"
