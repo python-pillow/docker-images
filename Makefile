@@ -15,7 +15,7 @@ TARGETS = \
 	ubuntu-22.04-jammy-amd64 \
 	ubuntu-24.04-noble-amd64 \
 	ubuntu-22.04-jammy-amd64-valgrind \
-	ubuntu-22.04-jammy-arm64v8 \
+	ubuntu-24.04-noble-arm64v8 \
 	ubuntu-24.04-noble-ppc64le \
 	ubuntu-24.04-noble-s390x
 
