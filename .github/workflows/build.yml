@@ -43,14 +43,14 @@ jobs:
             test-image: "fedora-41-amd64"
           - image: "manylinux_2_28-wheel-build"
             test-image: "fedora-41-amd64"
-          - image: "ubuntu-22.04-jammy-arm64v8"
-            os: "ubuntu-24.04-arm"
           - image: "ubuntu-24.04-noble-ppc64le"
             qemu-arch: "ppc64le"
             docker-args: "--platform linux/ppc64le"
           - image: "ubuntu-24.04-noble-s390x"
             qemu-arch: "s390x"
             docker-args: "--platform linux/s390x"
+          - image: "ubuntu-24.04-noble-arm64v8"
+            os: "ubuntu-24.04-arm"
 
     steps:
       - uses: actions/checkout@v4
