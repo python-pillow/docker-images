@@ -22,6 +22,6 @@
         }
     ],
     "schedule": [
-        "on the 5th day of the month"
+        "* * 5 * *"
     ]
 }
