@@ -6,6 +6,7 @@ RUN dnf install -y \
     gcc \
     harfbuzz-devel \
     lcms2-devel \
+    libavif-devel \
     libimagequant-devel \
     libjpeg-devel \
     libraqm-devel \

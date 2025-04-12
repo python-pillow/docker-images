@@ -24,6 +24,7 @@ RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -y install \
     libxcb-render-util0 \
     libxkbcommon-x11-0 \
     meson \
+    nasm \
     netpbm \
     python3-dev \
     python3-numpy \
@@ -53,6 +54,7 @@ RUN virtualenv -p /usr/bin/python3.10 --system-site-packages /vpy3 \
 
 ADD depends /depends
 RUN cd /depends \
+    && ./install_libavif.sh \
     && ./install_raqm.sh
 
 USER pillow

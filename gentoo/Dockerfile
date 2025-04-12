@@ -25,7 +25,7 @@ RUN emerge --quiet sudo dev-python/virtualenv dev-util/cargo-c dev-build/meson =
 
 # Install dependencies
 RUN USE="jpeg jpeg2k lcms tiff truetype webp xcb zlib" emerge --quiet --onlydeps dev-python/pillow
-RUN emerge --quiet app-text/ghostscript-gpl dev-python/numpy
+RUN emerge --quiet app-text/ghostscript-gpl dev-python/numpy dev-vcs/git
 
 RUN useradd --uid 1001 pillow \
     && chown pillow:pillow /home/pillow
@@ -39,7 +39,7 @@ RUN virtualenv --system-site-packages /vpy3 \
     && chown -R pillow:pillow /vpy3
 
 ADD depends /depends
-RUN cd /depends && ./install_imagequant.sh && ./install_raqm.sh && ldconfig
+RUN cd /depends && ./install_imagequant.sh && ./install_libavif.sh && ./install_raqm.sh && ldconfig
 
 USER pillow
 CMD ["depends/test.sh"]

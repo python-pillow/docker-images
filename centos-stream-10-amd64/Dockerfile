@@ -9,7 +9,7 @@ RUN yum install -y \
     cargo \
     cmake \
     freetype-devel \
-    gcc \
+    gcc-c++ \
     ghostscript \
     git \
     lcms2-devel \
@@ -18,6 +18,7 @@ RUN yum install -y \
     libwebp-devel \
     make \
     meson \
+    nasm \
     openjpeg2-devel \
     openssl-devel \
     python3-devel \
@@ -46,6 +47,7 @@ RUN bash -c "python3.12 -m pip install virtualenv \
 COPY depends /depends
 RUN cd /depends \
     && ./install_imagequant.sh \
+    && ./install_libavif.sh \
     && ./install_raqm.sh \
     && ldconfig
 
