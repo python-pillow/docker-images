@@ -47,6 +47,7 @@ RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -y install \
     libwebp-dev \
     libssl-dev \
     meson \
+    nasm \
     netpbm \
     python3-dev \
     python3-numpy \
@@ -77,7 +78,7 @@ RUN virtualenv -p /usr/bin/python3.11 --system-site-packages /vpy3 \
     && chown -R pillow:pillow /vpy3
 
 ADD depends /depends
-RUN cd /depends && ./install_imagequant.sh && ./install_raqm.sh
+RUN cd /depends && ./install_imagequant.sh && ./install_libavif.sh && ./install_raqm.sh
 
 USER pillow
 ENTRYPOINT ["linux32"]

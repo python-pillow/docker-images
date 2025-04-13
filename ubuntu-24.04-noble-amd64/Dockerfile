@@ -4,6 +4,7 @@ RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -y install \
     cmake \
     ghostscript \
     git \
+    libavif-dev \
     libegl-dev \
     libfreetype6-dev \
     libfribidi-dev \

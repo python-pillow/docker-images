@@ -26,6 +26,7 @@ RUN apk --no-cache add \
     fribidi-dev \
     harfbuzz-dev \
     jpeg-dev \
+    libavif-dev \
     lcms2-dev \
     libimagequant-dev \
     openjpeg-dev \

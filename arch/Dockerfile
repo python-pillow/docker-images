@@ -15,6 +15,7 @@ RUN pacman -Sy --noconfirm \
             extra/fribidi \
             extra/harfbuzz \
             extra/lcms2 \
+            extra/libavif \
             extra/libjpeg-turbo \
             extra/libtiff \
             extra/libwebp \
