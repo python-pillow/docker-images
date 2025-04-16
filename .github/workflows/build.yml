@@ -30,6 +30,7 @@ jobs:
           - "centos-stream-10-amd64"
           - "debian-12-bookworm-x86"
           - "debian-12-bookworm-amd64"
+          - "fedora-42-amd64"
           - "gentoo"
           - "ubuntu-22.04-jammy-amd64"
           - "ubuntu-22.04-jammy-amd64-valgrind"
