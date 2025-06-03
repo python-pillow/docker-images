@@ -33,7 +33,7 @@ wheel:
 
 .PHONY: test
 test: 313
-	docker run --rm -v $(ROOT):/Pillow -v `pwd`/out:/output $(TEST_IMAGE) sh -c ". /vpy3/bin/activate && python3 -m pip install /output/*cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl && cd /Pillow && python3 selftest.py && /usr/bin/xvfb-run -a .ci/test.sh"
+	docker run --rm -v $(ROOT):/Pillow -v `pwd`/out:/output $(TEST_IMAGE) sh -c ". /vpy3/bin/activate && python3 -m pip install /output/*cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl && cd /Pillow && python3 selftest.py && /usr/bin/xvfb-run -a .ci/test.sh"
 
 .PHONY: push
 push:
