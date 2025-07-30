@@ -16,7 +16,7 @@ fi
 # not strictly necessary, unless running multiple versions from the shell
 rm -f /tmp/*.whl || true
 
-# Python version, as 39,310,311,312,313. Defaults to 313.
+# Python version, as 310,311,312,313. Defaults to 313.
 # Matches the naming in /opt/python/
 PYVER=${1:-313}
 PYBIN=$(echo /opt/python/cp${PYVER}-cp${PYVER}/bin)
