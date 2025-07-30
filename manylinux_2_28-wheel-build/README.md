@@ -18,7 +18,7 @@ The Makefile has several new commands:
 
 * make wheel: Makes a Python 3.13 manylinux_2_28 wheel, and puts it in the
 ./out directory.
-* make 39|310|311|312|313: These are specific commands to make the
+* make 310|311|312|313: These are specific commands to make the
 corresponding 3.x version in the ./out directory.
 
 The test target here is mainly to validate the image build, it is
