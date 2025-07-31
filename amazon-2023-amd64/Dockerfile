@@ -16,11 +16,10 @@ RUN yum install -y \
     make \
     nasm \
     openssl-devel \
-    python3-devel \
-    python3-pip \
-    python3-test \
-    python3-tkinter \
-    python3-virtualenv \
+    python3.11-devel \
+    python3.11-pip \
+    python3.11-test \
+    python3.11-tkinter \
     shadow-utils \
     sudo \
     tar \
@@ -41,8 +40,8 @@ RUN useradd --uid 1001 pillow
 ARG PIP_DISABLE_PIP_VERSION_CHECK=1
 ARG PIP_NO_CACHE_DIR=1
 
-RUN bash -c "/usr/bin/pip3 install virtualenv \
-    && /usr/bin/python3 -mvirtualenv -p /usr/bin/python3 --system-site-packages /vpy3 \
+RUN bash -c "/usr/bin/python3.11 -m pip install virtualenv \
+    && /usr/bin/python3.11 -mvirtualenv -p /usr/bin/python3.11 --system-site-packages /vpy3 \
     && /vpy3/bin/pip install --upgrade pip \
     && /vpy3/bin/pip install olefile pytest pytest-cov pytest-timeout \
     && /vpy3/bin/pip install numpy --only-binary=:all: || true \
@@ -52,7 +51,7 @@ ADD depends /depends
 RUN wget https://github.com/ninja-build/ninja/releases/download/v1.13.1/ninja-linux.zip \
     && unzip ninja-linux.zip \
     && mv ninja /usr/bin
-RUN /usr/bin/python3 -m pip install meson
+RUN /usr/bin/python3.11 -m pip install meson
 RUN cd /depends \
     && ./install_imagequant.sh \
     && ./install_libavif.sh \

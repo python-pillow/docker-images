@@ -15,10 +15,10 @@ RUN yum install -y \
     libjpeg-devel \
     libtiff-devel \
     make \
-    openssl-devel \
-    sqlite-devel \
+    openssl11-devel \
     pth-devel \
     shadow-utils \
+    sqlite-devel \
     sudo \
     tar \
     tk-devel \
@@ -36,19 +36,19 @@ ENV PATH="/root/.cargo/bin:${PATH}"
 
 RUN useradd --uid 1001 pillow
 
-RUN wget https://www.python.org/ftp/python/3.9.16/Python-3.9.16.tgz \
-    && tar xzf Python-3.9.16.tgz \
-    && cd Python-3.9.16 \
+RUN wget https://www.python.org/ftp/python/3.10.18/Python-3.10.18.tgz \
+    && tar xzf Python-3.10.18.tgz \
+    && cd Python-3.10.18 \
     && ./configure \
     && make altinstall \
     && cd .. \
-    && rm -r Python-3.9.16 Python-3.9.16.tgz
+    && rm -r Python-3.10.18 Python-3.10.18.tgz
 
 ARG PIP_DISABLE_PIP_VERSION_CHECK=1
 ARG PIP_NO_CACHE_DIR=1
 
-RUN bash -c "python3.9 -m pip install virtualenv \
-    && python3.9 -m virtualenv --system-site-packages /vpy3 \
+RUN bash -c "python3.10 -m pip install virtualenv \
+    && python3.10 -m virtualenv --system-site-packages /vpy3 \
     && /vpy3/bin/pip install --upgrade pip \
     && /vpy3/bin/pip install olefile pytest pytest-cov pytest-timeout \
     && /vpy3/bin/pip install numpy --only-binary=:all: || true \
@@ -58,8 +58,8 @@ ADD depends /depends
 RUN wget https://github.com/ninja-build/ninja/releases/download/v1.13.1/ninja-linux.zip \
     && unzip ninja-linux.zip \
     && mv ninja /usr/bin
-RUN python3.9 -m pip install meson
-RUN ln -s /usr/local/bin/python3.9 /usr/bin/python3
+RUN python3.10 -m pip install meson
+RUN ln -s /usr/local/bin/python3.10 /usr/bin/python3
 RUN cd /depends \
     && ./install_imagequant.sh \
     && ./install_openjpeg.sh \

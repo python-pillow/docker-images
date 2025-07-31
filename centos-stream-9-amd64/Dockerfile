@@ -21,9 +21,7 @@ RUN yum install -y \
     nasm \
     openjpeg2-devel \
     openssl-devel \
-    python3-devel \
-    python3-pip \
-    python3-tkinter \
+    sqlite-devel \
     sudo \
     tcl-devel \
     tk-devel \
@@ -35,17 +33,26 @@ RUN yum install -y \
 
 RUN useradd --uid 1001 pillow
 
+RUN wget https://www.python.org/ftp/python/3.10.18/Python-3.10.18.tgz \
+    && tar xzf Python-3.10.18.tgz \
+    && cd Python-3.10.18 \
+    && ./configure \
+    && make altinstall \
+    && cd .. \
+    && rm -r Python-3.10.18 Python-3.10.18.tgz
+
 ARG PIP_DISABLE_PIP_VERSION_CHECK=1
 ARG PIP_NO_CACHE_DIR=1
 
-RUN bash -c "python3.9 -m pip install virtualenv \
-    && python3.9 -m virtualenv --system-site-packages /vpy3 \
+RUN bash -c "python3.10 -m pip install virtualenv \
+    && python3.10 -m virtualenv --system-site-packages /vpy3 \
     && /vpy3/bin/pip install --upgrade pip \
     && /vpy3/bin/pip install olefile pytest pytest-cov pytest-timeout \
     && /vpy3/bin/pip install numpy --only-binary=:all: || true \
     && chown -R pillow:pillow /vpy3"
 
 COPY depends /depends
+RUN ln -sf /usr/local/bin/python3.10 /usr/bin/python3
 RUN cd /depends \
     && ./install_imagequant.sh \
     && ./install_libavif.sh \
