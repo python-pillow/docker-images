@@ -1,9 +1,0 @@
-pull_request_rules:
-  - name: Automatic merge
-    conditions:
-      - "#approved-reviews-by>=1"
-      - label=automerge
-      - status-success=Build successful
-    actions:
-      merge:
-        method: merge
