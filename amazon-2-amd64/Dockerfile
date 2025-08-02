@@ -15,7 +15,7 @@ RUN yum install -y \
     libjpeg-devel \
     libtiff-devel \
     make \
-    openssl11-devel \
+    openssl-devel \
     pth-devel \
     shadow-utils \
     sqlite-devel \
@@ -36,6 +36,14 @@ ENV PATH="/root/.cargo/bin:${PATH}"
 
 RUN useradd --uid 1001 pillow
 
+ADD depends /depends
+RUN cd /depends \
+    && ./install_imagequant.sh
+
+RUN yum remove -y openssl-devel && \
+    yum install -y openssl11-devel && \
+    yum clean all
+
 RUN wget https://www.python.org/ftp/python/3.10.18/Python-3.10.18.tgz \
     && tar xzf Python-3.10.18.tgz \
     && cd Python-3.10.18 \
@@ -54,14 +62,12 @@ RUN bash -c "python3.10 -m pip install virtualenv \
     && /vpy3/bin/pip install numpy --only-binary=:all: || true \
     && chown -R pillow:pillow /vpy3"
 
-ADD depends /depends
 RUN wget https://github.com/ninja-build/ninja/releases/download/v1.13.1/ninja-linux.zip \
     && unzip ninja-linux.zip \
     && mv ninja /usr/bin
 RUN python3.10 -m pip install meson
 RUN ln -s /usr/local/bin/python3.10 /usr/bin/python3
 RUN cd /depends \
-    && ./install_imagequant.sh \
     && ./install_openjpeg.sh \
     && ./install_raqm.sh \
     && ./install_webp.sh
