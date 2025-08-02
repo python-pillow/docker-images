@@ -17,8 +17,8 @@ RUN yum install -y \
     libtiff-devel \
     libwebp-devel \
     make \
-    meson \
     nasm \
+    ninja-build \
     openjpeg2-devel \
     openssl-devel \
     sqlite-devel \
@@ -53,6 +53,7 @@ RUN bash -c "python3.10 -m pip install virtualenv \
 
 COPY depends /depends
 RUN ln -sf /usr/local/bin/python3.10 /usr/bin/python3
+RUN /usr/bin/python3 -m pip install --no-cache-dir meson
 RUN cd /depends \
     && ./install_imagequant.sh \
     && ./install_libavif.sh \
