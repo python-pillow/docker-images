@@ -83,4 +83,4 @@ RUN cd /depends && ./install_imagequant.sh && ./install_libavif.sh && ./install_
 USER pillow
 CMD ["depends/test.sh"]
 
-#docker run -v $GITHUB_WORKSPACE:/Pillow pythonpillow/debian-12-trixie-amd64
+#docker run -v $GITHUB_WORKSPACE:/Pillow pythonpillow/debian-13-trixie-amd64

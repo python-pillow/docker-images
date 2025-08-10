@@ -84,4 +84,4 @@ USER pillow
 ENTRYPOINT ["linux32"]
 CMD ["depends/test.sh"]
 
-#docker run -v $GITHUB_WORKSPACE:/Pillow pythonpillow/debian-12-trixie-x86
+#docker run -v $GITHUB_WORKSPACE:/Pillow pythonpillow/debian-13-trixie-x86
