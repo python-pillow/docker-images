@@ -22,6 +22,7 @@ RUN pacman -Sy --noconfirm \
             extra/openjpeg2 \
             extra/tk \
             gcc \
+            ghostscript \
             git \
             make \
             mesa-libgl \
@@ -39,12 +40,6 @@ ADD depends /depends
 RUN cd /depends \
      && ./install_imagequant.sh \
      && ./install_raqm.sh
-
-RUN wget -q https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs10051/ghostscript-10.05.1.tar.gz \
-     && tar -xzf ghostscript-10.05.1.tar.gz \
-     && cd ghostscript-10.05.1 \
-     && CFLAGS="-std=gnu17" ./configure --without-x \
-     && make install
 
 ARG PIP_DISABLE_PIP_VERSION_CHECK=1
 ARG PIP_NO_CACHE_DIR=1
