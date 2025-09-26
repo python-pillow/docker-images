@@ -4,7 +4,6 @@ RUN yum install -y \
     cmake \
     curl \
     findutils \
-    freetype-devel \
     fribidi-devel \
     gcc \
     gcc-c++ \
@@ -69,6 +68,8 @@ RUN python3.10 -m pip install meson
 RUN ln -s /usr/local/bin/python3.10 /usr/bin/python3
 RUN cd /depends \
     && ./install_openjpeg.sh \
+    && ./download-and-extract.sh freetype-2.14.1 https://raw.githubusercontent.com/python-pillow/pillow-depends/main/freetype-2.14.1.tar.gz \
+    && cd freetype-2.14.1 && ./configure --prefix=/usr && make -j4 install && cd .. \
     && ./install_raqm.sh \
     && ./install_webp.sh
 
