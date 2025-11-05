@@ -16,9 +16,9 @@ fi
 # not strictly necessary, unless running multiple versions from the shell
 rm -f /tmp/*.whl || true
 
-# Python version, as 310,311,312,313. Defaults to 313.
+# Python version, as 310,311,312,313,314. Defaults to 314.
 # Matches the naming in /opt/python/
-PYVER=${1:-313}
+PYVER=${1:-314}
 PYBIN=$(echo /opt/python/cp${PYVER}-cp${PYVER}/bin)
 
 # We have to clean up the Pillow directories, otherwise we might get
