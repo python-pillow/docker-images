@@ -11,6 +11,7 @@ TARGETS = \
 	debian-13-trixie-amd64 \
 	fedora-41-amd64 \
 	fedora-42-amd64 \
+	fedora-43-amd64 \
 	gentoo \
 	manylinux2014-wheel-build \
 	manylinux_2_28-wheel-build \
