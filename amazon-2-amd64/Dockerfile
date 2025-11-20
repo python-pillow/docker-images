@@ -61,7 +61,7 @@ RUN bash -c "python3.10 -m pip install virtualenv \
     && /vpy3/bin/pip install numpy --only-binary=:all: || true \
     && chown -R pillow:pillow /vpy3"
 
-RUN wget https://github.com/ninja-build/ninja/releases/download/v1.13.1/ninja-linux.zip \
+RUN wget https://github.com/ninja-build/ninja/releases/download/v1.13.2/ninja-linux.zip \
     && unzip ninja-linux.zip \
     && mv ninja /usr/bin
 RUN python3.10 -m pip install meson
