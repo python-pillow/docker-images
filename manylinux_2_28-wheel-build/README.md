@@ -32,4 +32,3 @@ other images.
 * yum_install is syntactic sugar to make the multibuild repo work with
   the base manylinux wheel image, rather than with its custom set of
   images
-
