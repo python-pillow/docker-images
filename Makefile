@@ -12,7 +12,6 @@ TARGETS = \
 	fedora-42-amd64 \
 	fedora-43-amd64 \
 	gentoo \
-	manylinux2014-wheel-build \
 	manylinux_2_28-wheel-build \
 	ubuntu-22.04-jammy-amd64 \
 	ubuntu-24.04-noble-amd64 \
