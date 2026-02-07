@@ -16,6 +16,7 @@ RUN yum install -y \
     make \
     nasm \
     openssl-devel \
+    patch \
     python3.11-devel \
     python3.11-pip \
     python3.11-test \
