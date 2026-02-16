@@ -40,6 +40,8 @@ RUN virtualenv -p /usr/bin/python3.13 --system-site-packages /vpy3 \
 
 ADD depends /depends
 
+ENV FORCE_COLOR=1
+
 USER pillow
 CMD ["depends/test.sh"]
 

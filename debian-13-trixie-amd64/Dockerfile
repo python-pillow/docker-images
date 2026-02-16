@@ -80,6 +80,8 @@ RUN virtualenv -p /usr/bin/python3.13 --system-site-packages /vpy3 \
 ADD depends /depends
 RUN cd /depends && ./install_imagequant.sh && ./install_libavif.sh && ./install_raqm.sh
 
+ENV FORCE_COLOR=1
+
 USER pillow
 CMD ["depends/test.sh"]
 

@@ -41,6 +41,8 @@ RUN virtualenv --system-site-packages /vpy3 \
 ADD depends /depends
 RUN cd /depends && ./install_imagequant.sh && ./install_libavif.sh && ./install_raqm.sh && ldconfig
 
+ENV FORCE_COLOR=1
+
 USER pillow
 CMD ["depends/test.sh"]
 

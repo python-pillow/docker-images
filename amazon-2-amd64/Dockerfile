@@ -73,6 +73,8 @@ RUN cd /depends \
     && ./install_raqm.sh \
     && ./install_webp.sh
 
+ENV FORCE_COLOR=1
+
 USER pillow
 CMD ["depends/test.sh"]
 
