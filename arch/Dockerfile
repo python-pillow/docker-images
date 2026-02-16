@@ -36,7 +36,7 @@ RUN pacman -Sy --noconfirm \
             xorg-server-xvfb \
     && find /var/cache/pacman/ -type f -delete
 
-ADD depends /depends
+COPY depends /depends
 RUN cd /depends \
      && ./install_imagequant.sh \
      && ./install_raqm.sh

@@ -40,7 +40,7 @@ RUN virtualenv -p /usr/bin/python3.12 --system-site-packages /vpy3 \
     && /vpy3/bin/pip install olefile pytest pytest-cov pytest-timeout \
     && chown -R pillow:pillow /vpy3
 
-ADD depends /depends
+COPY depends /depends
 RUN cd /depends \
     && ./install_raqm.sh \
     && ./install_webp.sh

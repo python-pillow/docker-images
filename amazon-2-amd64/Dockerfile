@@ -35,7 +35,7 @@ ENV PATH="/root/.cargo/bin:${PATH}"
 
 RUN useradd --uid 1001 pillow
 
-ADD depends /depends
+COPY depends /depends
 RUN cd /depends \
     && ./install_imagequant.sh
 

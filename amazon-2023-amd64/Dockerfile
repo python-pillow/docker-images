@@ -48,7 +48,7 @@ RUN bash -c "/usr/bin/python3.11 -m pip install virtualenv \
     && /vpy3/bin/pip install numpy --only-binary=:all: || true \
     && chown -R pillow:pillow /vpy3"
 
-ADD depends /depends
+COPY depends /depends
 RUN wget https://github.com/ninja-build/ninja/releases/download/v1.13.2/ninja-linux.zip \
     && unzip ninja-linux.zip \
     && mv ninja /usr/bin
