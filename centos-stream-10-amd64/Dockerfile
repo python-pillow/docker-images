@@ -52,6 +52,8 @@ RUN cd /depends \
     && ./install_raqm.sh \
     && ldconfig
 
+ENV FORCE_COLOR=1
+
 USER pillow
 CMD ["depends/test.sh"]
 

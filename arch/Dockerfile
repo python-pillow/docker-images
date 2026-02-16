@@ -51,6 +51,8 @@ RUN /sbin/useradd -m -U --uid 1001 pillow \
     && /vpy3/bin/pip install numpy --only-binary=:all: || true \
     && chown -R pillow:pillow /vpy3
 
+ENV FORCE_COLOR=1
+
 USER pillow
 CMD ["depends/test.sh"]
 

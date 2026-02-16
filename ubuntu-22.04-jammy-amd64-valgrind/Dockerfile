@@ -52,6 +52,8 @@ RUN cd /depends \
 
 COPY python.supp /depends
 
+ENV FORCE_COLOR=1
+
 USER pillow
 CMD ["depends/test.sh"]
 

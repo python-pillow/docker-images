@@ -15,5 +15,6 @@ COPY --from=0 /usr/local/lib /usr/local/lib
 COPY --from=0 /usr/local/include /usr/local/include
 RUN yum install -y zlib-devel
 COPY build.sh /build.sh
+ENV FORCE_COLOR=1
 
 CMD ["/bin/sh /build.sh"]

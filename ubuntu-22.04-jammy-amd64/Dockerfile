@@ -57,6 +57,8 @@ RUN cd /depends \
     && ./install_libavif.sh \
     && ./install_raqm.sh
 
+ENV FORCE_COLOR=1
+
 USER pillow
 CMD ["depends/test.sh"]
 
