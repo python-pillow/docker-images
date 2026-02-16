@@ -1,0 +1,19 @@
+ignored:
+  - DL3003 # Use WORKDIR to switch to a directory
+  - DL3006 # Always tag the version of an image explicitly
+  - DL3007 # Using latest is prone to errors
+  - DL3008 # Pin versions in apt-get install
+  - DL3013 # Pin versions in pip
+  - DL3015 # Avoid additional packages (--no-install-recommends)
+  - DL3018 # Pin versions in apk add
+  - DL3020 # Use COPY instead of ADD for files and folders
+  - DL3032 # yum clean all missing after yum command
+  - DL3033 # Pin versions in yum install
+  - DL3040 # dnf clean all missing after dnf command
+  - DL3041 # Pin versions in dnf install
+  - DL3042 # Avoid use of cache directory with pip
+  - DL3047 # Avoid use of wget without progress bar
+  - DL3059 # Multiple consecutive RUN instructions
+  - DL4001 # Either use Wget or Curl but not both
+  - DL4006 # Set the SHELL option -o pipefail before RUN with a pipe in
+  - SC2016 # Expressions don't expand in single quotes

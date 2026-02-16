@@ -6,5 +6,11 @@ repos:
       - id: check-json
       - id: check-yaml
 
+  - repo: https://github.com/AleksaC/hadolint-py
+    rev: v2.14.0
+    hooks:
+      - id: hadolint
+        exclude: ^archive/
+
 ci:
   autoupdate_schedule: quarterly
