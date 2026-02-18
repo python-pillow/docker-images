@@ -35,6 +35,8 @@ RUN apt-get -qq update \
     && DEBIAN_FRONTEND=noninteractive apt-get -y --no-install-recommends install \
     cmake \
     curl \
+    g++ \
+    gcc \
     ghostscript \
     git \
     libfreetype6-dev \
@@ -59,6 +61,7 @@ RUN apt-get -qq update \
     tk8.6-dev \
     virtualenv \
     wget \
+    xauth \
     xvfb \
     zlib1g-dev \
     && rm -rf /var/lib/apt/lists/*

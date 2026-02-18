@@ -3,6 +3,8 @@ FROM ubuntu:jammy
 RUN apt-get -qq update \
     && DEBIAN_FRONTEND=noninteractive apt-get -y --no-install-recommends install \
     cmake \
+    g++ \
+    gcc \
     ghostscript \
     git \
     libfreetype6-dev \

@@ -3,6 +3,8 @@ FROM ubuntu:jammy
 RUN apt-get -qq update \
     && DEBIAN_FRONTEND=noninteractive apt-get -y --no-install-recommends install \
     cmake \
+    g++ \
+    gcc \
     ghostscript \
     git \
     libegl-dev \
@@ -23,6 +25,7 @@ RUN apt-get -qq update \
     libxcb-keysyms1 \
     libxcb-randr0 \
     libxcb-render-util0 \
+    libxcb-shape0 \
     libxkbcommon-x11-0 \
     meson \
     nasm \
