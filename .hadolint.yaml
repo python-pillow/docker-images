@@ -9,5 +9,4 @@ ignored:
   - DL3041 # Pin versions in dnf install
   - DL3047 # Avoid use of wget without progress bar
   - DL3059 # Multiple consecutive RUN instructions
-  - DL4001 # Either use Wget or Curl but not both
   - SC2016 # Expressions don't expand in single quotes

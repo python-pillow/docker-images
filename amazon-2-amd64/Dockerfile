@@ -2,7 +2,6 @@ FROM amazonlinux:2
 
 RUN yum install -y \
     cmake \
-    curl \
     findutils \
     fribidi-devel \
     gcc \
@@ -31,7 +30,7 @@ RUN yum install -y \
     && yum clean all
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+RUN wget -qO- https://sh.rustup.rs | sh -s -- -y
 ENV PATH="/root/.cargo/bin:${PATH}"
 
 RUN useradd --uid 1001 pillow

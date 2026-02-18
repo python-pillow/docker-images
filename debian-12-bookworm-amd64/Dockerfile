@@ -34,7 +34,6 @@ RUN echo '#!/bin/sh' > /usr/sbin/policy-rc.d \
 RUN apt-get -qq update \
     && DEBIAN_FRONTEND=noninteractive apt-get -y --no-install-recommends install \
     cmake \
-    curl \
     g++ \
     gcc \
     ghostscript \
@@ -67,7 +66,7 @@ RUN apt-get -qq update \
     && rm -rf /var/lib/apt/lists/*
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+RUN wget -qO- https://sh.rustup.rs | sh -s -- -y
 ENV PATH="/root/.cargo/bin:${PATH}"
 
 RUN useradd --uid 1001 pillow \
