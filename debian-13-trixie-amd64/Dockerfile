@@ -31,7 +31,8 @@ RUN echo '#!/bin/sh' > /usr/sbin/policy-rc.d \
 # Pillow customization
 #
 
-RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -y install \
+RUN apt-get -qq update \
+    && DEBIAN_FRONTEND=noninteractive apt-get -y --no-install-recommends install \
     cmake \
     curl \
     ghostscript \

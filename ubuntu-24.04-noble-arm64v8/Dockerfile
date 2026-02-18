@@ -1,6 +1,7 @@
 FROM arm64v8/ubuntu:noble
 
-RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -y install \
+RUN apt-get -qq update \
+    && DEBIAN_FRONTEND=noninteractive apt-get -y --no-install-recommends install \
     cmake \
     ghostscript \
     git \
