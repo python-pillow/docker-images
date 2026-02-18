@@ -1,5 +1,7 @@
 FROM gentoo/stage3:desktop
 
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
 # Disable bits which don't work within Docker.
 RUN echo 'FEATURES="-ipc-sandbox -pid-sandbox -network-sandbox -usersandbox -mount-sandbox -sandbox"' | cat >> /etc/portage/make.conf
 # Speed things up a bit.

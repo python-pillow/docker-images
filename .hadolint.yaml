@@ -10,5 +10,4 @@ ignored:
   - DL3047 # Avoid use of wget without progress bar
   - DL3059 # Multiple consecutive RUN instructions
   - DL4001 # Either use Wget or Curl but not both
-  - DL4006 # Set the SHELL option -o pipefail before RUN with a pipe in
   - SC2016 # Expressions don't expand in single quotes

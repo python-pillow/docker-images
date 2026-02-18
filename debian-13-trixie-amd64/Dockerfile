@@ -66,6 +66,7 @@ RUN apt-get -qq update \
     zlib1g-dev \
     && rm -rf /var/lib/apt/lists/*
 
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 ENV PATH="/root/.cargo/bin:${PATH}"
 
