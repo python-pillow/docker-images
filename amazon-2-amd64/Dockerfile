@@ -64,7 +64,7 @@ RUN bash -c "python3.10 -m pip install virtualenv \
 RUN wget https://github.com/ninja-build/ninja/releases/download/v1.13.2/ninja-linux.zip \
     && unzip ninja-linux.zip \
     && mv ninja /usr/bin
-RUN python3.10 -m pip install meson
+RUN python3.10 -m pip install --no-cache-dir meson
 RUN ln -s /usr/local/bin/python3.10 /usr/bin/python3
 RUN cd /depends \
     && ./install_openjpeg.sh \
