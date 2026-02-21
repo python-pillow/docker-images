@@ -1,5 +1,7 @@
 FROM amazonlinux:2
 
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
 RUN yum install -y \
     cmake \
     findutils \
@@ -29,7 +31,6 @@ RUN yum install -y \
     zlib-devel \
     && yum clean all
 
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN wget -qO- https://sh.rustup.rs | sh -s -- -y
 ENV PATH="/root/.cargo/bin:${PATH}"
 
