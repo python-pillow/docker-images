@@ -34,7 +34,7 @@ RUN yum install -y \
 
 RUN useradd --uid 1001 pillow
 
-RUN wget https://www.python.org/ftp/python/3.10.18/Python-3.10.18.tgz \
+RUN wget --no-verbose https://www.python.org/ftp/python/3.10.18/Python-3.10.18.tgz \
     && tar xzf Python-3.10.18.tgz \
     && cd Python-3.10.18 \
     && ./configure \

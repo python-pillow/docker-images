@@ -36,5 +36,3 @@ build-dbg:
 
 dbg:
 	docker run --privileged --rm -it -v $(ROOT):/Pillow $(IMAGENAME)-dbg:$(BRANCH)
-
-

@@ -1,8 +1,9 @@
 FROM amazonlinux:2
 
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
 RUN yum install -y \
     cmake \
-    curl \
     findutils \
     fribidi-devel \
     gcc \
@@ -30,12 +31,12 @@ RUN yum install -y \
     zlib-devel \
     && yum clean all
 
-RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+RUN wget -qO- https://sh.rustup.rs | sh -s -- -y
 ENV PATH="/root/.cargo/bin:${PATH}"
 
 RUN useradd --uid 1001 pillow
 
-ADD depends /depends
+COPY depends /depends
 RUN cd /depends \
     && ./install_imagequant.sh
 
@@ -43,7 +44,7 @@ RUN yum remove -y openssl-devel && \
     yum install -y openssl11-devel && \
     yum clean all
 
-RUN wget https://www.python.org/ftp/python/3.10.18/Python-3.10.18.tgz \
+RUN wget --no-verbose https://www.python.org/ftp/python/3.10.18/Python-3.10.18.tgz \
     && tar xzf Python-3.10.18.tgz \
     && cd Python-3.10.18 \
     && ./configure \
@@ -61,10 +62,10 @@ RUN bash -c "python3.10 -m pip install virtualenv \
     && /vpy3/bin/pip install numpy --only-binary=:all: || true \
     && chown -R pillow:pillow /vpy3"
 
-RUN wget https://github.com/ninja-build/ninja/releases/download/v1.13.2/ninja-linux.zip \
+RUN wget --no-verbose https://github.com/ninja-build/ninja/releases/download/v1.13.2/ninja-linux.zip \
     && unzip ninja-linux.zip \
     && mv ninja /usr/bin
-RUN python3.10 -m pip install meson
+RUN python3.10 -m pip install --no-cache-dir meson
 RUN ln -s /usr/local/bin/python3.10 /usr/bin/python3
 RUN cd /depends \
     && ./install_openjpeg.sh \

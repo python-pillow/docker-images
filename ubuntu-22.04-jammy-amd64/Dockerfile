@@ -1,7 +1,10 @@
 FROM ubuntu:jammy
 
-RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -y install \
+RUN apt-get -qq update \
+    && DEBIAN_FRONTEND=noninteractive apt-get -y --no-install-recommends install \
     cmake \
+    g++ \
+    gcc \
     ghostscript \
     git \
     libegl-dev \
@@ -22,6 +25,7 @@ RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -y install \
     libxcb-keysyms1 \
     libxcb-randr0 \
     libxcb-render-util0 \
+    libxcb-shape0 \
     libxkbcommon-x11-0 \
     meson \
     nasm \
@@ -52,7 +56,7 @@ RUN virtualenv -p /usr/bin/python3.10 --system-site-packages /vpy3 \
     && /vpy3/bin/pip install olefile pyside6 pytest pytest-cov pytest-timeout \
     && chown -R pillow:pillow /vpy3
 
-ADD depends /depends
+COPY depends /depends
 RUN cd /depends \
     && ./install_libavif.sh \
     && ./install_raqm.sh

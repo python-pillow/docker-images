@@ -1,5 +1,7 @@
 FROM gentoo/stage3:desktop
 
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
 # Disable bits which don't work within Docker.
 RUN echo 'FEATURES="-ipc-sandbox -pid-sandbox -network-sandbox -usersandbox -mount-sandbox -sandbox"' | cat >> /etc/portage/make.conf
 # Speed things up a bit.
@@ -38,7 +40,7 @@ RUN virtualenv --system-site-packages /vpy3 \
     && /vpy3/bin/pip install pytest-cov pytest-timeout \
     && chown -R pillow:pillow /vpy3
 
-ADD depends /depends
+COPY depends /depends
 RUN cd /depends && ./install_imagequant.sh && ./install_libavif.sh && ./install_raqm.sh && ldconfig
 
 ENV FORCE_COLOR=1

@@ -38,7 +38,7 @@ RUN virtualenv -p /usr/bin/python3.13 --system-site-packages /vpy3 \
     && /vpy3/bin/pip install numpy --only-binary=:all: || true \
     && chown -R pillow:pillow /vpy3
 
-ADD depends /depends
+COPY depends /depends
 
 ENV FORCE_COLOR=1
 

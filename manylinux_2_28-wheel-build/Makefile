@@ -46,4 +46,3 @@ clean:
 .PHONY: shell
 shell:
 	docker run --rm -it -v $(ROOT):/Pillow $(IMAGENAME):$(BRANCH) /bin/bash
-

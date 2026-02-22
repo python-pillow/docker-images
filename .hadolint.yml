@@ -1,0 +1,11 @@
+ignored:
+  - DL3003 # Use WORKDIR to switch to a directory
+  - DL3006 # Always tag the version of an image explicitly
+  - DL3007 # Using latest is prone to errors
+  - DL3008 # Pin versions in apt-get install
+  - DL3013 # Pin versions in pip
+  - DL3018 # Pin versions in apk add
+  - DL3033 # Pin versions in yum install
+  - DL3041 # Pin versions in dnf install
+  - DL3059 # Multiple consecutive RUN instructions
+  - SC2016 # Expressions don't expand in single quotes

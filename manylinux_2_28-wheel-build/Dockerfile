@@ -13,7 +13,7 @@ RUN cd $SRC && bash build_depends.sh
 FROM quay.io/pypa/manylinux_2_28_x86_64:latest
 COPY --from=0 /usr/local/lib /usr/local/lib
 COPY --from=0 /usr/local/include /usr/local/include
-RUN yum install -y zlib-devel
+RUN yum install -y zlib-devel && yum clean all
 COPY build.sh /build.sh
 ENV FORCE_COLOR=1
 

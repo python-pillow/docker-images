@@ -3,6 +3,8 @@ name: Docker images
 
 on: [push, pull_request, workflow_dispatch]
 
+permissions: {}
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -75,7 +77,7 @@ jobs:
             git submodule update --remote Pillow
           fi
           (cd Pillow && git checkout main)
-          sudo chown -R 1001 $(pwd)
+          sudo chown -R 1001 "$(pwd)"
 
       - name: Test Image Build
         if: "matrix.test-image"
@@ -91,7 +93,7 @@ jobs:
         run: |
           cd "${{ matrix.image }}" && sudo chmod a+w . && make update
           if [[ -n "$DOCKER_USERNAME" ]]; then
-            echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin && echo "logged_in=true" >> $GITHUB_OUTPUT
+            echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin && echo "logged_in=true" >> "$GITHUB_OUTPUT"
           fi
           make build BRANCH=main
         env:
@@ -120,7 +122,7 @@ jobs:
 
       - name: Post build
         if: always()
-        run: sudo chown -R $(id -u) $(pwd)
+        run: sudo chown -R "$(id -u)" "$(pwd)"
 
   success:
     needs: build
