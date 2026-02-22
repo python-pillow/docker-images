@@ -31,6 +31,8 @@ RUN echo '#!/bin/sh' > /usr/sbin/policy-rc.d \
 # Pillow customization
 #
 
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
 RUN apt-get -qq update \
     && DEBIAN_FRONTEND=noninteractive apt-get -y --no-install-recommends install \
     cmake \
@@ -65,7 +67,6 @@ RUN apt-get -qq update \
     zlib1g-dev \
     && rm -rf /var/lib/apt/lists/*
 
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN wget -qO- https://sh.rustup.rs | sh -s -- -y --default-host=i686-unknown-linux-gnu
 ENV PATH="/root/.cargo/bin:${PATH}"
 

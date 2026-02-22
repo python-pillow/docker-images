@@ -7,7 +7,8 @@ RUN echo "deb http://ddebs.ubuntu.com jammy main restricted universe multiverse"
 RUN echo "deb http://ddebs.ubuntu.com jammy-updates main restricted universe multiverse" >> /etc/apt/sources.list.d/ddebs.list
 RUN perl -pi -e 's/# deb-src/deb-src/;' /etc/apt/sources.list
 
-RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -y install \
+RUN apt-get -qq update \
+    && DEBIAN_FRONTEND=noninteractive apt-get -y --no-install-recommends install \
     libfreetype6-dbgsym \
     libtiff5-dbgsym \
     libwebpmux3-dbgsym \
