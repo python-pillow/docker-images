@@ -3,7 +3,6 @@ FROM s390x/ubuntu:noble
 RUN apt-get -qq update \
     && DEBIAN_FRONTEND=noninteractive apt-get -y --no-install-recommends install \
     cmake \
-    g++ \
     gcc \
     ghostscript \
     git \
