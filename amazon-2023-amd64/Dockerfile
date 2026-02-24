@@ -1,5 +1,7 @@
 FROM amazonlinux:2023
 
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
 RUN yum install -y \
     cmake \
     findutils \
@@ -33,7 +35,7 @@ RUN yum install -y \
     zlib-devel \
     && yum clean all
 
-RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+RUN wget -qO- https://sh.rustup.rs | sh -s -- -y
 ENV PATH="/root/.cargo/bin:${PATH}"
 
 RUN useradd --uid 1001 pillow
@@ -48,8 +50,8 @@ RUN bash -c "/usr/bin/python3.11 -m pip install virtualenv \
     && /vpy3/bin/pip install numpy --only-binary=:all: || true \
     && chown -R pillow:pillow /vpy3"
 
-ADD depends /depends
-RUN wget https://github.com/ninja-build/ninja/releases/download/v1.13.2/ninja-linux.zip \
+COPY depends /depends
+RUN wget --no-verbose https://github.com/ninja-build/ninja/releases/download/v1.13.2/ninja-linux.zip \
     && unzip ninja-linux.zip \
     && mv ninja /usr/bin
 RUN /usr/bin/python3.11 -m pip install meson

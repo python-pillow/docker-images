@@ -31,9 +31,12 @@ RUN echo '#!/bin/sh' > /usr/sbin/policy-rc.d \
 # Pillow customization
 #
 
-RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -y install \
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
+RUN apt-get -qq update \
+    && DEBIAN_FRONTEND=noninteractive apt-get -y --no-install-recommends install \
     cmake \
-    curl \
+    g++ \
     ghostscript \
     git \
     libfreetype6-dev \
@@ -58,11 +61,12 @@ RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -y install \
     tk8.6-dev \
     virtualenv \
     wget \
+    xauth \
     xvfb \
     zlib1g-dev \
     && rm -rf /var/lib/apt/lists/*
 
-RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+RUN wget -qO- https://sh.rustup.rs | sh -s -- -y
 ENV PATH="/root/.cargo/bin:${PATH}"
 
 RUN useradd --uid 1001 pillow \
@@ -77,7 +81,7 @@ RUN virtualenv -p /usr/bin/python3.13 --system-site-packages /vpy3 \
     && /vpy3/bin/pip install olefile pytest pytest-cov pytest-timeout \
     && chown -R pillow:pillow /vpy3
 
-ADD depends /depends
+COPY depends /depends
 RUN cd /depends && ./install_imagequant.sh && ./install_libavif.sh && ./install_raqm.sh
 
 ENV FORCE_COLOR=1

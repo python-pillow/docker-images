@@ -35,7 +35,7 @@ RUN apk --no-cache add \
     tk-dev \
     zlib-dev
 
-ADD depends /depends
+COPY depends /depends
 RUN cd /depends \
     && ./install_webp.sh \
     && ./install_raqm.sh

@@ -1,7 +1,9 @@
 FROM ubuntu:jammy
 
-RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -y install \
+RUN apt-get -qq update \
+    && DEBIAN_FRONTEND=noninteractive apt-get -y --no-install-recommends install \
     cmake \
+    g++ \
     ghostscript \
     git \
     libfreetype6-dev \
@@ -45,7 +47,7 @@ RUN virtualenv -p /usr/bin/python3.10-dbg --system-site-packages /vpy3 \
     && /vpy3/bin/pip install olefile pytest pytest-cov pytest-timeout pytest-valgrind \
     && chown -R pillow:pillow /vpy3
 
-ADD depends /depends
+COPY depends /depends
 RUN cd /depends \
     && ./install_libavif.sh \
     && ./install_raqm.sh
