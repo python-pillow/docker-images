@@ -21,7 +21,6 @@ RUN yum install -y \
     nasm \
     openjpeg2-devel \
     openssl-devel \
-    patch \
     python3-devel \
     python3-pip \
     python3-tkinter \

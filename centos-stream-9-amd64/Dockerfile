@@ -21,7 +21,6 @@ RUN yum install -y \
     ninja-build \
     openjpeg2-devel \
     openssl-devel \
-    patch \
     sqlite-devel \
     sudo \
     tcl-devel \
