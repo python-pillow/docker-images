@@ -57,7 +57,6 @@ RUN virtualenv -p /usr/bin/python3.10 --system-site-packages /vpy3 \
 
 COPY depends /depends
 RUN cd /depends \
-    && ./install_libavif.sh \
     && ./install_raqm.sh
 
 ENV FORCE_COLOR=1
