@@ -56,6 +56,7 @@ RUN wget --no-verbose https://github.com/ninja-build/ninja/releases/download/v1.
 RUN /usr/bin/python3.11 -m pip install meson
 RUN cd /depends \
     && ./install_imagequant.sh \
+    && ./install_libavif.sh \
     && ./install_openjpeg.sh \
     && ./install_raqm.sh \
     && ./install_webp.sh
