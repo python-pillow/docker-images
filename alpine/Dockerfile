@@ -21,6 +21,7 @@ RUN apk --no-cache add \
     py3-pip \
     py3-virtualenv \
     sudo \
+    wget \
     # Pillow dependencies
     freetype-dev \
     fribidi-dev \
@@ -33,7 +34,6 @@ RUN apk --no-cache add \
     tcl-dev \
     tiff-dev \
     tk-dev \
-    wget \
     zlib-dev
 
 COPY depends /depends
