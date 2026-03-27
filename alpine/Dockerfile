@@ -21,6 +21,7 @@ RUN apk --no-cache add \
     py3-pip \
     py3-virtualenv \
     sudo \
+    wget \
     # Pillow dependencies
     freetype-dev \
     fribidi-dev \

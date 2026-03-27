@@ -10,6 +10,7 @@ RUN yum install -y \
     gcc-c++ \
     ghostscript \
     git \
+    gnutls-devel \
     harfbuzz-devel \
     lcms2-devel \
     libjpeg-devel \
@@ -35,6 +36,14 @@ RUN wget -qO- https://sh.rustup.rs | sh -s -- -y
 ENV PATH="/root/.cargo/bin:${PATH}"
 
 RUN useradd --uid 1001 pillow
+
+RUN wget --no-verbose https://ftp.gnu.org/gnu/wget/wget-1.25.0.tar.gz \
+    && tar xzf wget-1.25.0.tar.gz \
+    && cd wget-1.25.0 \
+    && ./configure \
+    && make install \
+    && cd .. \
+    && rm -r wget-1.25.0 wget-1.25.0.tar.gz
 
 COPY depends /depends
 RUN cd /depends \
@@ -66,7 +75,7 @@ RUN wget --no-verbose https://github.com/ninja-build/ninja/releases/download/v1.
     && unzip ninja-linux.zip \
     && mv ninja /usr/bin
 RUN python3.10 -m pip install --no-cache-dir meson
-RUN ln -s /usr/local/bin/python3.10 /usr/bin/python3
+RUN ln -sf /usr/local/bin/python3.10 /usr/bin/python3
 RUN cd /depends \
     && ./install_openjpeg.sh \
     && ./download-and-extract.sh freetype-2.14.1 https://raw.githubusercontent.com/python-pillow/pillow-depends/main/freetype-2.14.1.tar.gz \
