@@ -10,6 +10,7 @@ RUN yum install -y \
     gcc-c++ \
     ghostscript \
     git \
+    gnutls-devel \
     harfbuzz-devel \
     lcms2-devel \
     libjpeg-devel \
@@ -35,6 +36,14 @@ RUN wget -qO- https://sh.rustup.rs | sh -s -- -y
 ENV PATH="/root/.cargo/bin:${PATH}"
 
 RUN useradd --uid 1001 pillow
+
+RUN wget --no-verbose https://ftp.gnu.org/gnu/wget/wget-1.25.0.tar.gz \
+    && tar xzf wget-1.25.0.tar.gz \
+    && cd wget-1.25.0 \
+    && ./configure \
+    && make install \
+    && cd .. \
+    && rm -r wget-1.25.0 wget-1.25.0.tar.gz
 
 COPY depends /depends
 RUN cd /depends \
