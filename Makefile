@@ -4,11 +4,8 @@ TARGETS = \
 	arch \
 	centos-stream-9-amd64 \
 	centos-stream-10-amd64 \
-	debian-12-bookworm-x86 \
-	debian-12-bookworm-amd64 \
 	debian-13-trixie-x86 \
 	debian-13-trixie-amd64 \
-	fedora-42-amd64 \
 	fedora-43-amd64 \
 	gentoo \
 	manylinux_2_28-wheel-build \
