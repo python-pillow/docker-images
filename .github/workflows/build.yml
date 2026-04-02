@@ -25,7 +25,6 @@ jobs:
           - "fedora-43-amd64"
           # Then run the remainder
           - "alpine"
-          - "amazon-2-amd64"
           - "amazon-2023-amd64"
           - "arch"
           - "centos-stream-9-amd64"
@@ -40,11 +39,8 @@ jobs:
           - "ubuntu-22.04-jammy-amd64-valgrind"
           - "ubuntu-24.04-noble-amd64"
           # has a dependency on the test image
-          - "manylinux2014-wheel-build"
           - "manylinux_2_28-wheel-build"
         include:
-          - image: "manylinux2014-wheel-build"
-            test-image: "fedora-43-amd64"
           - image: "manylinux_2_28-wheel-build"
             test-image: "fedora-43-amd64"
           - image: "ubuntu-24.04-noble-ppc64le"

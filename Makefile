@@ -1,6 +1,5 @@
 TARGETS = \
 	alpine \
-	amazon-2-amd64 \
 	amazon-2023-amd64 \
 	arch \
 	centos-stream-9-amd64 \
@@ -12,7 +11,6 @@ TARGETS = \
 	fedora-42-amd64 \
 	fedora-43-amd64 \
 	gentoo \
-	manylinux2014-wheel-build \
 	manylinux_2_28-wheel-build \
 	ubuntu-22.04-jammy-amd64 \
 	ubuntu-24.04-noble-amd64 \
