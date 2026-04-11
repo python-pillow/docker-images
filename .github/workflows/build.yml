@@ -48,6 +48,9 @@ jobs:
             docker-args: "--platform linux/s390x"
           - image: "ubuntu-24.04-noble-arm64v8"
             os: "ubuntu-24.04-arm"
+    environment:
+      name: docker-hub-push
+      url: https://hub.docker.com/u/pythonpillow
 
     steps:
       - uses: actions/checkout@v6
