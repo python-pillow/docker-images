@@ -21,6 +21,8 @@ jobs:
           # Run slower jobs first to give them a headstart and reduce waiting time
           - "ubuntu-24.04-noble-ppc64le"
           - "ubuntu-24.04-noble-s390x"
+          - "ubuntu-26.04-resolute-ppc64le"
+          - "ubuntu-26.04-resolute-s390x"
           # test image for manylinux-wheel build
           - "fedora-43-amd64"
           # Then run the remainder
@@ -35,6 +37,7 @@ jobs:
           - "ubuntu-22.04-jammy-amd64"
           - "ubuntu-22.04-jammy-amd64-valgrind"
           - "ubuntu-24.04-noble-amd64"
+          - "ubuntu-26.04-resolute-amd64"
           # has a dependency on the test image
           - "manylinux_2_28-wheel-build"
         include:
@@ -47,6 +50,14 @@ jobs:
             qemu-arch: "s390x"
             docker-args: "--platform linux/s390x"
           - image: "ubuntu-24.04-noble-arm64v8"
+            os: "ubuntu-24.04-arm"
+          - image: "ubuntu-26.04-resolute-ppc64le"
+            qemu-arch: "ppc64le"
+            docker-args: "--platform linux/ppc64le"
+          - image: "ubuntu-26.04-resolute-s390x"
+            qemu-arch: "s390x"
+            docker-args: "--platform linux/s390x"
+          - image: "ubuntu-26.04-resolute-arm64v8"
             os: "ubuntu-24.04-arm"
 
     steps:
