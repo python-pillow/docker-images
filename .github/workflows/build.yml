@@ -19,8 +19,6 @@ jobs:
         os: ["ubuntu-latest"]
         image:
           # Run slower jobs first to give them a headstart and reduce waiting time
-          - "ubuntu-24.04-noble-ppc64le"
-          - "ubuntu-24.04-noble-s390x"
           - "ubuntu-26.04-resolute-ppc64le"
           - "ubuntu-26.04-resolute-s390x"
           # test image for manylinux-wheel build
@@ -43,22 +41,12 @@ jobs:
         include:
           - image: "manylinux_2_28-wheel-build"
             test-image: "fedora-43-amd64"
-          - image: "ubuntu-24.04-noble-ppc64le"
-            qemu-arch: "ppc64le"
-            docker-args: "--platform linux/ppc64le"
-          - image: "ubuntu-24.04-noble-s390x"
-            qemu-arch: "s390x"
-            docker-args: "--platform linux/s390x"
-          - image: "ubuntu-24.04-noble-arm64v8"
-            os: "ubuntu-24.04-arm"
           - image: "ubuntu-26.04-resolute-ppc64le"
             qemu-arch: "ppc64le"
             docker-args: "--platform linux/ppc64le"
           - image: "ubuntu-26.04-resolute-s390x"
             qemu-arch: "s390x"
             docker-args: "--platform linux/s390x"
-          - image: "ubuntu-26.04-resolute-arm64v8"
-            os: "ubuntu-24.04-arm"
 
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
