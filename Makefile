@@ -7,6 +7,7 @@ TARGETS = \
 	debian-13-trixie-x86 \
 	debian-13-trixie-amd64 \
 	fedora-43-amd64 \
+	fedora-44-amd64 \
 	gentoo \
 	manylinux_2_28-wheel-build \
 	ubuntu-22.04-jammy-amd64 \
