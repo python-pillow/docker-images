@@ -27,7 +27,7 @@ RUN emerge --quiet sudo dev-python/virtualenv dev-util/cargo-c dev-build/meson x
 
 # Install dependencies
 RUN USE="jpeg jpeg2k lcms tiff truetype webp xcb zlib" emerge --quiet --onlydeps dev-python/pillow
-RUN emerge --quiet app-text/ghostscript-gpl dev-python/numpy dev-vcs/git
+RUN emerge --quiet app-text/ghostscript-gpl dev-vcs/git
 
 RUN useradd --uid 1001 pillow \
     && chown pillow:pillow /home/pillow
@@ -38,6 +38,7 @@ ARG PIP_NO_CACHE_DIR=1
 RUN virtualenv --system-site-packages /vpy3 \
     && /vpy3/bin/pip install --upgrade pip \
     && /vpy3/bin/pip install pytest-cov pytest-timeout \
+    && /vpy3/bin/pip install numpy --only-binary=:all: || true \
     && chown -R pillow:pillow /vpy3
 
 COPY depends /depends
