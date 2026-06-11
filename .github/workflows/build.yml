@@ -35,6 +35,7 @@ jobs:
           - "gentoo"
           - "ubuntu-22.04-jammy-amd64"
           - "ubuntu-24.04-noble-amd64"
+          - "ubuntu-24.04-noble-amd64-valgrind"
           - "ubuntu-26.04-resolute-amd64"
           # has a dependency on the test image
           - "manylinux_2_28-wheel-build"
