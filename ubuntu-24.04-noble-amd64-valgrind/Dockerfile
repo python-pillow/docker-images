@@ -35,7 +35,6 @@ RUN apt-get -qq update \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN useradd --uid 1001 pillow \
-    && addgroup pillow sudo \
     && mkdir /home/pillow \
     && chown pillow:pillow /home/pillow
 
