@@ -10,7 +10,6 @@ TARGETS = \
 	fedora-44-amd64 \
 	gentoo \
 	manylinux_2_28-wheel-build \
-	ubuntu-22.04-jammy-amd64 \
 	ubuntu-24.04-noble-amd64 \
 	ubuntu-26.04-resolute-amd64 \
 	ubuntu-22.04-jammy-amd64-valgrind \
