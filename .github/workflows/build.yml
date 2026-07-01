@@ -11,8 +11,10 @@ concurrency:
 
 jobs:
   build:
-    name: ${{ matrix.image }}
+    name: ${{ matrix.image }}${{ matrix.split && format(' {0}', matrix.split) }}
     runs-on: ${{ matrix.os }}
+    env:
+      SPLIT_COUNT: 4
     strategy:
       fail-fast: false
       matrix:
@@ -34,11 +36,24 @@ jobs:
           - "fedora-44-amd64"
           - "gentoo"
           - "ubuntu-24.04-noble-amd64"
-          - "ubuntu-24.04-noble-amd64-valgrind"
           - "ubuntu-26.04-resolute-amd64"
           # has a dependency on the test image
           - "manylinux_2_28-wheel-build"
         include:
+          # The valgrind suite is slow, so split it across parallel jobs.
+          # Keep the SPLIT_COUNT env var equal to the number of entries here.
+          - image: "ubuntu-24.04-noble-amd64-valgrind"
+            os: "ubuntu-latest"
+            split: 1
+          - image: "ubuntu-24.04-noble-amd64-valgrind"
+            os: "ubuntu-latest"
+            split: 2
+          - image: "ubuntu-24.04-noble-amd64-valgrind"
+            os: "ubuntu-latest"
+            split: 3
+          - image: "ubuntu-24.04-noble-amd64-valgrind"
+            os: "ubuntu-latest"
+            split: 4
           - image: "manylinux_2_28-wheel-build"
             test-image: "fedora-43-amd64"
           - image: "ubuntu-26.04-resolute-ppc64le"
@@ -101,6 +116,7 @@ jobs:
           make test BRANCH=main
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          SPLIT_INDEX: ${{ matrix.split }}
 
       - name: Log image size
         run: |
