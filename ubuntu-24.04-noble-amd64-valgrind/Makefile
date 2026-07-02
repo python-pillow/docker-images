@@ -23,6 +23,10 @@ test:
 push:
 	docker push $(IMAGENAME):$(BRANCH)
 
+.PHONY: save
+save:
+	docker save $(IMAGENAME):$(BRANCH) -o image.tar
+
 .PHONY: clean
 clean:
 	rm -r depends
