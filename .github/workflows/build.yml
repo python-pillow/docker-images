@@ -131,7 +131,7 @@ jobs:
       - name: Prepare build
         run: |
           git submodule update --remote Pillow
-          (cd Pillow && git checkout main)
+          cd Pillow && git checkout main
 
       - name: Build image
         run: |
