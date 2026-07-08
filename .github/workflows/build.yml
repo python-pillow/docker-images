@@ -158,8 +158,6 @@ jobs:
     name: ubuntu-24.04-noble-amd64-valgrind ${{ matrix.split }}
     needs: build-valgrind
     runs-on: ubuntu-latest
-    env:
-      SPLIT_COUNT: ${{ strategy.job-total }}
     strategy:
       fail-fast: false
       matrix:
@@ -197,6 +195,7 @@ jobs:
           make test BRANCH=main
         env:
           SPLIT_INDEX: ${{ matrix.split }}
+          SPLIT_COUNT: ${{ strategy.job-total }}
 
       - name: Post test
         if: always()
