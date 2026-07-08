@@ -4,9 +4,14 @@ cd /Pillow
 make clean
 make install-coverage
 
+SPLIT_ARGS=""
+if [ "${SPLIT_COUNT:-1}" -gt 1 ]; then
+    SPLIT_ARGS="--splits ${SPLIT_COUNT} --group ${SPLIT_INDEX} --durations-path /depends/.test_durations"
+fi
+
 PYTHONMALLOC=malloc valgrind --suppressions=/depends/python.supp --leak-check=no \
             --log-file=/tmp/valgrind-output \
-            python3 -m pytest --no-memcheck -vv --valgrind --valgrind-log=/tmp/valgrind-output
+            python3 -m pytest --no-memcheck -vv --valgrind --valgrind-log=/tmp/valgrind-output $SPLIT_ARGS
 
 # To run one test in the image:
 # make bash

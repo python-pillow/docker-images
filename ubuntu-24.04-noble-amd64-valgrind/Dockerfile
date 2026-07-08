@@ -43,7 +43,7 @@ ARG PIP_NO_CACHE_DIR=1
 
 RUN virtualenv -p /usr/bin/python3.12-dbg --system-site-packages /vpy3 \
     && /vpy3/bin/pip install --upgrade pip \
-    && /vpy3/bin/pip install olefile pytest pytest-cov pytest-timeout pytest-valgrind \
+    && /vpy3/bin/pip install olefile pytest pytest-cov pytest-split pytest-timeout pytest-valgrind \
     && chown -R pillow:pillow /vpy3
 
 COPY depends /depends
@@ -51,7 +51,7 @@ RUN cd /depends \
     && ./install_libavif.sh \
     && ./install_raqm.sh
 
-COPY python.supp /depends
+COPY python.supp .test_durations /depends/
 
 ENV FORCE_COLOR=1
 

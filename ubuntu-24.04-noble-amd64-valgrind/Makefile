@@ -17,11 +17,15 @@ update:
 
 .PHONY: test
 test:
-	docker run --rm -e "PILLOW_VALGRIND_TEST=true" -v $(ROOT):/Pillow $(IMAGENAME):$(BRANCH)
+	docker run --rm -e "PILLOW_VALGRIND_TEST=true" -e SPLIT_INDEX -e SPLIT_COUNT -v $(ROOT):/Pillow $(IMAGENAME):$(BRANCH)
 
 .PHONY: push
 push:
 	docker push $(IMAGENAME):$(BRANCH)
+
+.PHONY: save
+save:
+	docker save $(IMAGENAME):$(BRANCH) -o image.tar
 
 .PHONY: clean
 clean:

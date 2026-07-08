@@ -34,7 +34,6 @@ jobs:
           - "fedora-44-amd64"
           - "gentoo"
           - "ubuntu-24.04-noble-amd64"
-          - "ubuntu-24.04-noble-amd64-valgrind"
           - "ubuntu-26.04-resolute-amd64"
           # has a dependency on the test image
           - "manylinux_2_28-wheel-build"
@@ -118,8 +117,129 @@ jobs:
         if: always()
         run: sudo chown -R "$(id -u)" "$(pwd)"
 
+  # The valgrind suite is slow, so build its image once, test it across
+  # parallel split jobs, and push only after every split has passed.
+  build-valgrind:
+    name: ubuntu-24.04-noble-amd64-valgrind build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          persist-credentials: false
+          submodules: true
+
+      - name: Prepare build
+        run: |
+          git submodule update --remote Pillow
+          cd Pillow && git checkout main
+
+      - name: Build image
+        run: |
+          cd ubuntu-24.04-noble-amd64-valgrind && make update
+          if [[ -n "$DOCKER_USERNAME" ]]; then
+            echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+          fi
+          make build BRANCH=main
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Save image
+        run: make -C ubuntu-24.04-noble-amd64-valgrind save BRANCH=main
+
+      - name: Upload image
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: ubuntu-24.04-noble-amd64-valgrind
+          path: ubuntu-24.04-noble-amd64-valgrind/image.tar
+          retention-days: 1
+
+  test-valgrind:
+    name: ubuntu-24.04-noble-amd64-valgrind ${{ matrix.split }}
+    needs: build-valgrind
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        split: [1, 2, 3, 4]
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          persist-credentials: false
+          submodules: true
+
+      - name: Download image
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: ubuntu-24.04-noble-amd64-valgrind
+
+      - name: Prepare test
+        run: |
+          git submodule update --remote Pillow
+          (cd Pillow && git checkout main)
+          sudo chown -R 1001 "$(pwd)"
+
+      - name: Load image
+        run: |
+          if [[ -n "$DOCKER_USERNAME" ]]; then
+            echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+          fi
+          docker load -i image.tar
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Test image
+        run: |
+          cd ubuntu-24.04-noble-amd64-valgrind
+          make test BRANCH=main
+        env:
+          SPLIT_INDEX: ${{ matrix.split }}
+          SPLIT_COUNT: ${{ strategy.job-total }}
+
+      - name: Post test
+        if: always()
+        run: sudo chown -R "$(id -u)" "$(pwd)"
+
+  push-valgrind:
+    name: Push ubuntu-24.04-noble-amd64-valgrind
+    needs: test-valgrind
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          persist-credentials: false
+
+      - name: Download image
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: ubuntu-24.04-noble-amd64-valgrind
+
+      - name: Load image
+        id: build
+        run: |
+          if [[ -n "$DOCKER_USERNAME" ]]; then
+            echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin && echo "logged_in=true" >> "$GITHUB_OUTPUT"
+          fi
+          docker load -i image.tar
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Log image size
+        run: |
+          docker images
+
+      - name: Push image
+        if: "steps.build.outputs.logged_in == 'true'
+                           && github.event_name == 'push'
+                           && github.ref == 'refs/heads/main'"
+        run: make push-ubuntu-24.04-noble-amd64-valgrind BRANCH=main
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+
   success:
-    needs: build
+    needs: [build, push-valgrind]
     runs-on: ubuntu-latest
     name: Build successful
     steps:
