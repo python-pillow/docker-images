@@ -1,0 +1,6 @@
+{
+   <py3_12_encode_current_locale>
+   Memcheck:Cond
+   ...
+   fun:encode_current_locale
+}
