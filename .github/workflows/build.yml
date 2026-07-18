@@ -195,6 +195,8 @@ jobs:
     name: Push ubuntu-24.04-noble-amd64-valgrind
     needs: test-valgrind
     runs-on: ubuntu-latest
+    if: "github.event_name == 'push'
+        && github.ref == 'refs/heads/main'"
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
@@ -221,9 +223,7 @@ jobs:
           docker images
 
       - name: Push image
-        if: "steps.build.outputs.logged_in == 'true'
-                           && github.event_name == 'push'
-                           && github.ref == 'refs/heads/main'"
+        if: "steps.build.outputs.logged_in == 'true'"
         run: make push-ubuntu-24.04-noble-amd64-valgrind BRANCH=main
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
