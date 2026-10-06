@@ -4,6 +4,7 @@ TARGETS = \
 	arch \
 	centos-stream-9-amd64 \
 	centos-stream-10-amd64 \
+    cpython_sanity-3.14tsan \
 	debian-13-trixie-x86 \
 	debian-13-trixie-amd64 \
 	fedora-43-amd64 \

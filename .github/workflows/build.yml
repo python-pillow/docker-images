@@ -35,6 +35,7 @@ jobs:
           - "gentoo"
           - "ubuntu-24.04-noble-amd64"
           - "ubuntu-26.04-resolute-amd64"
+          - "cpython_sanity-3.14tsan"
           # has a dependency on the test image
           - "manylinux_2_28-wheel-build"
         include:
