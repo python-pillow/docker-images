@@ -43,7 +43,7 @@ RUN apt-get -qq update \
 ARG PIP_DISABLE_PIP_VERSION_CHECK=1
 ARG PIP_NO_CACHE_DIR=1
 
-RUN /work/.pyenv/shims/python3 -mvenv /vpy3 \
+RUN /work/.pyenv/shims/python3 -m venv /vpy3 \
     && /vpy3/bin/pip install --upgrade pip \
     && /vpy3/bin/pip install olefile pytest pytest-cov pytest-timeout \
     && chown -R 1000:1000 /vpy3
