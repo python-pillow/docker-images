@@ -26,7 +26,6 @@ RUN apt-get -qq update \
     libxcb-shape0 \
     libxkbcommon-x11-0 \
     meson \
-    netpbm \
     python3-dev \
     python3-numpy \
     python3-setuptools \
@@ -40,13 +39,17 @@ RUN apt-get -qq update \
     zlib1g-dev \
     && rm -rf /var/lib/apt/lists/*
 
+RUN useradd pillow \
+    && mkdir /home/pillow \
+    && chown pillow:pillow /home/pillow
+
 ARG PIP_DISABLE_PIP_VERSION_CHECK=1
 ARG PIP_NO_CACHE_DIR=1
 
 RUN /work/.pyenv/shims/python3 -m venv /vpy3 \
     && /vpy3/bin/pip install --upgrade pip \
     && /vpy3/bin/pip install olefile pytest pytest-cov pytest-timeout \
-    && chown -R 1000:1000 /vpy3
+    && chown -R pillow:pillow /vpy3
 
 COPY depends /depends
 RUN cd /depends \
@@ -55,7 +58,7 @@ RUN cd /depends \
 ENV FORCE_COLOR=1
 ENV PILLOW_TSAN_TEST=1
 
-USER 1000
+USER pillow
 CMD ["/depends/test.sh"]
 
 #docker run -v $GITHUB_WORKSPACE:/Pillow pythonpillow/cpython_sanity-3.14tsan
