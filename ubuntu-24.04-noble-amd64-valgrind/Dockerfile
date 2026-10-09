@@ -20,7 +20,6 @@ RUN apt-get -qq update \
     nasm \
     python3.12-dbg \
     python3-dev \
-    python3-numpy \
     python3-setuptools \
     python3-tk \
     sudo \
@@ -42,8 +41,8 @@ ARG PIP_NO_CACHE_DIR=1
 
 RUN virtualenv -p /usr/bin/python3.12-dbg --system-site-packages /vpy3 \
     && /vpy3/bin/pip install --upgrade pip \
-    && /vpy3/bin/pip install olefile pytest pytest-cov pytest-split pytest-timeout pytest-valgrind \
-    && chown -R pillow:pillow /vpy3
+    && /vpy3/bin/pip install olefile pytest pytest-cov pytest-split pytest-timeout pytest-valgrind numpy pyarrow nanoarrow arro3-core arro3-compute \
+    && chown -R pillow:pillow /vpy3 
 
 COPY depends /depends
 RUN cd /depends \
