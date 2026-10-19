@@ -54,7 +54,7 @@ COPY python.supp .test_durations /depends/
 
 ENV FORCE_COLOR=1
 
-USER pillow
+USER 1001
 CMD ["depends/test.sh"]
 
 #docker run -v $TRAVIS_BUILD_DIR:/Pillow pythonpillow/ubuntu-24.04-noble-amd64

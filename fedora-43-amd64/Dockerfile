@@ -42,7 +42,7 @@ COPY depends /depends
 
 ENV FORCE_COLOR=1
 
-USER pillow
+USER 1001
 CMD ["depends/test.sh"]
 
 #docker run -v $GITHUB_WORKSPACE:/Pillow pythonpillow/fedora-43-amd64

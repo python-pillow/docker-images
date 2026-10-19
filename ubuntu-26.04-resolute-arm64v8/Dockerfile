@@ -59,7 +59,7 @@ RUN cd /depends \
 
 ENV FORCE_COLOR=1
 
-USER pillow
+USER 1001
 CMD ["depends/test.sh"]
 
 #docker run -v $GITHUB_WORKSPACE:/Pillow pythonpillow/ubuntu-26.04-resolute-arm64v8

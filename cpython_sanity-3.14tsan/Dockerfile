@@ -58,7 +58,7 @@ RUN cd /depends \
 ENV FORCE_COLOR=1
 ENV PILLOW_TSAN_TEST=1
 
-USER pillow
+USER 1001
 CMD ["/depends/test.sh"]
 
 #docker run -v $GITHUB_WORKSPACE:/Pillow pythonpillow/cpython_sanity-3.14tsan

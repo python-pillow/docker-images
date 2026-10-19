@@ -49,7 +49,7 @@ RUN cd /depends \
 ENV FORCE_COLOR=1
 ENV LD_LIBRARY_PATH=/usr/lib
 
-USER pillow
+USER 1001
 CMD ["depends/test.sh"]
 
 #docker run -v $GITHUB_WORKSPACE:/Pillow pythonpillow/ubuntu-26.04-resolute-s390x
