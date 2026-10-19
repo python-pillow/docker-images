@@ -3,7 +3,7 @@ TARGET := $(notdir $(WD))
 ROOT := $(abspath $(WD)/../Pillow)
 IMAGENAME := $(if $(DOCKER_USERNAME), $(DOCKER_USERNAME)/$(TARGET), $(TARGET))
 BRANCH := $(shell git rev-parse --abbrev-ref HEAD)
-TEST_TARGET = fedora-43-amd64
+TEST_TARGET = fedora-44-amd64
 TEST_IMAGE := $(if $(DOCKER_USERNAME), $(DOCKER_USERNAME)/$(TEST_TARGET):$(BRANCH), pythonpillow/$(TEST_TARGET):main)
 
 .PHONY: build
