@@ -85,7 +85,7 @@ RUN cd /depends && ./install_imagequant.sh && ./install_libavif.sh && ./install_
 
 ENV FORCE_COLOR=1
 
-USER pillow
+USER 1001
 ENTRYPOINT ["linux32"]
 CMD ["depends/test.sh"]
 
