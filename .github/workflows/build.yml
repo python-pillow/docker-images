@@ -22,7 +22,7 @@ jobs:
           - "ubuntu-26.04-resolute-ppc64le"
           - "ubuntu-26.04-resolute-s390x"
           # test image for manylinux-wheel build
-          - "fedora-43-amd64"
+          - "fedora-44-amd64"
           # Then run the remainder
           - "alpine"
           - "amazon-2023-amd64"
@@ -31,7 +31,6 @@ jobs:
           - "centos-stream-10-amd64"
           - "debian-13-trixie-x86"
           - "debian-13-trixie-amd64"
-          - "fedora-44-amd64"
           - "gentoo"
           - "ubuntu-24.04-noble-amd64"
           - "ubuntu-26.04-resolute-amd64"
@@ -40,7 +39,7 @@ jobs:
           - "manylinux_2_28-wheel-build"
         include:
           - image: "manylinux_2_28-wheel-build"
-            test-image: "fedora-43-amd64"
+            test-image: "fedora-44-amd64"
           - image: "ubuntu-26.04-resolute-ppc64le"
             qemu-arch: "ppc64le"
             docker-args: "--platform linux/ppc64le"
