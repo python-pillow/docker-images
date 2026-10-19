@@ -2,16 +2,20 @@
 
 set -e # exit on error
 
-if [ $# -eq 0 ]; then
-    echo "Usage: update-pillow-tag.sh [[release tag]]"
-    exit
-fi
-
 git checkout main
 git submodule update --init Pillow
 cd Pillow
-git fetch --all
-git checkout $1
+git fetch --all --tags
+
+if [ $# -eq 0 ]; then
+    # Default to the most recently released tag
+    tag=$(git tag --list '[0-9]*.[0-9]*.[0-9]*' --sort=-creatordate | head -n 1)
+    echo "No release tag given, using the newest one: $tag"
+else
+    tag=$1
+fi
+
+git checkout "$tag"
 cd ..
-git commit -m "Pillow -> $1" Pillow
+git commit -m "Pillow -> $tag" Pillow
 git push
