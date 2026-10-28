@@ -29,7 +29,6 @@ jobs:
           - "arch"
           - "centos-stream-9-amd64"
           - "centos-stream-10-amd64"
-          - "debian-13-trixie-x86"
           - "debian-13-trixie-amd64"
           - "gentoo"
           - "ubuntu-24.04-noble-amd64"
@@ -38,6 +37,8 @@ jobs:
           # has a dependency on the test image
           - "manylinux_2_28-wheel-build"
         include:
+          - image: "debian-13-trixie-x86"
+            os: "ubuntu-24.04"
           - image: "manylinux_2_28-wheel-build"
             test-image: "fedora-44-amd64"
           - image: "ubuntu-26.04-resolute-ppc64le"
