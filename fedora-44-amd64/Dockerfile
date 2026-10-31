@@ -2,9 +2,7 @@ FROM fedora:44
 
 RUN dnf install -y \
     freetype-devel \
-    fribidi-devel \
     gcc \
-    harfbuzz-devel \
     lcms2-devel \
     libavif-devel \
     libimagequant-devel \
@@ -18,10 +16,6 @@ RUN dnf install -y \
     python3-tkinter \
     python3-virtualenv \
     redhat-rpm-config \
-    tcl-devel \
-    tk-devel \
-    util-linux \
-    which \
     xorg-x11-server-Xvfb \
     zlib-devel \
     && dnf clean all
@@ -34,7 +28,6 @@ ARG PIP_NO_CACHE_DIR=1
 
 RUN virtualenv -p /usr/bin/python3.14 --system-site-packages /vpy3 \
     && /vpy3/bin/pip install --upgrade pip \
-    && /vpy3/bin/pip install olefile pytest pytest-cov pytest-timeout \
     && /vpy3/bin/pip install numpy --only-binary=:all: || true \
     && chown -R pillow:pillow /vpy3
 
