@@ -2,9 +2,7 @@ FROM fedora:45
 
 RUN dnf install -y \
     freetype-devel \
-    fribidi-devel \
     gcc \
-    harfbuzz-devel \
     lcms2-devel \
     libavif-devel \
     libimagequant-devel \
@@ -18,10 +16,6 @@ RUN dnf install -y \
     python3-tkinter \
     python3-virtualenv \
     redhat-rpm-config \
-    tcl-devel \
-    tk-devel \
-    util-linux \
-    which \
     xorg-x11-server-Xvfb \
     zlib-devel \
     && dnf clean all
