@@ -95,6 +95,12 @@ jobs:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
           DOCKER_ARGS: ${{ matrix.docker-args }}
 
+      - name: Log OS details
+        run: |
+          docker run --rm "${DOCKER_USERNAME:+$DOCKER_USERNAME/}${{ matrix.image }}:main" cat /etc/os-release
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+
       - name: Test image
         run: |
           cd "${{ matrix.image }}"
