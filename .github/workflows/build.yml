@@ -30,6 +30,7 @@ jobs:
           - "centos-stream-9-amd64"
           - "centos-stream-10-amd64"
           - "debian-13-trixie-amd64"
+          - "fedora-45-amd64"
           - "gentoo"
           - "ubuntu-24.04-noble-amd64"
           - "ubuntu-26.04-resolute-amd64"
@@ -93,6 +94,12 @@ jobs:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
           DOCKER_ARGS: ${{ matrix.docker-args }}
+
+      - name: Log OS details
+        run: |
+          docker run --rm "${DOCKER_USERNAME:+$DOCKER_USERNAME/}${{ matrix.image }}:main" cat /etc/os-release
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
 
       - name: Test image
         run: |
