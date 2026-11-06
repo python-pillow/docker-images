@@ -52,14 +52,14 @@ jobs:
             os: "ubuntu-24.04-arm"
 
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
           submodules: true
 
       - name: Set up QEMU
         if: "matrix.qemu-arch"
-        uses: docker/setup-qemu-action@99012661954931238ded8c8b007157a8430204e1 # v4.4.0
+        uses: docker/setup-qemu-action@v4.4.0
         with:
           platforms: ${{ matrix.qemu-arch }}
 
@@ -126,7 +126,7 @@ jobs:
     name: ubuntu-24.04-noble-amd64-valgrind build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
           submodules: true
@@ -151,7 +151,7 @@ jobs:
         run: make -C ubuntu-24.04-noble-amd64-valgrind save BRANCH=main
 
       - name: Upload image
-        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        uses: actions/upload-artifact@v7.0.2
         with:
           name: ubuntu-24.04-noble-amd64-valgrind
           path: ubuntu-24.04-noble-amd64-valgrind/image.tar
@@ -166,13 +166,13 @@ jobs:
       matrix:
         split: [1, 2, 3, 4]
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
           submodules: true
 
       - name: Download image
-        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        uses: actions/download-artifact@v8.0.2
         with:
           name: ubuntu-24.04-noble-amd64-valgrind
 
@@ -206,12 +206,12 @@ jobs:
     if: "github.event_name == 'push'
         && github.ref == 'refs/heads/main'"
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
       - name: Download image
-        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        uses: actions/download-artifact@v8.0.2
         with:
           name: ubuntu-24.04-noble-amd64-valgrind
 
