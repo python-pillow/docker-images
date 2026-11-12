@@ -9,7 +9,6 @@ RUN apt-get -qq update \
     libfreetype6-dev \
     libfribidi-dev \
     libharfbuzz-dev \
-    libimagequant-dev \
     libjpeg-turbo8-dev \
     liblcms2-dev \
     libopengl-dev \
