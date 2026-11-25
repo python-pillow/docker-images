@@ -15,7 +15,6 @@ RUN dnf install -y \
     python3-devel \
     python3-tkinter \
     python3-virtualenv \
-    redhat-rpm-config \
     xorg-x11-server-Xvfb \
     zlib-devel \
     && dnf clean all
